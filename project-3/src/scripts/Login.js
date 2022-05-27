@@ -35,7 +35,7 @@ function loginpage() {
       openLoginInfo();
       setTimeout(closeLoginInfo, 1000);
     });
-    
+
     function openLoginInfo() {
         $(document).ready(function(){ 
             $('.b-form').css("opacity","0.01");
