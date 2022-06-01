@@ -9,7 +9,7 @@ body {
   font-family: 'Press Start 2P', cursive;
   background-image: url("../assets/images/contextPage.jpeg");
 }
-h1 {
+.loginPage {
   font-size: 45px;
   position: relative;
   bottom: 400px;
