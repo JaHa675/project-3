@@ -3,7 +3,8 @@ import '../../styles/About.css'
 
 export default function About () {
     return (
-        <div className='infoContainer'>
+        <div>
+                <div className='infoContainer'>
             <div className='aboutContainer'>
             <h1 className='aboutTitle'>Why We Did this?</h1>
             <div className='aboutParaContainer'>
@@ -25,6 +26,6 @@ export default function About () {
                 </ul>
             </div>
         </div>
-
+        </div>
     );
 }
