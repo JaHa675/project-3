@@ -1,6 +1,5 @@
 import React from 'react';
-import '../styles/Login.css'
-import Scroll from "../assets/images/600px\ scroll.png";
+import '../../styles/Login.css'
 // creating a functioning page
 
 export default function Login () {
@@ -8,7 +7,7 @@ export default function Login () {
             <div className="loginContainer">
                 <div className="contentContainer">
                 <div className='scrollImage '></div>
-                    <h1>Login Page</h1>
+                    <h1 className= "loginPage">Login Page</h1>
                     <p>Please Login/Signup to Battle!</p>
                     <form action="#" method="post" id="loginOut">
                     <p>Email</p>
