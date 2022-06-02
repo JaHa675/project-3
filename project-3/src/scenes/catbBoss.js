@@ -1,11 +1,22 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
 import playGame from "../phaserGame"
+import brookeBattle from "../assets/backgrounds/PC Computer - RPG Maker MV - Forest.png"
+
+class brookeBoss extends Phaser.Scene {
+    constructor () {
+        super('brookeBoss')
+    }
+    preload () {
+        this.load.image('brookeBattle',brookeBattle)
+    }
+    create () {
+        const bgImages = this.add.image(400,300,'brookeBattle');
+    }
+}
 
 
-
-
-export default function BattleTrail(props) {
+export default function CatBoss(props) {
     var game = null;
     // var background = 
 

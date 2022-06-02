@@ -2,9 +2,19 @@ import React, {useEffect} from 'react';
 import Phaser from "phaser";
 import playGame from "../phaserGame"
 
+class brookeBoss extends Phaser.Scene {
+    constructor () {
+        super('brookeBoss')
+    }
+    preload () {
+        this.load.image('brookeBattle',brookeBattle)
+    }
+    create () {
+        const bgImages = this.add.image(400,300,'brookeBattle');
+    }
+}
 
-
-export default function BattleTrail(props) {
+export default function Dahlia(props) {
     var game = null;
 
     
