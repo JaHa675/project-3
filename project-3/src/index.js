@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import Phaser from "./phaserGame";
+
+const game = new Phaser.game(config);
+
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
