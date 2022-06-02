@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
-import playGame from "../phaserGame"
+import playGame from "../../phaserGame"
 
 
 
