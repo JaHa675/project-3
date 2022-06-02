@@ -5,7 +5,14 @@ import Landing from './components/pages/Landing'
 import About from './components/pages/About'
 import Stats from './components/pages/Stats'
 import BattleTrail from './components/pages/BattleTrail'
-import Test from './components/pages/Test'
+import Brooke from './scenes/brookeBoss'
+import CatBoss from './scenes/catbBoss'
+import Dahlia from './scenes/dahliaBoss'
+import James from './scenes/jamesBoss'
+import Lucas from './scenes/lucasBoss'
+import Main from './scenes/main'
+import House from './scenes/playerHouse'
+import Credits from './scenes/credits'
 
 
 function App() {
@@ -17,6 +24,14 @@ function App() {
   <Route path ='/about' element ={<About />}></Route>
   <Route path ='/stats' element ={<Stats />}></Route>
   <Route path ='/game' element ={<BattleTrail />}></Route>
+  <Route path ='/brooke' element ={<Brooke />}></Route>
+  <Route path ='/catboss' element ={<CatBoss />}></Route>
+  <Route path ='/dahlia' element ={<Dahlia />}></Route>
+  <Route path ='/james' element ={<James />}></Route>
+  <Route path ='/lucas' element ={<Lucas/>}></Route>
+  <Route path ='/main' element ={<Main />}></Route>
+  <Route path ='/house' element ={<House />}></Route>
+  <Route path ='/credits' element ={<Credits />}></Route>
 </Routes>
 </BrowserRouter>
   )
