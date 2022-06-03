@@ -3,22 +3,25 @@
   margin: 0;
 }
 body {
-  color: rgb(81, 22, 22);
+  /* color: rgb(81, 22, 22); */
   background-size: cover;
   background-repeat: no-repeat;
   font-family: 'Press Start 2P', cursive;
   background-image: url("../assets/images/contextPage.jpeg");
 }
 .loginPage {
-  font-size: 45px;
+  display: flex;
+  font-size: 40px;
   position: relative;
-  bottom: 400px;
-  left: 70px;
+  bottom: 430px;
+  left: 30%;
 }
 p {
-  padding: 0 20px 0 20px;
+  font-size: 15px;
+  padding: 0 20px 10px 20px;
   position: relative;
-  bottom: 360px;
+  left: 15%;
+  bottom: 400px;
 }
 a {
   padding: 0 20px 0 20px;
@@ -36,13 +39,14 @@ a {
 .scrollImage {
   background-image: url("../assets/images/600px\ scroll.png");
   height: 600px;
+  width: 600px;
 }
 input {
   display: flex;
   margin: 10px;
   padding: 10px;
-  justify-content: center;
   font-family: 'Press Start 2P', cursive;
   position: relative;
-  bottom: 360px;
+  left: 20%;
+  bottom: 410px;
 }
