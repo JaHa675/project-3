@@ -4,7 +4,7 @@ import Login from './components/pages/Login'
 import Landing from './components/pages/Landing'
 import About from './components/pages/About'
 import Stats from './components/pages/Stats'
-import BattleTrail from './components/pages/BattleTrail'
+import PlayerSelect from './scenes/newplayer'
 import Brooke from './scenes/brookeBoss'
 import CatBoss from './scenes/catbBoss'
 import Dahlia from './scenes/dahliaBoss'
@@ -23,7 +23,7 @@ function App() {
   <Route path ='/login' element ={<Login />}></Route>
   <Route path ='/about' element ={<About />}></Route>
   <Route path ='/stats' element ={<Stats />}></Route>
-  <Route path ='/game' element ={<BattleTrail />}></Route>
+  <Route path ='/newplayer' element ={<PlayerSelect />}></Route>
   <Route path ='/brooke' element ={<Brooke />}></Route>
   <Route path ='/catboss' element ={<CatBoss />}></Route>
   <Route path ='/dahlia' element ={<Dahlia />}></Route>

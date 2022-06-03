@@ -1,54 +1,55 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
 // import playGame from "../phaserGame"
-import dgBattle from "../assets/backgrounds/BattleOption5.png"
-import bossPlatform from "../assets/extras/TomatoPlatform.png"
-import dahliaBoss from '../assets/characters/Dahlia.png'
-import dahliaBattlePos from '../assets/characters/DahliaBattlePositions.png'
+import playerbg from "../assets/backgrounds/PotionShop.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import mageBattlePos from "../assets/characters/MageBattlePositions.png"
 import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 
+
 var player;
 var platforms;
 var cursors;
-var boss;
 
-class Dahlias extends Phaser.Scene {
+class Players extends Phaser.Scene {
     constructor () {
-        super('Dahlias')
+        super('Players')
     }
     preload () {
-        this.load.image('dgBattle',dgBattle)
-        this.load.image('bossPlatform',bossPlatform)
+        this.load.image('playerbg',playerbg);
+
         this.load.spritesheet('mage',mage,{
             frameWidth: 48, frameHeight: 48
         });
-        this.load.spritesheet('dahliaBoss',dahliaBoss,{
+        this.load.spritesheet('warrior',warrior,{
+            frameWidth: 48, frameHeight: 48
+        });
+        this.load.spritesheet('mageBattlePos',mageBattlePos,{
+            frameWidth: 48, frameHeight: 48
+        });
+        this.load.spritesheet('warriorBattlesPos',warriorBattlePos,{
             frameWidth: 48, frameHeight: 48
         });
     }
     create () {
+        // const warriors = this.add.spritesheet('warrior');
+        // const warriorBattle = this.add.spritesheet('warriorBattlePos');
+        // const mageBattle = this.add.spritesheet('mageBattlePos');
 
         platforms = this.physics.add.staticGroup();
 
-        platforms.create(400, 300, 'dgBattle').refreshBody();
-        // boss.create(100,450,'dahliaBoss');
+        platforms.create(400, 300, 'playerbg').refreshBody();
         // .setScale(2) - option for images. Scales the size
 
-        platforms.create(600, 500, 'bossPlatform').setScale(3);
-        // platforms.create(50, 250, 'dgBattle');
-        // platforms.create(750, 220, 'dgBattle');
+        // platforms.create(600, 400, 'playerbg');
+        // platforms.create(50, 250, 'playerbg');
+        // platforms.create(750, 220, 'playerbg');
 
         player = this.physics.add.sprite(100, 450, 'mage');
 
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
-
-        boss = this.physics.add.sprite(600,100,'dahliaBoss');
-        boss.setBounce(0.2);
-        boss.setCollideWorldBounds(true);
 
         this.anims.create({
             key: 'left',
@@ -71,9 +72,7 @@ class Dahlias extends Phaser.Scene {
         });
         cursors = this.input.keyboard.createCursorKeys();
 
-        // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
-        this.physics.add.collider(boss, platforms);
     }
      update ()
     {
@@ -106,7 +105,7 @@ class Dahlias extends Phaser.Scene {
 
 
 
-export default function Dahlia(props) {
+export default function PlayerSelect(props) {
     var game = null;
     
     
@@ -123,7 +122,7 @@ export default function Dahlia(props) {
                     debug: false
                 }
             },
-            scene: Dahlias
+            scene: Players
         }
          game = new Phaser.Game(config);
     },[])
@@ -134,3 +133,5 @@ export default function Dahlia(props) {
     )
     
 }
+
+
