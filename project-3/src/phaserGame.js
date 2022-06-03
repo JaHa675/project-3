@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import logoImg from "./assets/backgrounds/wp8861921-anime-night-forest-wallpapers.jpg"
+import logoImg from "./assets/backgrounds/BattleOption6.jpg"
 import house from "./assets/backgrounds/SafeHouse.png"
 
 class playGame extends Phaser.Scene {

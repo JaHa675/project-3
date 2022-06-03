@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
-import playGame from "../phaserGame"
+// import playGame from "../phaserGame"
+import creditbg from "../assets/backgrounds/UnpixeledBattleOption2.jpg"
 
-class brookeBoss extends Phaser.Scene {
+class Credit extends Phaser.Scene {
     constructor () {
-        super('brookeBoss')
+        super('Credit')
     }
     preload () {
-        this.load.image('brookeBattle',brookeBattle)
+        this.load.image('creditbg',creditbg)
     }
     create () {
-        const bgImages = this.add.image(400,300,'brookeBattle');
+        const bgImages = this.add.image(400,300,'creditbg');
     }
 }
 
@@ -24,7 +25,7 @@ export default function Credits(props) {
             parent: "phaser",
             width: 800,
             height: 600,
-            scene: playGame
+            scene: Credit
         }
          game = new Phaser.Game(config);
     },[])
