@@ -1,17 +1,21 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
-import playGame from "../phaserGame"
-import brookeBattle from "../assets/backgrounds/PC Computer - RPG Maker MV - Forest.png"
+// import playGame from "../phaserGame"
+import catBattle from "../assets/backgrounds/CatBossBackground.jpg"
+import CatSprite from "../assets/characters/CatBoss.png"
 
-class brookeBoss extends Phaser.Scene {
+class Cat extends Phaser.Scene {
     constructor () {
-        super('brookeBoss')
+        super('Cat')
     }
     preload () {
-        this.load.image('brookeBattle',brookeBattle)
+        this.load.image('catBattle',catBattle)
+        this.load.spritesheet('CatSprite',CatSprite,
+        { frameWidth: 48, frameHeight: 48 });
     }
     create () {
-        const bgImages = this.add.image(400,300,'brookeBattle');
+        const bgImages = this.add.image(400,300,'catBattle');
+        const catBoii = this.add.spritesheet(100,200,'CatSprite');
     }
 }
 
@@ -27,7 +31,7 @@ export default function CatBoss(props) {
             parent: "phaser",
             width: 800,
             height: 600,
-            scene: playGame
+            scene: Cat
         }
          game = new Phaser.Game(config);
     },[])

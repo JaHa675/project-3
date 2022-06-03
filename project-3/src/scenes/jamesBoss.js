@@ -1,16 +1,23 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
-import playGame from "../phaserGame"
+// import playGame from "../phaserGame"
+import jamesBattle from "../assets/backgrounds/BattleOption2.png"
+import jamesBoss from "../assets/characters/James.png"
 
-class brookeBoss extends Phaser.Scene {
+class JamesH extends Phaser.Scene {
     constructor () {
-        super('brookeBoss')
+        super('jamesBoss')
     }
     preload () {
-        this.load.image('brookeBattle',brookeBattle)
+        this.load.image('jamesBattle',jamesBattle)
+        this.load.spritesheet('jamesBoss',jamesBoss,{
+            frameWidth: 48, frameHeight: 48
+        });
+        
     }
     create () {
-        const bgImages = this.add.image(400,300,'brookeBattle');
+        const bgImages = this.add.image(400,300,'jamesBattle');
+        const jamesSprite=this.add.spritesheet(100,200,'jamesBoss');
     }
 }
 
@@ -24,7 +31,7 @@ export default function James(props) {
             parent: "phaser",
             width: 800,
             height: 600,
-            scene: playGame
+            scene: JamesH
         }
          game = new Phaser.Game(config);
     },[])

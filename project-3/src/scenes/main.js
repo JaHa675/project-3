@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
-import playGame from "../phaserGame"
+// import playGame from "../phaserGame"
+import mainbg from "../assets/backgrounds/MainOption1.png"
 
-class brookeBoss extends Phaser.Scene {
+class Mains extends Phaser.Scene {
     constructor () {
-        super('brookeBoss')
+        super('Mains')
     }
     preload () {
-        this.load.image('brookeBattle',brookeBattle)
+        this.load.image('mainbg',mainbg)
     }
     create () {
-        const bgImages = this.add.image(400,300,'brookeBattle');
+        const bgImages = this.add.image(400,300,'mainbg');
     }
 }
 
@@ -24,7 +25,7 @@ export default function Main(props) {
             parent: "phaser",
             width: 800,
             height: 600,
-            scene: playGame
+            scene: Mains
         }
          game = new Phaser.Game(config);
     },[])
