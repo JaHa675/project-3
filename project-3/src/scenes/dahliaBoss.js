@@ -4,6 +4,8 @@ import Phaser from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption5.png"
 import dahliaBoss from '../assets/characters/Dahlia.png'
 var player;
+var platforms;
+var cursors;
 
 class Dahlias extends Phaser.Scene {
     constructor () {
@@ -16,7 +18,16 @@ class Dahlias extends Phaser.Scene {
         });
     }
     create () {
-        const bgImages = this.add.image(400,300,'dgBattle');
+        // const bgImages = this.add.image(400,300,'dgBattle');
+        platforms = this.physics.add.staticGroup();
+
+        platforms.create(400, 300, 'dgBattle').refreshBody();
+        // .setScale(2) - option for images. Scales the size
+
+        // platforms.create(600, 400, 'dgBattle');
+        // platforms.create(50, 250, 'dgBattle');
+        // platforms.create(750, 220, 'dgBattle');
+
         player = this.physics.add.sprite(100, 450, 'dahliaBoss');
 
         player.setBounce(0.2);
@@ -41,9 +52,39 @@ class Dahlias extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
+        cursors = this.input.keyboard.createCursorKeys();
+
+        this.physics.add.collider(player, platforms);
+    }
+     update ()
+    {
+        if (cursors.left.isDown)
+        {
+            player.setVelocityX(-160);
+
+            player.anims.play('left', true);
+        }
+        else if (cursors.right.isDown)
+        {
+            player.setVelocityX(160);
+
+            player.anims.play('right', true);
+        }
+        else
+        {
+            player.setVelocityX(0);
+
+            player.anims.play('turn');
+        }
+
+        if (cursors.up.isDown && player.body.touching.down)
+        {
+            player.setVelocityY(-330);
+        }
     }
 
     }
+
 
 
 export default function Dahlia(props) {
