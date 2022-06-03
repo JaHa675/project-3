@@ -7,8 +7,8 @@ export default function Login () {
             <div className="loginContainer">
                 <div className="contentContainer">
                 <div className='scrollImage '></div>
-                    <h1 className= "loginPage">Login Page</h1>
-                    <p>Please Login/Signup to Battle!</p>
+                    <h1 className= "loginPage">Login</h1>
+                    <p>Please Login to Battle!</p>
                     <form action="#" method="post" id="loginOut">
                     <p>Email</p>
                     <input name="email" type="text" placeholder="Your Email Here"id="emailInput" required></input>

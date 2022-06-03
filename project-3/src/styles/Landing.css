@@ -1,0 +1,33 @@
+.landingContainer {
+    display: flex;
+    margin: 20%;
+    align-items:center;
+    flex-direction: column;
+    justify-content: center;
+}
+.battleLogo {
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.playNow {
+    display: flex;
+    font-family: 'Press Start 2P', cursive;
+    color: #c89876;
+    background: rgba(156, 95, 93, 0.806);
+    border-radius: 10px;
+    margin: 20px 0 20px 0;
+    font-size: 20px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.playNow:hover {
+    color: #322b5b;
+    transition: ease 0.5s ;
+    background: rgba(93, 143, 156, 0.663);
+}
+a {
+    text-decoration: none;
+}
