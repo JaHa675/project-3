@@ -11,11 +11,13 @@
     justify-content: center;
 }
 
+
 .playNow {
     display: flex !important;
     /* font-family: 'Press Start 2P', cursive i; */
     color: #c89876 !important;
     background: rgba(156, 95, 93, 0.806) !important;
+
     border-radius: 10px;
     margin: 20px 0 20px 0;
     font-size: 20px;
@@ -23,7 +25,7 @@
     justify-content: center;
     align-items: center;
 }
-.playNow:hover {
+button:hover {
     color: #322b5b;
     transition: ease 0.5s ;
     background: rgba(93, 143, 156, 0.663);
