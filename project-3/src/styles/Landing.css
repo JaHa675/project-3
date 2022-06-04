@@ -11,11 +11,13 @@
     justify-content: center;
 }
 
-button {
-    display: flex;
-    font-family: 'Press Start 2P', cursive;
-    color: #c89876;
-    background: rgba(156, 95, 93, 0.806);
+
+.playNow {
+    display: flex !important;
+    /* font-family: 'Press Start 2P', cursive i; */
+    color: #c89876 !important;
+    background: rgba(156, 95, 93, 0.806) !important;
+
     border-radius: 10px;
     margin: 20px 0 20px 0;
     font-size: 20px;
