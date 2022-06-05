@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
 // import playGame from "../phaserGame"
-import mainbg from "../assets/backgrounds/MainOption1.png"
+import mainbg from "../assets/backgrounds/BattleOption4.png"
 
 class Mains extends Phaser.Scene {
     constructor () {
