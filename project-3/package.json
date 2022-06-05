@@ -2,6 +2,9 @@
   "name": "project-3",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.14.2"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
