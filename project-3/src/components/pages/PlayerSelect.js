@@ -8,20 +8,26 @@ export default function PlayerSelection() {
         <div>
             <h1 id="charTitle">Choose Your Character</h1>
             <div id="classBox">
-                <h3 id="mage">Mage</h3>
-                <h3 id="warrior">Warrior</h3>
             </div>
-            <div className="avatarBox">
-                <img className="avatar pixelart" id="mage" src={mage} />
+            <div className="characterArea">
+                <div className="characterBox">
+                <h3 style={{marginLeft:"55px"}}>Mage</h3>
+                    <div className="avatarBox">
+                        <img className="avatar pixelart" id="mage" src={mage} />
+                    </div>
+                    <button style={{width: "200px"}}>Select</button>
+                </div>
+                    <br />
+
+                <div className="characterBox">
+                <h3>Warrior</h3>
+                    <div className="avatarBox">
+                        <img className="avatar pixelart" id="warrior" src={warrior}/>
+                    </div>
+                    <button style={{width: "200px"}}>Select</button>
+                </div>
             </div>
-                <br />
-            <div className="avatarBox">
-                <img className="avatar pixelart" id="warrior" src={warrior} style={{marginLeft: '200px'}}/>
-            </div>
-            
             <div id="buttonBox">
-                <button>Select</button>
-                <button>Select</button>
             </div>
         </div>
     )

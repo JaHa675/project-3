@@ -1,14 +1,14 @@
 :root {
-    --pixel-size: 6;
+   --pixel-size: 6;
 }
 
 .avatarBox {
-    display: flex;
-    margin-left: 17%;
-    margin-top: 17%;
-    position: absolute;
-    top:0;
-    left:0;
+   display: flex;
+   margin-left: 17%;
+   margin-top: 17%;
+   position: absolute;
+   top:0;
+   left:0;
 }
 
 
@@ -17,63 +17,72 @@
 } */
 
 #classBox {
-    display: flex;
-    margin-left: 28%;
-    margin-top: 8%;
-    font-size: 25px;
-    color: white;
+   display: flex;
+   margin-left: 28%;
+   margin-top: 8%;
+   font-size: 25px;
+   color: white;
 }
 
 #charTitle {
-    text-align: center;
-    margin-top: 5%
+   text-align: center;
+   margin-top: 5%;
+   color: black;
 }
 
-#warrior {
-    margin-left: 30%;
-}
 /* ----------------Sprite CSS---------------- */
+.characterArea {
+  display: flex;
+  margin-left: 25%;
+  width: 50%;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.characterBox {
+  justify-content: center;
+  display: grid;
+}
 
 :root {
-    --pixel-size: 2;
- }
- 
- .avatarBox {
-    width: calc(48px * var(--pixel-size));
-    height: calc(48px * var(--pixel-size));
-    overflow: hidden;
-    position: relative;
-    margin: 4em auto;
- }
- 
+   --pixel-size: 2;
+}
+
+.avatarBox {
+   width: calc(48px * var(--pixel-size));
+   height: calc(48px * var(--pixel-size));
+   overflow: hidden;
+   position: relative;
+   margin: 4em auto;
+}
+
 .avatar {
-    animation: moveSpritesheet 1s steps(3) infinite;
-    width: calc(147px * var(--pixel-size));
-    position: absolute;
-    
- }
- 
- .pixelart {
-    image-rendering: pixelated;
- }
- 
- .face-right {
-    top: calc(-48px * var(--pixel-size));
- }
- .face-up {
-    top: calc(-146px * var(--pixel-size));
- }
- .face-left {
-    top: calc(-96px * var(--pixel-size));
- }
- 
- 
- @keyframes moveSpritesheet {
-    from {
-       transform: translate3d(0px,0,0)
-    }
-    to {
-       transform: translate3d(-100%,0,0)
-    }
- }
- 
+   animation: moveSpritesheet 1s steps(3) infinite;
+   width: calc(147px * var(--pixel-size));
+   position: absolute;
+   
+}
+
+.pixelart {
+   image-rendering: pixelated;
+}
+
+.face-right {
+   top: calc(-48px * var(--pixel-size));
+}
+.face-up {
+   top: calc(-146px * var(--pixel-size));
+}
+.face-left {
+   top: calc(-96px * var(--pixel-size));
+}
+
+
+@keyframes moveSpritesheet {
+   from {
+      transform: translate3d(0px,0,0)
+   }
+   to {
+      transform: translate3d(-100%,0,0)
+   }
+}
