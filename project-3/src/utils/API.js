@@ -1,9 +1,9 @@
 // IMPORTANT NOTE you gotta run the backend on localhost 3001 to make the dev environment work once it's deployed we swap these two things here
 
 //DEVELOP
-const BASE_URL="http://localhost:3001"
+// const BASE_URL="http://localhost:3001"
 //PROD
-// const BASE_URL="TODO: put our url here"
+const BASE_URL="https://stormy-shelf-28724.herokuapp.com/"
 
 
 module.exports = {
