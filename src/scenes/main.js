@@ -11,6 +11,7 @@ import test from "./dahliaBoss"
 
 import ground from "../assets/backgrounds/BattleOption4ground.png"
 import door from "../assets/backgrounds/DoorsTrial1.png"
+import CharacterSelection from './characterSelection';
 var player;
 var platforms;
 var cursors;
@@ -19,9 +20,9 @@ var doors;
 
 // MAIN acts as the directory for the other scenes
 
-class Main extends Phaser.Scene {
+class Mains extends Phaser.Scene {
     constructor () {
-        super('Main')
+        super('Mains')
     }
     preload () {
         this.load.image('dgBattle',dgBattle)
@@ -83,7 +84,7 @@ class Main extends Phaser.Scene {
 // this input is what changes scenes on keydown (letter A)
 
         this.input.keyboard.on('keydown-A', () => {
-            this.scene.add('test', test, true, {x:800, y:600})
+            this.scene.add('dahlia', test, true, {x:800, y:600})
         }, this);
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
@@ -121,7 +122,7 @@ class Main extends Phaser.Scene {
 
 
 
-export default function Dahlia(props) {
+export default function Main(props) {
     var game = null;
     
     useEffect((props) => {
@@ -130,6 +131,7 @@ export default function Dahlia(props) {
             parent: "phaser",
             width: 800,
             height: 600,
+            pixelArt: true,
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -137,7 +139,7 @@ export default function Dahlia(props) {
                     debug: false
                 }
             },
-            scene: Main
+            scene: CharacterSelection
         }
          game = new Phaser.Game(config);
     },[])
