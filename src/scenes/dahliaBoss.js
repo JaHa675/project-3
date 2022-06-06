@@ -13,10 +13,10 @@ import bridge from "../assets/extras/TomatoPlatform.png"
 import { mageAttack, warriorAttack } from '../scripts/attack';
 import { getOneCharacter } from '../utils/API';
 
+import MainScene from "./main"
 const currentChar = getOneCharacter(1);
 
 
-import MainScene from "./main"
 
 var player;
 var platforms;
