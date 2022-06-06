@@ -52,43 +52,28 @@ class CharacterSelection extends Scene {
 
         player = this.physics.add.sprite(250, 300, 'mage').setScale(3);
 
-        player.setBounce(0.2);
-        player.setCollideWorldBounds(true);
-
         warrior = this.physics.add.sprite(550, 300, 'warrior').setScale(3);
-        
-        warrior.setBounce(0.2);
-        warrior.setCollideWorldBounds(true);
-
-
 
         this.anims.create({
-            key: 'walk',
-            frames: this.anims.generateFrameNumbers('warrior', {start: 1, end: 3 }),
+            key: 'warriorwalk',
+            frames: this.anims.generateFrameNumbers('warrior', {start: 1, end: 4 }),
             frameRate: 10,
             repeat: -1
         });
         warrior.play('walk');
 
-
-
-        // var cursors = this.input.keyboard.createCursorKeys();
+        this.anims.create({
+            key: 'walk',
+            frames: this.anims.generateFrameNumbers('mage', { frames: [ 1, 2, 3,]}),
+            frameRate: 10,
+            repeat: -1
+        });
+        const key = ['walk']
+        player.play('walk');
 
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(boss, platforms);
-
-        const text= this.add.text(50,50,'');
-        const text2= this.add.text(20,20,'');
-
-        const list = [ 'Battle Data:', '' ];
-        player.setDataEnabled();
-
-        player.on('setdata', function (gameObject, key, value) {
-            list.push(key);
-            text2.setText(list);
-        });
-
 
              text4 =this.add.text(230, 190, 'MAGE', { fontFamily: '"Press Start 2P"' }).setPadding(5);
              text5 =this.add.text(500, 190, 'WARRIOR', { fontFamily: '"Press Start 2P"' }).setPadding(5);
