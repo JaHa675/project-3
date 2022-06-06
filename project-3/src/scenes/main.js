@@ -7,16 +7,12 @@ import mageBattlePos from "../assets/characters/MageBattlePositions.png"
 import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 import mainOptions from "../assets/backgrounds/MainOption2.png"
 import ground from "../assets/backgrounds/BattleOption4ground.png"
-import door from "../assets/backgrounds/Door.png"
+import door from "../assets/backgrounds/DoorsTrial1.png"
 var player;
 var platforms;
 var cursors;
-var door1;
-var door2;
-var door3;
-var door4;
-var door5;
-var safeHouse;
+var doors;
+// var safeHouse;
 
 class Main extends Phaser.Scene {
     constructor () {
@@ -24,7 +20,7 @@ class Main extends Phaser.Scene {
     }
     preload () {
         this.load.image('dgBattle',dgBattle)
-        this.load.image('door',"../assets/backgrounds/Door.png")
+        this.load.image('door',door)
         this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
         this.load.image("ground", ground)
     }
@@ -32,6 +28,14 @@ class Main extends Phaser.Scene {
         // create a background 
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'dgBattle').refreshBody();
+
+                // adding the door to the game 
+        doors =this.physics.add.staticGroup();
+        doors.create(100,440,'door').refreshBody();
+        doors.create(300, 440, 'door').refreshBody();
+        doors.create(500, 440, 'door').refreshBody();
+        doors.create(700, 440, 'door').refreshBody();
+
 
         // getting the player to render 
         player = this.physics.add.sprite(350, 100, 'mage');
@@ -47,12 +51,6 @@ class Main extends Phaser.Scene {
         ground.setImmovable();
         ground.setCollideWorldBounds(true);
 
-        // adding the door to the game 
-        door1 = this.add.image(100, 440, 'door');
-        // door1.create (100,440, 'door').setScale(3);
-        door2 = this.add.image(300, 440, 'door');
-        door3 = this.add.image(500, 440, 'door');
-        door4 = this.add.image(700, 440, 'door');
 
         // player changing to righ left and center positions
         this.anims.create({
@@ -78,6 +76,7 @@ class Main extends Phaser.Scene {
 
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
+        // this.physics.add.collider(player, doors);
         // this.physics.add.collider(boss, platforms);
     }
      update ()
