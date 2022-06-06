@@ -11,6 +11,8 @@ import mage from "../assets/characters/Mage.png"
 
 import bridge from "../assets/extras/TomatoPlatform.png"
 
+import MainScene from "./main"
+
 var player;
 var platforms;
 var cursors;
@@ -76,6 +78,10 @@ class Dahlias extends Scene {
             repeat: -1
         });
         cursors = this.input.keyboard.createCursorKeys();
+
+        this.input.keyboard.on('keydown-R', () => {
+            this.scene.start('main', MainScene, true, {x:800, y:600})
+        }, this);
 
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);

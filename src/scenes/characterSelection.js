@@ -1,18 +1,10 @@
-import React, { useEffect } from 'react';
-import Phaser from 'phaser';
+
 import { Scene } from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption5.png"
 import bossPlatform from "../assets/extras/TomatoPlatform.png"
-import dahliaBoss from '../assets/characters/Dahlia.png'
-import test from "./dahliaBoss"
-// import dahliaBattlePos from '../assets/characters/DahliaBattlePositions.png'
 import warrior from "../assets/characters/Warrior.png"
 import mage from "../assets/characters/Mage.png"
-// import warrior from "../assets/characters/Warrior.png"
-// import mageBattlePos from "../assets/characters/MageBattlePositions.png"
-// import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
-
-import bridge from "../assets/extras/TomatoPlatform.png"
+import MainScene from "./main"
 
 var player;
 var platforms;
@@ -32,7 +24,6 @@ class CharacterSelection extends Scene {
     preload() {
         
         this.load.image('dgBattle', dgBattle)
-        this.load.image('bridge', bridge)
         this.load.image('bossPlatform', bossPlatform)
         this.load.spritesheet('mage', mage, {
             frameWidth: 48, frameHeight: 48
@@ -61,6 +52,11 @@ class CharacterSelection extends Scene {
         warrior.setCollideWorldBounds(true);
 
 
+        cursors = this.input.keyboard.createCursorKeys();
+        
+        this.input.keyboard.on('keydown-Y', () => {
+            this.scene.start('main', MainScene, true, {x:800, y:600})
+        }, this);
 
         this.anims.create({
             key: 'walk',
@@ -70,9 +66,6 @@ class CharacterSelection extends Scene {
         });
         warrior.play('walk');
 
-
-
-        // var cursors = this.input.keyboard.createCursorKeys();
 
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
@@ -96,10 +89,6 @@ class CharacterSelection extends Scene {
 
             graphics = this.add.graphics();
 
-            cursors = this.input.keyboard.createCursorKeys();
-            this.input.keyboard.on('keydown-A', () => {
-                this.scene.add('test', test, true, {x:800, y:600})
-            }, this);
             
     }
      update ()
