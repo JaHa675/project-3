@@ -9,6 +9,8 @@ import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 import bridge from "../assets/extras/TomatoPlatform.png"
 import mainOptions from "../assets/backgrounds/MainOption2.png"
 import ground from "../assets/backgrounds/BattleOption6.png"
+import test from "./dahliaBoss"
+
 var player;
 var platforms;
 var cursors;
@@ -20,6 +22,8 @@ var door4;
 var door5;
 var safeHouse;
 
+// MAIN acts as the directory for the other scenes
+
 class Main extends Phaser.Scene {
     constructor () {
         super('Main')
@@ -30,20 +34,20 @@ class Main extends Phaser.Scene {
         this.load.image('bossPlatform',bossPlatform)
         this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
         this.load.image("ground", ground)
+        // this.load.sceneFile('DahliasScene', '/dahliaBoss.js')
     }
     create () {
 
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 500, 'mainOptions').setScale(2);
         platforms.create(400, 300, 'dgBattle').refreshBody();
-
         platforms.create(400, 600, 'bossPlatform').setScale(6);
-
+        
         player = this.physics.add.sprite(350, 100, 'mage');
         
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
-
+        
         // getting a ground to render on the bottom
         let groundX = this.sys.game.config.width / 2;
         let groundY = this.sys.game.config.height * .95;
@@ -52,14 +56,14 @@ class Main extends Phaser.Scene {
         ground.setBounce(0);
         ground.setImmovable();
         ground.setCollideWorldBounds(true);
-
+        
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
             frameRate: 10,
             repeat: -1
         });
-     
+        
         this.anims.create({
             key: 'turn',
             frames: [ { key: 'mage', frame: 4} ],
@@ -68,12 +72,17 @@ class Main extends Phaser.Scene {
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('mage', { start: 5, end: 7}),
+            frames: this.anims.generateFrameNumbers('mage', { start: 6, end: 7}),
             frameRate: 10,
             repeat: -1
         });
         cursors = this.input.keyboard.createCursorKeys();
+        
+// this input is what changes scenes on keydown (letter A)
 
+        this.input.keyboard.on('keydown-A', () => {
+            this.scene.add('test', test, true, {x:800, y:600})
+        }, this);
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
         // this.physics.add.collider(boss, platforms);

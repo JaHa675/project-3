@@ -26,7 +26,7 @@ function App() {
   <Route path ='/newplayer' element ={<PlayerSelect />}></Route>
   <Route path ='/brooke' element ={<Brooke />}></Route>
   <Route path ='/catboss' element ={<CatBoss />}></Route>
-  <Route path ='/dahlia' element ={<Dahlia />}></Route>
+  {/* <Route path ='/dahlia' element ={<Dahlia />}></Route> */}
   <Route path ='/james' element ={<James />}></Route>
   <Route path ='/lucas' element ={<Lucas/>}></Route>
   <Route path ='/main' element ={<Main />}></Route>

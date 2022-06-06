@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import Phaser from "phaser";
+import { Scene } from "phaser";
 // import playGame from "../phaserGame"
 import dgBattle from "../assets/backgrounds/BattleOption5.png"
 import bossPlatform from "../assets/extras/TomatoPlatform.png"
@@ -16,7 +16,7 @@ var platforms;
 var cursors;
 var boss;
 
-class Dahlias extends Phaser.Scene {
+class Dahlias extends Scene {
     constructor () {
         super('Dahlias')
     }
@@ -105,33 +105,33 @@ class Dahlias extends Phaser.Scene {
 
     }
 
+export default Dahlias
 
-
-export default function Dahlia(props) {
-    var game = null;
+// export default function Dahlia(props) {
+//     var game = null;
     
     
-    useEffect((props) => {
-        const config = {
-            type: Phaser.AUTO,
-            parent: "phaser",
-            width: 800,
-            height: 600,
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    gravity: { y: 300 },
-                    debug: false
-                }
-            },
-            scene: Dahlias
-        }
-         game = new Phaser.Game(config);
-    },[])
+//     useEffect((props) => {
+//         const config = {
+//             type: Phaser.AUTO,
+//             parent: "phaser",
+//             width: 800,
+//             height: 600,
+//             physics: {
+//                 default: 'arcade',
+//                 arcade: {
+//                     gravity: { y: 300 },
+//                     debug: false
+//                 }
+//             },
+//             scene: Dahlias
+//         }
+//          game = new Phaser.Game(config);
+//     },[])
     
-    return (
-        <div id="battle">{game ? game :""}</div>
+//     return (
+//         <div id="battle">{game ? game :""}</div>
         
-    )
+//     )
     
-}
+// }
