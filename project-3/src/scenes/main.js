@@ -1,18 +1,16 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption4.png"
-import bossPlatform from "../assets/extras/TomatoPlatform.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import mageBattlePos from "../assets/characters/MageBattlePositions.png"
 import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
-import bridge from "../assets/extras/TomatoPlatform.png"
 import mainOptions from "../assets/backgrounds/MainOption2.png"
-import ground from "../assets/backgrounds/BattleOption6.png"
+import ground from "../assets/backgrounds/BattleOption4ground.png"
+import door from "../assets/backgrounds/Door.png"
 var player;
 var platforms;
 var cursors;
-var main;
 var door1;
 var door2;
 var door3;
@@ -26,26 +24,22 @@ class Main extends Phaser.Scene {
     }
     preload () {
         this.load.image('dgBattle',dgBattle)
-        this.load.image('bridge',bridge)
-        this.load.image('bossPlatform',bossPlatform)
+        this.load.image('door',"../assets/backgrounds/Door.png")
         this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
         this.load.image("ground", ground)
     }
     create () {
-
+        // create a background 
         platforms = this.physics.add.staticGroup();
-        platforms.create(400, 500, 'mainOptions').setScale(2);
         platforms.create(400, 300, 'dgBattle').refreshBody();
 
-        platforms.create(400, 600, 'bossPlatform').setScale(6);
-
+        // getting the player to render 
         player = this.physics.add.sprite(350, 100, 'mage');
-        
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
 
         // getting a ground to render on the bottom
-        let groundX = this.sys.game.config.width / 2;
+        let groundX = this.sys.game.config.width / 3;
         let groundY = this.sys.game.config.height * .95;
         let ground = this.physics.add.image(groundX, groundY, "ground");
         ground.displayWidth = this.sys.game.config.width * 1.0;
@@ -53,6 +47,14 @@ class Main extends Phaser.Scene {
         ground.setImmovable();
         ground.setCollideWorldBounds(true);
 
+        // adding the door to the game 
+        door1 = this.add.image(100, 440, 'door');
+        // door1.create (100,440, 'door').setScale(3);
+        door2 = this.add.image(300, 440, 'door');
+        door3 = this.add.image(500, 440, 'door');
+        door4 = this.add.image(700, 440, 'door');
+
+        // player changing to righ left and center positions
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
@@ -68,7 +70,7 @@ class Main extends Phaser.Scene {
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('mage', { start: 5, end: 7}),
+            frames: this.anims.generateFrameNumbers('mage', { start: 6, end: 7}),
             frameRate: 10,
             repeat: -1
         });
@@ -111,7 +113,6 @@ class Main extends Phaser.Scene {
 
 export default function Dahlia(props) {
     var game = null;
-    
     
     useEffect((props) => {
         const config = {

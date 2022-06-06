@@ -66,7 +66,7 @@ class Dahlias extends Phaser.Scene {
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('mage', { start: 5, end: 7}),
+            frames: this.anims.generateFrameNumbers('mage', { start: 6, end: 7}),
             frameRate: 10,
             repeat: -1
         });
