@@ -1,7 +1,6 @@
 
 import { Scene } from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption5.png"
-import MainScene from "./main"
 import warrior from "../assets/characters/Warrior.png"
 import Mage from "../assets/characters/Mage.png"
 import MainScene from "./main"
@@ -55,6 +54,10 @@ class CharacterSelection extends Scene {
 
             graphics = this.add.graphics();
 
+            cursors = this.input.keyboard.createCursorKeys();
+            this.input.keyboard.on('keydown-U', () => {
+                this.scene.add('main', MainScene, true, {x:800, y:600})
+            }, this);
             
     }
      update ()
