@@ -1,6 +1,7 @@
 
 import { Scene } from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption5.png"
+import MainScene from "./main"
 import warrior from "../assets/characters/Warrior.png"
 import Mage from "../assets/characters/Mage.png"
 import MainScene from "./main"
@@ -29,15 +30,7 @@ class CharacterSelection extends Scene {
         platforms = this.physics.add.staticGroup();
 
         platforms.create(400, 300, 'dgBattle').refreshBody();
-
-        platforms.create(400, 500, 'bossPlatform').setScale(3);
-
-        cursors = this.input.keyboard.createCursorKeys();
-        
-        this.input.keyboard.on('keydown-Y', () => {
-            this.scene.start('main', MainScene, true, {x:800, y:600})
-        }, this);
-
+        // creating animations for mage to walk in place
         this.anims.create({
             key: 'mageWalk',
             frames: this.anims.generateFrameNumbers('mage', { frames: [ 0, 1, 2,]}),
@@ -62,10 +55,7 @@ class CharacterSelection extends Scene {
 
             graphics = this.add.graphics();
 
-            cursors = this.input.keyboard.createCursorKeys();
-            this.input.keyboard.on('keydown-A', () => {
-                this.scene.add('test', test, true, {x:800, y:600})
-            }, this);
+            
     }
      update ()
     {
