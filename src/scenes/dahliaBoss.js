@@ -10,6 +10,7 @@ import mage from "../assets/characters/Mage.png"
 // import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 
 import bridge from "../assets/extras/TomatoPlatform.png"
+import { mageAttack } from '../scripts/attack';
 
 var player;
 var platforms;
@@ -82,48 +83,44 @@ class Dahlias extends Scene {
         this.physics.add.collider(boss, platforms);
 
         const text= this.add.text(50,50,'');
-        const text2= this.add.text(20,20,'');
 
-        const list = [ 'Battle Data:', '' ];
         player.setDataEnabled();
 
-        player.on('setdata', function (gameObject, key, value) {
-            list.push(key);
-            text2.setText(list);
-        });
+        player.data.set('name', 'player');
+        player.data.set('class', 'mage');
+        player.data.set('level', 2);
+        player.data.set('attack', 150);
+        player.data.set('hp', 12);
+        
+        //  Display it
+        text.setText([
+            'Name: ' + player.data.get('name'),
+            'Level: ' + player.data.get('level'),
+            'Attack: ' + player.data.get('attack'),
+            'Hp: ' + player.data.get('hp')
+        ]);
 
-        player.data.set('Name:', 'player username here');
-        player.data.set('Level:', 2);
-        player.data.set('AtkPoints:',100);
-        player.data.set('HpPoints:',250);
-
-        player.on('changedata', function (gameObject, key, value) {
-            text.setText([
-                'Name: ' + player.data.get('name'),
-                'Level: ' + player.data.get('level'),
-                'Atk Points: ' + player.data.get('atkPoints') + ' atkPoints',
-                'HP Points: ' + player.data.get('hpPoints') - ' bossAtkPoints'
-            ]);
-
-        });
-
-            text3 = this.add.text(50, 480, 'SELECT:', { fontFamily: '"Press Start 2P"'});
-             text4 =this.add.text(50, 505, 'ATTACK', { fontFamily: '"Press Start 2P"' }).setPadding(5);
-             text5 =this.add.text(50, 545, 'DEFEND', { fontFamily: '"Press Start 2P"' }).setPadding(5);
+        text3 = this.add.text(50, 480, 'SELECT:', { fontFamily: '"Press Start 2P"'});
+        text4 =this.add.text(50, 505, 'ATTACK', { fontFamily: '"Press Start 2P"' }).setPadding(5);
+        text5 =this.add.text(50, 545, 'DEFEND', { fontFamily: '"Press Start 2P"' }).setPadding(5);
              text6=this.add.text(220,80, 'DEFEAT THE DAHLIA',{fontFamily:'"Press Start 2P',fontSize:'32px'})
              text7=this.add.text(400,120, 'FIGHT!',{fontFamily:'"Press Start 2P',fontSize:'32px'})
-
-            graphics = this.add.graphics();
-            
-
-
+             
+             graphics = this.add.graphics();
+             
+             boss.data.set('name', 'boss');
+             boss.data.set('level', 213719);
+             boss.data.set('attack', 1);
+             boss.data.set('hp', 1174326874612398746123);
+             boss.data.set('defense', 2);
        
-            // Beginnings of code for click functions for attack and defend 
-
-        // this.input.on('pointerdown',function(){
-        //      const hpPoints = player.data.get('bossAtkPoints')
-        //      if ()
-        // })
+             // Beginnings of code for click functions for attack and defend 
+        this.input.on('pointerdown',function(){
+             const hpPoints = player.data.get('bossAtkPoints')
+             if (player.data.get('class')=== 'mage'){
+                 console.log(mageAttack(player.data.get('level'),boss.data.get('defense')))
+             }
+        })
     }
      update ()
     {
@@ -131,13 +128,13 @@ class Dahlias extends Scene {
 
         graphics.strokeRectShape(text4.getBounds());
         graphics.strokeRectShape(text5.getBounds());
-
+        
         // Commented out character movement
-
-    //     if (cursors.left.isDown)
-    //     {
-    //         player.setVelocityX(-160);
-
+        
+        //     if (cursors.left.isDown)
+        //     {
+            //         player.setVelocityX(-160);
+            
     //         player.anims.play('left', true);
     //     }
     //     else if (cursors.right.isDown)
