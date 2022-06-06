@@ -1,7 +1,14 @@
-import React, { useEffect } from 'react';
-import Phaser from 'phaser';
+
 import { Scene } from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption5.png"
+<<<<<<< HEAD
+import bossPlatform from "../assets/extras/TomatoPlatform.png"
+import warrior from "../assets/characters/Warrior.png"
+import mage from "../assets/characters/Mage.png"
+import MainScene from "./main"
+
+var player;
+=======
 // import bossPlatform from "../assets/extras/TomatoPlatform.png"
 import dahliaBoss from '../assets/characters/Dahlia.png'
 import test from "./dahliaBoss"
@@ -10,6 +17,7 @@ import warrior from "../assets/characters/Warrior.png"
 import Mage from "../assets/characters/Mage.png"
 
 var mage;
+>>>>>>> dev
 var platforms;
 var cursors;
 var graphics;
@@ -25,21 +33,72 @@ class CharacterSelection extends Scene {
     preload() {
         
         this.load.image('dgBattle', dgBattle)
+<<<<<<< HEAD
+        this.load.image('bossPlatform', bossPlatform)
+        this.load.spritesheet('mage', mage, {
+            frameWidth: 48, frameHeight: 48
+        });
+        this.load.spritesheet('warrior', warrior, {
+            frameWidth: 48, frameHeight: 48
+        });
+=======
         this.load.spritesheet('mage', Mage, {frameWidth: 48, frameHeight: 48});
         this.load.spritesheet('warrior', warrior, {frameWidth: 48, frameHeight: 48});
+>>>>>>> dev
         
     }
     create() {
         platforms = this.physics.add.staticGroup();
 
         platforms.create(400, 300, 'dgBattle').refreshBody();
+<<<<<<< HEAD
+
+        platforms.create(400, 500, 'bossPlatform').setScale(3);
+
+        player = this.physics.add.sprite(250, 300, 'mage').setScale(3);
+
+        player.setBounce(0.2);
+        player.setCollideWorldBounds(true);
+
+        warrior = this.physics.add.sprite(550, 300, 'warrior').setScale(3);
+        
+        warrior.setBounce(0.2);
+        warrior.setCollideWorldBounds(true);
+
+
+        cursors = this.input.keyboard.createCursorKeys();
+        
+        this.input.keyboard.on('keydown-Y', () => {
+            this.scene.start('main', MainScene, true, {x:800, y:600})
+        }, this);
+
+=======
         // creating animations for mage to walk in place
+>>>>>>> dev
         this.anims.create({
             key: 'mageWalk',
             frames: this.anims.generateFrameNumbers('mage', { frames: [ 0, 1, 2,]}),
             frameRate: 7,
             repeat: -1, 
         });
+<<<<<<< HEAD
+        warrior.play('walk');
+
+
+        // collider only takes in two parameters
+        this.physics.add.collider(player, platforms);
+        this.physics.add.collider(boss, platforms);
+
+        const text= this.add.text(50,50,'');
+        const text2= this.add.text(20,20,'');
+
+        const list = [ 'Battle Data:', '' ];
+        player.setDataEnabled();
+
+        player.on('setdata', function (gameObject, key, value) {
+            list.push(key);
+            text2.setText(list);
+=======
         mage = this.add.sprite(250, 300, 'mage').setScale(3);
         mage.play('mageWalk');
     // creating animations for warrior to walk in place
@@ -48,6 +107,7 @@ class CharacterSelection extends Scene {
             frames: this.anims.generateFrameNumbers('warrior', { frames: [ 0, 1, 2,]}),
             frameRate: 7,
             repeat: -1, 
+>>>>>>> dev
         });
         warrior = this.add.sprite(550, 300, 'warrior').setScale(3);
         warrior.play('warriorWalk');
@@ -58,10 +118,14 @@ class CharacterSelection extends Scene {
 
             graphics = this.add.graphics();
 
+<<<<<<< HEAD
+            
+=======
             cursors = this.input.keyboard.createCursorKeys();
             this.input.keyboard.on('keydown-A', () => {
                 this.scene.add('test', test, true, {x:800, y:600})
             }, this);
+>>>>>>> dev
     }
      update ()
     {

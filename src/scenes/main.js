@@ -1,17 +1,11 @@
-import React, {useEffect} from 'react';
-import Phaser from "phaser";
+
+import { Scene } from 'phaser'
 import dgBattle from "../assets/backgrounds/BattleOption4.png"
 import mage from "../assets/characters/Mage.png"
-import warrior from "../assets/characters/Warrior.png"
-import mageBattlePos from "../assets/characters/MageBattlePositions.png"
-import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
-import mainOptions from "../assets/backgrounds/MainOption2.png"
-// import ground from "../assets/backgrounds/BattleOption6.png"
-import test from "./dahliaBoss"
-
 import ground from "../assets/backgrounds/BattleOption4ground.png"
 import door from "../assets/backgrounds/DoorsTrial1.png"
-import CharacterSelection from './characterSelection';
+import DahliaScene from "./dahliaBoss"
+
 var player;
 var platforms;
 var cursors;
@@ -20,7 +14,7 @@ var doors;
 
 // MAIN acts as the directory for the other scenes
 
-class Mains extends Phaser.Scene {
+class Mains extends Scene {
     constructor () {
         super('Mains')
     }
@@ -29,7 +23,6 @@ class Mains extends Phaser.Scene {
         this.load.image('door',door)
         this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
         this.load.image("ground", ground)
-        // this.load.sceneFile('DahliasScene', '/dahliaBoss.js')
     }
     create () {
         // create a background 
@@ -84,7 +77,7 @@ class Mains extends Phaser.Scene {
 // this input is what changes scenes on keydown (letter A)
 
         this.input.keyboard.on('keydown-A', () => {
-            this.scene.add('dahlia', test, true, {x:800, y:600})
+            this.scene.add('dahlia', DahliaScene, true, {x:800, y:600})
         }, this);
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
@@ -120,33 +113,4 @@ class Mains extends Phaser.Scene {
 
     }
 
-
-
-export default function Main(props) {
-    var game = null;
-    
-    useEffect((props) => {
-        const config = {
-            type: Phaser.AUTO,
-            parent: "phaser",
-            width: 800,
-            height: 600,
-            pixelArt: true,
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    gravity: { y: 300 },
-                    debug: false
-                }
-            },
-            scene: CharacterSelection
-        }
-         game = new Phaser.Game(config);
-    },[])
-    
-    return (
-        <div id="battle">{game ? game :""}</div>
-        
-    )
-    
-}
+export default Mains

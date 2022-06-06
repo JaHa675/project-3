@@ -16,6 +16,8 @@ import { getOneCharacter } from '../utils/API';
 const currentChar = getOneCharacter(1);
 
 
+import MainScene from "./main"
+
 var player;
 var platforms;
 var cursors;
@@ -81,7 +83,11 @@ class Dahlias extends Scene {
             repeat: -1
         });
         cursors = this.input.keyboard.createCursorKeys();
-        
+
+        this.input.keyboard.on('keydown-R', () => {
+            this.scene.start('main', MainScene, true, {x:800, y:600})
+        }, this);
+
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(boss, platforms);

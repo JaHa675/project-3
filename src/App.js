@@ -13,6 +13,7 @@ import Lucas from './scenes/lucasBoss'
 import Main from './scenes/main'
 import House from './scenes/playerHouse'
 import Credits from './scenes/credits'
+import Config from './scenes/config'
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
   <Route path ='/dahlia' element ={<Dahlia />}></Route>
   <Route path ='/james' element ={<James />}></Route>
   <Route path ='/lucas' element ={<Lucas/>}></Route>
-  <Route path ='/main' element ={<Main />}></Route>
+  <Route path ='/main' element ={<Config />}></Route>
   <Route path ='/house' element ={<House />}></Route>
   <Route path ='/credits' element ={<Credits />}></Route>
 </Routes>
