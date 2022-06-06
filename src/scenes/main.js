@@ -6,6 +6,9 @@ import warrior from "../assets/characters/Warrior.png"
 import mageBattlePos from "../assets/characters/MageBattlePositions.png"
 import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 import mainOptions from "../assets/backgrounds/MainOption2.png"
+// import ground from "../assets/backgrounds/BattleOption6.png"
+import test from "./dahliaBoss"
+
 import ground from "../assets/backgrounds/BattleOption4ground.png"
 import door from "../assets/backgrounds/DoorsTrial1.png"
 var player;
@@ -13,6 +16,8 @@ var platforms;
 var cursors;
 var doors;
 // var safeHouse;
+
+// MAIN acts as the directory for the other scenes
 
 class Main extends Phaser.Scene {
     constructor () {
@@ -23,6 +28,7 @@ class Main extends Phaser.Scene {
         this.load.image('door',door)
         this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
         this.load.image("ground", ground)
+        // this.load.sceneFile('DahliasScene', '/dahliaBoss.js')
     }
     create () {
         // create a background 
@@ -41,7 +47,7 @@ class Main extends Phaser.Scene {
         player = this.physics.add.sprite(350, 100, 'mage');
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
-
+        
         // getting a ground to render on the bottom
         let groundX = this.sys.game.config.width / 3;
         let groundY = this.sys.game.config.height * .95;
@@ -59,7 +65,7 @@ class Main extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
-     
+        
         this.anims.create({
             key: 'turn',
             frames: [ { key: 'mage', frame: 4} ],
@@ -73,7 +79,12 @@ class Main extends Phaser.Scene {
             repeat: -1
         });
         cursors = this.input.keyboard.createCursorKeys();
+        
+// this input is what changes scenes on keydown (letter A)
 
+        this.input.keyboard.on('keydown-A', () => {
+            this.scene.add('test', test, true, {x:800, y:600})
+        }, this);
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
         // this.physics.add.collider(player, doors);
