@@ -2,9 +2,12 @@
 import Phaser from 'phaser'
 import dgBattle from "../assets/backgrounds/BattleOption4.png"
 import mage from "../assets/characters/Mage.png"
+import warrior from "../assets/characters/Warrior.png"
 import ground from "../assets/backgrounds/BattleOption4ground.png"
 import door from "../assets/backgrounds/DoorsTrial1.png"
 import DahliaScene from "./dahliaBoss"
+import eventsCenter from '../scripts/EventEmitter'
+import React, {useEffect,useState} from 'react';
 
 var player;
 var platforms;
@@ -22,9 +25,12 @@ class Mains extends Phaser.Scene {
         this.load.image('dgBattle',dgBattle)
         this.load.image('door',door)
         this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
+        this.load.spritesheet('warrior',warrior,{frameWidth: 48, frameHeight: 48});
         this.load.image("ground", ground)
     }
     create () {
+
+        this.character= ""
         // create a background 
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'dgBattle').refreshBody();
@@ -38,7 +44,12 @@ class Mains extends Phaser.Scene {
 
 
         // getting the player to render 
-        player = this.physics.add.sprite(350, 100, 'mage');
+        if(state.charClass === 'mage'){
+            player = this.physics.add.sprite(350, 100, 'mage');
+        } else {
+            player = this.physics.add.sprite(350, 100, 'warrior');
+        }
+        
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
         
@@ -52,7 +63,7 @@ class Mains extends Phaser.Scene {
         ground.setCollideWorldBounds(true);
 
 
-        // player changing to righ left and center positions
+        // player changing to right left and center positions
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
@@ -72,6 +83,15 @@ class Mains extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
+
+        player.setDataEnabled();
+
+        eventsCenter.on('classSelect', function(playerChange){
+            player.data.set('class',playerChange);
+            console.log(player.data);
+        })
+
+        cursors = this.input.keyboard.createCursorKeys();
         
 // Scene change handler currently on key, needs to be on press or bound condtionally (i.e. character position on a door)
 //  Please leave console logs for testing purposes as the game grows
@@ -96,8 +116,15 @@ var dahliaBossDefeated = true;
         // this.physics.add.collider(player, doors);
         // this.physics.add.collider(boss, platforms);
     }
+
+    updateClass(characterClass)
+    {
+        this.player.data.set = ('class',characterClass)
+    }
+
      update ()
     {
+
         if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
