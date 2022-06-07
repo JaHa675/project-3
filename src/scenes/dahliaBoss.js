@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Scene } from "phaser";
+import Phaser from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption5.png"
 import bossPlatform from "../assets/extras/TomatoPlatform.png"
 import dahliaBoss from '../assets/characters/Dahlia.png'
@@ -29,7 +29,7 @@ var defendText;
 var text6;
 var text7;
 
-class Dahlias extends Scene {
+class Dahlias extends Phaser.Scene {
     constructor() {
         super('Dahlias')
     }
@@ -82,10 +82,14 @@ class Dahlias extends Scene {
             frameRate: 10,
             repeat: -1
         });
-        cursors = this.input.keyboard.createCursorKeys();
 
+// Scene change handler currently on key, needs to be onClick or bound condtionally
+//  Please leave console logs for testing purposes as the game grows
+        cursors = this.input.keyboard.createCursorKeys();
+        var dahliaBossDefeated = null
         this.input.keyboard.on('keydown-R', () => {
-            this.scene.start('main', MainScene, true, {x:800, y:600})
+            // console.log('R button pressed');
+            this.scene.switch('Mains')
         }, this);
 
         // collider only takes in two parameters

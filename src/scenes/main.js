@@ -1,5 +1,5 @@
 
-import { Scene } from 'phaser'
+import Phaser from 'phaser'
 import dgBattle from "../assets/backgrounds/BattleOption4.png"
 import mage from "../assets/characters/Mage.png"
 import ground from "../assets/backgrounds/BattleOption4ground.png"
@@ -14,7 +14,7 @@ var doors;
 
 // MAIN acts as the directory for the other scenes
 
-class Mains extends Scene {
+class Mains extends Phaser.Scene {
     constructor () {
         super('Mains')
     }
@@ -72,22 +72,25 @@ class Mains extends Scene {
             frameRate: 10,
             repeat: -1
         });
-        cursors = this.input.keyboard.createCursorKeys();
         
-// this input is what changes scenes on keydown (letter A)
+// Scene change handler currently on key, needs to be on press or bound condtionally (i.e. character position on a door)
+//  Please leave console logs for testing purposes as the game grows
+cursors = this.input.keyboard.createCursorKeys();
+var firstPlay = null;
+var dahliaBossDefeated = true;
 
-        this.input.keyboard.on('keydown-A', () => {
-           // if firstPlay ==== true { setFirstPlay (true); add scene }
-            this.scene.add('dahlia', DahliaScene, true, {x:800, y:600})
-            // else {scene.start}
-        }, this);
+    this.input.keyboard.on('keydown-A', () => {
+             //  console.log(firstPlay)
+             if (firstPlay === null) {
+                 firstPlay = true;
+                 console.log("input A test",firstPlay);
+                this.scene.start ('Dahlias')
+             } else if (dahliaBossDefeated === false && firstPlay === true ) {
+                 console.log(dahliaBossDefeated)
+                 this.scene.switch('Dahlias')
+             }
+         })
 
-        this.input.keyboard.on('keydown-B', () => {
-            // if firstPlay ==== true { setFirstPlay (true); add scene }
-             this.scene.switch('Dahlias')
-             // else {scene.start}
-         }, this);
- 
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
         // this.physics.add.collider(player, doors);
