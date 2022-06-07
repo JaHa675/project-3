@@ -3,7 +3,7 @@
 //DEVELOP
 // const BASE_URL="http://localhost:3001"
 //PROD
-const BASE_URL="https://battle-trail-backend.herokuapp.com/"
+const BASE_URL="https://battle-trail-backend.herokuapp.com"
 
 
 module.exports = {
