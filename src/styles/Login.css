@@ -3,8 +3,9 @@
   margin: 0;
 }
 body {
-  /* color: rgb(81, 22, 22); */
   background-size: cover;
+  height: 100vh;
+  width: auto;
   background-repeat: no-repeat;
   font-family: 'Press Start 2P', cursive !important;
   background-image: url("../assets/images/contextPage.jpeg");
@@ -21,13 +22,13 @@ body {
   display: flex;
   justify-content: center;
   margin-right: 30%;
-  /* padding: 0 20px 10px 20px; */
   position: relative;
   left: 15%;
-  bottom: 350px;
+  bottom: 450px;
 }
 a {
-  padding: 0 20px 0 20px;
+  text-decoration: none;
+  color: #c89876 !important;
 }
 .loginContainer {
   background-repeat: no-repeat;
@@ -35,17 +36,16 @@ a {
   justify-content: center;
   align-items: center;
 }
-.contentContianer {
-  display: flex;
-  justify-content: center;
+.contentContainer {
+  height: 200px;
 }
 .scrollImage {
   background-image: url("../assets/images/scroll-2.png");
   width: 765px;
-  height: 800px;
+  height: 620px;
   position: relative;
-  top: 290px;
-  transform: scale(1.3);
+  top: 0px;
+  transform: scale(1);
 
   /* transform: rotate(270deg);  */
 }
@@ -56,9 +56,10 @@ a {
   padding: 10px;
   font-family: 'Press Start 2P', cursive;
   position: relative;
-  bottom: 360px;
+  bottom: 450px;
   margin-right: 40%;
 }
+/* to sign up on the modal */
 .signUpBTN {
   display: flex;
   justify-content: center;
@@ -67,11 +68,24 @@ a {
 .buttonContainer {
   display: flex;
   flex-direction: row;
+  position: relative;
+  top: 200px;
 }
+
 .centerBTN {
   position: relative;
   bottom: 350px;
-  left: 25%
+  left: 15%
+}
+#loginOut {
+  height:10px;
+  position: relative; 
+  bottom: 10px;
+}
+.openModal {
+  position: absolute;
+  left: 60%;
+  bottom: 190%;
 }
 .modal-content {
   padding: 20px;

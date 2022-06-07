@@ -28,11 +28,9 @@ export default function Login (props) {
                     <p className='subHeaders'>Password</p>
                     <input name="password" type="text" placeholder="Your Password Here" id="passwordInput" className="loginInput" required></input>
                     <br></br>
-                    <div style={{display: "flex"}}>
-                    <input type="submit" value="Play Now" id="form_button" className="playNow centerBTN"/>
-                    <br></br>
-                    <Button variant="dark" onClick={handleShow} className="playNow centerBTN" style={{margin: "20px"}}>Sign Up</Button>
-                    </div>
+                    {/* <input type="submit" value="Play Now" id="form_button" className="playNow centerBTN moveUp"/> */}
+                    <Button variant="dark" className="playNow centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
+                    <Button variant="dark" onClick={handleShow} className="playNow centerBTN moveUp openModal" style={{margin: "10px"}}>Sign Up</Button>
                     </form>
                     <Modal {...props} show={show} onHide={handleClose} backdrop="static" keyboard={false} aria-labelledby="contained-modal-title-vcenter">
                     <Modal.Header closeButton>
@@ -50,7 +48,7 @@ export default function Login (props) {
                     </Modal.Body>
                     <Modal.Footer>
                     <div className="signUpBTN">
-                    <Button variant="dark" className="playNow" style={{padding: "10px"}}>Submit</Button>
+                     <a href='/main'> <Button variant="dark" className="playNow" style={{padding: "10px"}}>Submit</Button></a>
                     </div>
                     </Modal.Footer>
                 </Modal>
