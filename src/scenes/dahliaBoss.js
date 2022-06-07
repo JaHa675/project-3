@@ -10,7 +10,7 @@ import warrior from "../assets/characters/Warrior.png"
 // import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 
 import bridge from "../assets/extras/TomatoPlatform.png"
-import { mageAttack, warriorAttack } from '../scripts/attack';
+import { mageAttack, warriorAttack, dahliaAttack } from '../scripts/attack';
 import { getOneCharacter } from '../utils/API';
 
 const currentChar = getOneCharacter(1);
@@ -84,29 +84,31 @@ class Dahlias extends Phaser.Scene {
 // Scene change handler currently on key, needs to be onClick or bound condtionally
 //  Please leave console logs for testing purposes as the game grows
         cursors = this.input.keyboard.createCursorKeys();
-        var dahliaBossDefeated = null
+        let dahliaBossDefeated = false
         this.input.keyboard.on('keydown-R', () => {
             // console.log('R button pressed');
             this.scene.switch('Mains')
         }, this);
-
+        
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(boss, platforms);
         
         const playerText = this.add.text(50, 50, '');
         const bossText = this.add.text(630, 50, '');
+
+        let currentTurn = 'player';
         
         player.setDataEnabled();
         boss.setDataEnabled();
         
-        console.log(currentChar)
+        // console.log(currentChar)
 
-        player.data.set('name', currentChar.character_name);
-        player.data.set('class', currentChar.class);
-        player.data.set('level', currentChar.level);
-        player.data.set('attack', currentChar.level*2);
-        player.data.set('hp', 12);
+        player.data.set('name', 'dog');
+        player.data.set('class', 'mage');
+        player.data.set('level', 2);
+        player.data.set('attack', player.data.get('level')*2);
+        player.data.set('hp', 20);
         
         boss.data.set('name', 'Dahlia');
         boss.data.set('level', 5);
@@ -129,6 +131,15 @@ class Dahlias extends Phaser.Scene {
             'Hp: ' + boss.data.get('hp')
         ]);
 
+        boss.on('changedata', function (gameObject, key, value) {
+            bossText.setText([
+                'Name: ' + boss.data.get('name'),
+                'Level: ' + boss.data.get('level'),
+                'Defense: ' + boss.data.get('defense'),
+                'Hp: ' + boss.data.get('hp')
+            ]);
+        });
+
         player.on('changedata', function (gameObject, key, value) {
             playerText.setText([
                 'Name: ' + player.data.get('name'),
@@ -149,14 +160,26 @@ class Dahlias extends Phaser.Scene {
 
         // Beginnings of code for click functions for attack and defend 
         attackText.on('pointerdown', function () {
+            const hp = boss.data.get('hp')
             if (player.data.get('class') === 'mage') {
-                console.log('damage dealt: ' + mageAttack(player.data.get('level'), boss.data.get('defense')))
-
-            } else {
-                console.log(warriorAttack(player.data.get('level'), boss.data.get('defense')))
+                let damage = mageAttack(player.data.get('level'), boss.data.get('defense'))
+                boss.data.set('hp', hp - damage);
+                console.log(boss.data.get('hp'))
+                currentTurn = 'boss';
+                bossAttack();
             }
+            //  else {
+            //     console.log(warriorAttack(player.data.get('level'), boss.data.get('defense')))
+            // }
         })
 
+        const bossAttack = () => {
+            const hp = boss.data.get('hp')
+            let damage = dahliaAttack();
+            player.data.set('hp', hp - damage);
+            console.log(player.data.get('hp'))
+            currentTurn = 'player';
+        }
 
         graphics = this.add.graphics();
     }
@@ -166,6 +189,14 @@ class Dahlias extends Phaser.Scene {
         graphics.strokeRectShape(attackText.getBounds());
         graphics.strokeRectShape(defendText.getBounds());
 
+
+        // while (boss.data.get('hp') > 0 || player.data.get('hp')) {
+        //     if(currentTurn === 'player'){
+        //         currentTurn = 'boss'
+        //     } else {
+        //         currentTurn = 'player'
+        //     }
+        // }
         // Commented out character movement
 
         //     if (cursors.left.isDown)
