@@ -1,5 +1,5 @@
 
-import { Scene } from "phaser";
+import Phaser, { Scene } from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption5.png"
 import warrior from "../assets/characters/Warrior.png"
 import Mage from "../assets/characters/Mage.png"
