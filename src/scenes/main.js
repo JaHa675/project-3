@@ -77,8 +77,17 @@ class Mains extends Scene {
 // this input is what changes scenes on keydown (letter A)
 
         this.input.keyboard.on('keydown-A', () => {
+           // if firstPlay ==== true { setFirstPlay (true); add scene }
             this.scene.add('dahlia', DahliaScene, true, {x:800, y:600})
+            // else {scene.start}
         }, this);
+
+        this.input.keyboard.on('keydown-B', () => {
+            // if firstPlay ==== true { setFirstPlay (true); add scene }
+             this.scene.switch('Dahlias')
+             // else {scene.start}
+         }, this);
+ 
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
         // this.physics.add.collider(player, doors);

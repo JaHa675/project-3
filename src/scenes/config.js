@@ -26,7 +26,11 @@ export default function Main(props) {
                     debug: false
                 }
             },
+<<<<<<< HEAD
             scene: [MainScene, CharacterSelection ] 
+=======
+            scene: [CharacterSelection] 
+>>>>>>> dev
         }
          game = new Phaser.Game(config);
     },[])
