@@ -2,9 +2,11 @@
 import { Scene } from 'phaser'
 import dgBattle from "../assets/backgrounds/BattleOption4.png"
 import mage from "../assets/characters/Mage.png"
+import warrior from "../assets/characters/Warrior.png"
 import ground from "../assets/backgrounds/BattleOption4ground.png"
 import door from "../assets/backgrounds/DoorsTrial1.png"
 import DahliaScene from "./dahliaBoss"
+import eventsCenter from '../scripts/EventEmitter'
 
 var player;
 var platforms;
@@ -25,6 +27,8 @@ class Mains extends Scene {
         this.load.image("ground", ground)
     }
     create () {
+
+        this.character= ""
         // create a background 
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'dgBattle').refreshBody();
@@ -72,6 +76,14 @@ class Mains extends Scene {
             frameRate: 10,
             repeat: -1
         });
+
+        player.setDataEnabled();
+
+        eventsCenter.on('classSelect', function(playerChange){
+            player.data.set('class',playerChange);
+            console.log(player.data);
+        })
+
         cursors = this.input.keyboard.createCursorKeys();
         
 // this input is what changes scenes on keydown (letter A)
@@ -93,8 +105,15 @@ class Mains extends Scene {
         // this.physics.add.collider(player, doors);
         // this.physics.add.collider(boss, platforms);
     }
+
+    updateClass(characterClass)
+    {
+        this.player.data.set = ('class',characterClass)
+    }
+
      update ()
     {
+
         if (cursors.left.isDown)
         {
             player.setVelocityX(-160);

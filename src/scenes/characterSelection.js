@@ -3,6 +3,8 @@ import { Scene } from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption5.png"
 import warrior from "../assets/characters/Warrior.png"
 import Mage from "../assets/characters/Mage.png"
+import MainScene from "./main"
+import eventsCenter from '../scripts/EventEmitter'
 
 var mage;
 var platforms;
@@ -25,6 +27,7 @@ class CharacterSelection extends Scene {
         
     }
     create() {
+
         platforms = this.physics.add.staticGroup();
 
         platforms.create(400, 300, 'dgBattle').refreshBody();
@@ -51,19 +54,29 @@ class CharacterSelection extends Scene {
              warriorSelect =this.add.text(500, 190, 'WARRIOR', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
              text6=this.add.text(120,80, 'CHARACTER SELECTION:',{fontFamily:'"Press Start 2P',fontSize:'32px'});
         mageSelect.on('pointerdown',function(){
+            goToMain();
+            eventsCenter.emit('classSelect','mage')
+            console.log(' mage button pushed');
             
         })
         warriorSelect.on('pointerdown',function(){
-            
+            goToMain();
+            eventsCenter.emit('classSelect','warrior');
+            console.log('warrior button pushed');
+
         })
 
 
             graphics = this.add.graphics();
 
             cursors = this.input.keyboard.createCursorKeys();
-            this.input.keyboard.on('keydown-U', () => {
+            const goToMain= ()=> {
                 this.scene.add('main', MainScene, true, {x:800, y:600})
-            }, this);
+
+            }
+            // this.input.keyboard.on('keydown-U', () => {
+            //     this.scene.add('main', MainScene, true, {x:800, y:600})
+            // }, this);
             
     }
      update ()
