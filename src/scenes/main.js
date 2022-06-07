@@ -7,6 +7,7 @@ import ground from "../assets/backgrounds/BattleOption4ground.png"
 import door from "../assets/backgrounds/DoorsTrial1.png"
 import DahliaScene from "./dahliaBoss"
 import eventsCenter from '../scripts/EventEmitter'
+import React, {useEffect,useState} from 'react';
 
 var player;
 var platforms;
@@ -24,6 +25,7 @@ class Mains extends Scene {
         this.load.image('dgBattle',dgBattle)
         this.load.image('door',door)
         this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
+        this.load.spritesheet('warrior',warrior,{frameWidth: 48, frameHeight: 48});
         this.load.image("ground", ground)
     }
     create () {
@@ -42,7 +44,12 @@ class Mains extends Scene {
 
 
         // getting the player to render 
-        player = this.physics.add.sprite(350, 100, 'mage');
+        if(state.charClass === 'mage'){
+            player = this.physics.add.sprite(350, 100, 'mage');
+        } else {
+            player = this.physics.add.sprite(350, 100, 'warrior');
+        }
+        
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
         
@@ -56,7 +63,7 @@ class Mains extends Scene {
         ground.setCollideWorldBounds(true);
 
 
-        // player changing to righ left and center positions
+        // player changing to right left and center positions
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
