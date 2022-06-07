@@ -14,6 +14,39 @@ export default function Login (props) {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [loginData, setLoginData] = useState({
+        username:"",
+        password:""
+    })
+
+    const [signupData, setSignupData] = useState({
+        username:"",
+        password:""
+    })
+
+    const loginSubmit = e=>{
+        e.preventDefault();
+        props.login(loginData).catch((err) => {
+            console.log(err)
+        });
+        setLoginData({
+            username:"",
+            password:""
+        })
+        window.location="/main"
+    }
+
+    const signupSubmit = e=>{
+        e.preventDefault();
+        props.signup(signupData).catch((err) => {
+            console.log(err)
+        });
+        setSignupData({
+            username:"",
+            password:""
+        })
+        window.location= "/main"
+    }
   
         return (
             <div className="loginContainer">
@@ -25,13 +58,13 @@ export default function Login (props) {
                     <br></br>
                     <form action="#" method="post" id="loginOut">
                     <p className='subHeaders'>Battle Name</p>
-                    <input name="email" type="text" placeholder="Your Battle Name Here"id="battleNameInput" className="loginInput" required></input>
+                    <input name="email" type="text" placeholder="Your Battle Name Here"id="battleNameInput" onChange={(e)=>setLoginData({...loginData,username:e.target.value})} className="loginInput" required></input>
                     <br></br>
                     <p className='subHeaders'>Password</p>
-                    <input name="password" type="password" placeholder="Your Password Here" id="passwordInput" className="loginInput" required></input>
+                    <input name="password" type="password" placeholder="Your Password Here" onChange={(e)=>setLoginData({...loginData,password:e.target.value})} id="passwordInput" className="loginInput" required></input>
                     <br></br>
                     {/* <input type="submit" value="Play Now" id="form_button" className="playNow centerBTN moveUp"/> */}
-                    <Button variant="dark" onClick={UserLoginInfo} className="playNow centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
+                    <Button variant="dark" onClick={loginSubmit}  className="playNow centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
                     <Button variant="dark" onClick={handleShow} className="playNow centerBTN moveUp openModal" style={{margin: "10px"}}>Sign Up</Button>
                     </form>
                     <Modal {...props} show={show} onHide={handleClose} backdrop="static" keyboard={false} aria-labelledby="contained-modal-title-vcenter">
@@ -40,17 +73,17 @@ export default function Login (props) {
                     </Modal.Header>
                     <Modal.Body>
                     <Form.Label >Battle Name</Form.Label>
-                        <Form.Control as='textarea' id="characterName" rows={1} style = {{resize: "none"}}/>
+                        <Form.Control as='textarea' id="characterName"  onChange={(e)=>setSignupData({...signupData,username:e.target.value})} rows={1} style = {{resize: "none"}}/>
                         <br></br>
                     {/* <Form.Label>Email</Form.Label>
                         <Form.Control as='textarea' id="newEmail" rows={1} style = {{resize: "none"}}/>
                         <br></br> */}
                     <Form.Label>Password</Form.Label>
-                        <Form.Control as='textarea' id="newPassword" type="password" rows={1} style = {{resize: "none"}}/>
+                        <Form.Control as='textarea' id="newPassword" type="password" onChange={(e)=>setSignupData({...signupData,password:e.target.value})} rows={1} style = {{resize: "none"}}/>
                     </Modal.Body>
                     <Modal.Footer>
                     <div className="signUpBTN">
-                     <a href='/main'> <Button variant="dark" className="playNow" style={{padding: "10px"}} onClick={UserInfo}>Submit</Button></a>
+                     <a href='/main'> <Button variant="dark" className="playNow" style={{padding: "10px"}} onClick={signupSubmit}>Submit</Button></a>
 
                     </div>
                     </Modal.Footer>
