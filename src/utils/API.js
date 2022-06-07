@@ -1,9 +1,9 @@
 // IMPORTANT NOTE you gotta run the backend on localhost 3001 to make the dev environment work once it's deployed we swap these two things here
 
 //DEVELOP
-// const BASE_URL="http://localhost:3001"
+const BASE_URL="http://localhost:3001"
 //PROD
-const BASE_URL="https://stormy-shelf-28724.herokuapp.com/"
+// const BASE_URL="https://stormy-shelf-28724.herokuapp.com/"
 
 
 module.exports = {
@@ -38,7 +38,18 @@ module.exports = {
             }
         }).then(res=>res.json())
     },
-    createGame:(gameData,token)=>{
+    getAllCharacters:()=>{
+        return fetch(`${BASE_URL}/api/characters`).then(res=>res.json())
+    },
+    getOneCharacter:charId=>{
+        return fetch(`${BASE_URL}/api/characters/${charId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res=>res.json())
+    },
+    createCharacter:(gameData,token)=>{
         return fetch(`${BASE_URL}/api/characters`,{
             method:"POST",
             body:JSON.stringify(gameData),

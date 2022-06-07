@@ -1,36 +1,38 @@
-import React, {useEffect} from 'react';
+
 import Phaser from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption4.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
-import mageBattlePos from "../assets/characters/MageBattlePositions.png"
-import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
-import mainOptions from "../assets/backgrounds/MainOption2.png"
-// import ground from "../assets/backgrounds/BattleOption6.png"
-import test from "./dahliaBoss"
-
 import ground from "../assets/backgrounds/BattleOption4ground.png"
 import door from "../assets/backgrounds/DoorsTrial1.png"
+import DahliaScene from "./dahliaBoss"
+import eventsCenter from '../scripts/EventEmitter'
+// import React, {useEffect,useState} from 'react';
+
 var player;
 var platforms;
 var cursors;
 var doors;
+var firstPlayDahlia = true;
+let dahliaBossDefeated = true;
 // var safeHouse;
 
 // MAIN acts as the directory for the other scenes
 
-class Main extends Phaser.Scene {
+class Mains extends Phaser.Scene {
     constructor () {
-        super('Main')
+        super('Mains')
     }
     preload () {
         this.load.image('dgBattle',dgBattle)
         this.load.image('door',door)
         this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
+        this.load.spritesheet('warrior',warrior,{frameWidth: 48, frameHeight: 48});
         this.load.image("ground", ground)
-        // this.load.sceneFile('DahliasScene', '/dahliaBoss.js')
     }
     create () {
+
+        this.character= ""
         // create a background 
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'dgBattle').refreshBody();
@@ -45,6 +47,12 @@ class Main extends Phaser.Scene {
 
         // getting the player to render 
         player = this.physics.add.sprite(350, 100, 'mage');
+        // if(state.charClass === 'mage'){
+        //     player = this.physics.add.sprite(350, 100, 'mage');
+        // } else {
+        //     player = this.physics.add.sprite(350, 100, 'warrior');
+        // }
+        
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
         
@@ -58,7 +66,7 @@ class Main extends Phaser.Scene {
         ground.setCollideWorldBounds(true);
 
 
-        // player changing to righ left and center positions
+        // player changing to right left and center positions
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
@@ -78,20 +86,46 @@ class Main extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
+
+        player.setDataEnabled();
+
+        // eventsCenter.on('classSelect', function(playerChange){
+        //     player.data.set('class',playerChange);
+        //     console.log(player.data);
+        // })
+
         cursors = this.input.keyboard.createCursorKeys();
         
-// this input is what changes scenes on keydown (letter A)
+// Scene change handler currently on key, needs to be on press or bound condtionally (i.e. character position on a door)
+//  Please leave console logs for testing purposes as the game grows
+cursors = this.input.keyboard.createCursorKeys();
+// console.log(dahliaBossDefeated);
+this.input.keyboard.on('keydown-A', () => {
+            //   console.log(firstPlay, dahliaBossDefeated)
+             if (firstPlayDahlia !== false) {
+                firstPlayDahlia = false;
+                 console.log("input A test",firstPlayDahlia);
+                this.scene.start ('Dahlias')
+             } else if (dahliaBossDefeated === false && firstPlayDahlia === false ) {
+                 console.log(dahliaBossDefeated)
+                 this.scene.switch('Dahlias')
+             }
+         })
 
-        this.input.keyboard.on('keydown-A', () => {
-            this.scene.add('test', test, true, {x:800, y:600})
-        }, this);
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
         // this.physics.add.collider(player, doors);
         // this.physics.add.collider(boss, platforms);
     }
+
+    updateClass(characterClass)
+    {
+        this.player.data.set = ('class',characterClass)
+    }
+
      update ()
     {
+
         if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
@@ -119,32 +153,4 @@ class Main extends Phaser.Scene {
 
     }
 
-
-
-export default function Dahlia(props) {
-    var game = null;
-    
-    useEffect((props) => {
-        const config = {
-            type: Phaser.AUTO,
-            parent: "phaser",
-            width: 800,
-            height: 600,
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    gravity: { y: 300 },
-                    debug: false
-                }
-            },
-            scene: Main
-        }
-         game = new Phaser.Game(config);
-    },[])
-    
-    return (
-        <div id="battle">{game ? game :""}</div>
-        
-    )
-    
-}
+export default Mains
