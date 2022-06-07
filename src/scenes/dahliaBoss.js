@@ -5,7 +5,7 @@ import bossPlatform from "../assets/extras/TomatoPlatform.png"
 import dahliaBoss from '../assets/characters/Dahlia.png'
 // import dahliaBattlePos from '../assets/characters/DahliaBattlePositions.png'
 import mage from "../assets/characters/Mage.png"
-// import warrior from "../assets/characters/Warrior.png"
+import warrior from "../assets/characters/Warrior.png"
 // import mageBattlePos from "../assets/characters/MageBattlePositions.png"
 // import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 
@@ -13,9 +13,7 @@ import bridge from "../assets/extras/TomatoPlatform.png"
 import { mageAttack, warriorAttack } from '../scripts/attack';
 import { getOneCharacter } from '../utils/API';
 
-import MainScene from "./main"
 const currentChar = getOneCharacter(1);
-
 
 
 var player;
@@ -83,11 +81,7 @@ class Dahlias extends Scene {
             repeat: -1
         });
         cursors = this.input.keyboard.createCursorKeys();
-
-        this.input.keyboard.on('keydown-R', () => {
-            this.scene.start('main', MainScene, true, {x:800, y:600})
-        }, this);
-
+        
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(boss, platforms);
