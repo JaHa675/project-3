@@ -1,5 +1,5 @@
 
-import Phaser from 'phaser'
+import Phaser from "phaser";
 import dgBattle from "../assets/backgrounds/BattleOption4.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
@@ -7,7 +7,7 @@ import ground from "../assets/backgrounds/BattleOption4ground.png"
 import door from "../assets/backgrounds/DoorsTrial1.png"
 import DahliaScene from "./dahliaBoss"
 import eventsCenter from '../scripts/EventEmitter'
-import React, {useEffect,useState} from 'react';
+// import React, {useEffect,useState} from 'react';
 
 var player;
 var platforms;
@@ -44,11 +44,12 @@ class Mains extends Phaser.Scene {
 
 
         // getting the player to render 
-        if(state.charClass === 'mage'){
-            player = this.physics.add.sprite(350, 100, 'mage');
-        } else {
-            player = this.physics.add.sprite(350, 100, 'warrior');
-        }
+        player = this.physics.add.sprite(350, 100, 'mage');
+        // if(state.charClass === 'mage'){
+        //     player = this.physics.add.sprite(350, 100, 'mage');
+        // } else {
+        //     player = this.physics.add.sprite(350, 100, 'warrior');
+        // }
         
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
@@ -86,10 +87,10 @@ class Mains extends Phaser.Scene {
 
         player.setDataEnabled();
 
-        eventsCenter.on('classSelect', function(playerChange){
-            player.data.set('class',playerChange);
-            console.log(player.data);
-        })
+        // eventsCenter.on('classSelect', function(playerChange){
+        //     player.data.set('class',playerChange);
+        //     console.log(player.data);
+        // })
 
         cursors = this.input.keyboard.createCursorKeys();
         

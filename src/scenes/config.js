@@ -9,11 +9,11 @@ import eventsCenter from '../scripts/EventEmitter';
 export default function Main(props) {
     var game = null;
     
-    const [charClass, setClassSelect] = useState();
+    // const [charClass, setClassSelect] = useState();
 
-    eventsCenter.on('classSelect', function(classChoice){
-        setClassSelect(classChoice);
-    })
+    // eventsCenter.on('classSelect', function(classChoice){
+    //     setClassSelect(classChoice);
+    // })
 
     useEffect((props) => {
         const config = {
