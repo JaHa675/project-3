@@ -3,7 +3,7 @@
 //DEVELOP
 // const BASE_URL="http://localhost:3001"
 //PROD
-const BASE_URL="https://stormy-shelf-28724.herokuapp.com"
+const BASE_URL="https://battle-trail-backend.herokuapp.com/"
 
 
 module.exports = {
