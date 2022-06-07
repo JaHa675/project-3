@@ -1,17 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import MainScene from "./main"
 import DahliaScene from "./dahliaBoss"
 import Phaser from "phaser"
 import CharacterSelection from './characterSelection';
-
-
-
-
+import eventsCenter from '../scripts/EventEmitter';
 
 
 export default function Main(props) {
     var game = null;
     
+    const [charClass, setClassSelect] = useState();
+
+    eventsCenter.on('classSelect', function(classChoice){
+        setClassSelect(classChoice);
+    })
+
     useEffect((props) => {
         const config = {
             type: Phaser.AUTO,
