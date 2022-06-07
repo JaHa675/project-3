@@ -4,7 +4,8 @@ import '../../styles/Login.css'
 import { Button, Modal, Form} from 'react-bootstrap';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UserInfo from '../../scripts/Login';
+import UserInfo from '../../scripts/signup';
+import UserLoginInfo from '../../scripts/login'
 
 
 export default function Login (props) {
@@ -23,14 +24,14 @@ export default function Login (props) {
                     <p className='subHeaders'>Please Login to Battle!</p>
                     <br></br>
                     <form action="#" method="post" id="loginOut">
-                    <p className='subHeaders'>Email</p>
-                    <input name="email" type="text" placeholder="Your Email Here"id="emailInput" className="loginInput" required></input>
+                    <p className='subHeaders'>Battle Name</p>
+                    <input name="email" type="text" placeholder="Your Battle Name Here"id="battleNameInput" className="loginInput" required></input>
                     <br></br>
                     <p className='subHeaders'>Password</p>
                     <input name="password" type="password" placeholder="Your Password Here" id="passwordInput" className="loginInput" required></input>
                     <br></br>
                     {/* <input type="submit" value="Play Now" id="form_button" className="playNow centerBTN moveUp"/> */}
-                    <Button variant="dark" className="playNow centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
+                    <Button variant="dark" onClick={UserLoginInfo} className="playNow centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
                     <Button variant="dark" onClick={handleShow} className="playNow centerBTN moveUp openModal" style={{margin: "10px"}}>Sign Up</Button>
                     </form>
                     <Modal {...props} show={show} onHide={handleClose} backdrop="static" keyboard={false} aria-labelledby="contained-modal-title-vcenter">
