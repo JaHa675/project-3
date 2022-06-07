@@ -1,19 +1,19 @@
 import React, {useState,useEffect} from 'react'
 import Login from "../components/pages/Login"
-import {login} from "../utils/API"
+import {signup} from "../utils/API"
 
 
-export default function UserLoginInfo(e) {
+export default function UserInfo(e) {
     e.preventDefault();
 
     const userObj = {
-        user_name: document.querySelector("#battleNameInput").value,
-        password: document.querySelector("#passwordInput").value,
+        user_name: document.querySelector("#characterName").value,
+        password: document.querySelector("#newPassword").value,
     }
     // Note: the empty deps array [] means
     // this useEffect will run once
     // similar to componentDidMount()
-        login(userObj)
+        signup(userObj)
         .then(
           (result) => {
             console.log(result);
