@@ -75,8 +75,7 @@ class CharacterSelection extends Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
         const goToMain = () => {
-            this.scene.add('main', MainScene, true, { x: 800, y: 600 })
-
+            this.scene.switch('Mains')
         }
         // this.input.keyboard.on('keydown-U', () => {
         //     this.scene.add('main', MainScene, true, {x:800, y:600})
