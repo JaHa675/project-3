@@ -39,14 +39,15 @@ class Mains extends Phaser.Scene {
 
                 // adding the door to the game 
         doors =this.physics.add.staticGroup();
-        doors.create(100,440,'door').refreshBody();
-        doors.create(300, 440, 'door').refreshBody();
-        doors.create(500, 440, 'door').refreshBody();
-        doors.create(700, 440, 'door').refreshBody();
+        doors.create(70,440,'door').refreshBody().setScale(1.3);
+        doors.create(235, 440, 'door').refreshBody().setScale(1.3);
+        doors.create(395, 440, 'door').refreshBody().setScale(1.3);
+        doors.create(570, 440, 'door').refreshBody().setScale(1.3);
+        doors.create(725, 440, 'door').refreshBody().setScale(1.3);
 
 
         // getting the player to render 
-        player = this.physics.add.sprite(350, 100, 'mage');
+        player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         // if(state.charClass === 'mage'){
         //     player = this.physics.add.sprite(350, 100, 'mage');
         // } else {
