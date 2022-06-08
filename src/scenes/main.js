@@ -90,7 +90,7 @@ class Mains extends Phaser.Scene {
             repeat: -1
         });
 
-        player.setDataEnabled();
+        
 
         // eventsCenter.on('classSelect', function(playerChange){
         //     player.data.set('class',playerChange);
