@@ -1,6 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import MainScene from "./main"
 import DahliaScene from "./dahliaBoss"
+import JamesScene from "./jamesBoss"
 import Phaser from "phaser"
 import CharacterSelection from './characterSelection';
 import eventsCenter from '../scripts/EventEmitter';
@@ -29,7 +30,7 @@ export default function Main(props) {
                     debug: false
                 }
             },
-            scene: [CharacterSelection, MainScene, DahliaScene] 
+            scene: [CharacterSelection, MainScene, DahliaScene,JamesScene] 
         }
          game = new Phaser.Game(config);
     },[])

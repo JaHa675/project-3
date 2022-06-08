@@ -15,6 +15,8 @@ var cursors;
 var doors;
 var firstPlayDahlia = true;
 let dahliaBossDefeated = true;
+var firstPlayJames = true;
+let jamesBossDefeated = true;
 // var safeHouse;
 
 // MAIN acts as the directory for the other scenes
@@ -110,6 +112,17 @@ this.input.keyboard.on('keydown-A', () => {
              } else if (dahliaBossDefeated === false && firstPlayDahlia === false ) {
                  console.log(dahliaBossDefeated)
                  this.scene.switch('Dahlias')
+             }
+         })
+         this.input.keyboard.on('keydown-J', () => {
+            //   console.log(firstPlay, jamesBossDefeated)
+             if (firstPlayJames !== false) {
+                firstPlayJames = false;
+                 console.log("input A test",firstPlayJames);
+                this.scene.start ('Jamess')
+             } else if (jamesBossDefeated === false && firstPlayJames === false ) {
+                 console.log(jamesBossDefeated)
+                 this.scene.switch('Jamess')
              }
          })
 
