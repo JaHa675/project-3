@@ -50,6 +50,7 @@ function App() {
       if(data.token){
         setToken(data.token)
         localStorage.setItem("token",data.token)
+        window.location= "/main"
       }
     })
   }
@@ -58,6 +59,7 @@ function App() {
       if(data.token){
         setToken(data.token)
         localStorage.setItem("token",data.token)
+        window.location= "/main"
       }
     })
   }
