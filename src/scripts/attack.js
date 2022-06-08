@@ -10,5 +10,17 @@ module.exports = {
     dahliaAttack: () =>  {
         const damage = 1;
         return damage
+    },
+    jamesAttack: () =>  {
+        const damage = 1;
+        return damage
+    },
+    lucasAttack: () =>  {
+        const damage = 1;
+        return damage
+    },
+    catAttack: () =>  {
+        const damage = 1;
+        return damage
     }
 }
