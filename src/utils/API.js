@@ -28,6 +28,9 @@ module.exports = {
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
+        .catch((err) => {
+            console.log(err)
+        });
     },
     signup:userData=>{
         return fetch(`${BASE_URL}/api/users`,{
@@ -37,6 +40,9 @@ module.exports = {
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
+        .catch((err) => {
+            console.log(err)
+        });
     },
     getAllCharacters:()=>{
         return fetch(`${BASE_URL}/api/characters`).then(res=>res.json())

@@ -26,9 +26,7 @@ export default function Login (props) {
 
     const loginSubmit = e=>{
         e.preventDefault();
-        props.login(loginData).catch((err) => {
-            console.log(err)
-        });
+        props.login(loginData)
         setLoginData({
             username:"",
             password:""
@@ -38,9 +36,7 @@ export default function Login (props) {
 
     const signupSubmit = e=>{
         e.preventDefault();
-        props.signup(signupData).catch((err) => {
-            console.log(err)
-        });
+        props.signup(signupData)
         setSignupData({
             username:"",
             password:""
@@ -58,28 +54,28 @@ export default function Login (props) {
                     <br></br>
                     <form action="#" method="post" id="loginOut">
                     <p className='subHeaders'>Battle Name</p>
-                    <input name="email" type="text" placeholder="Your Battle Name Here"id="battleNameInput" onChange={(e)=>setLoginData({...loginData,username:e.target.value})} className="loginInput" required></input>
+                    <input value={loginData.username} name="loginUsername" type="text" placeholder="Your Battle Name Here"id="battleNameInput" onChange={(e)=>setLoginData({...loginData,username:e.target.value})} className="loginInput" required></input>
                     <br></br>
                     <p className='subHeaders'>Password</p>
-                    <input name="password" type="password" placeholder="Your Password Here" onChange={(e)=>setLoginData({...loginData,password:e.target.value})} id="passwordInput" className="loginInput" required></input>
+                    <input value={loginData.password} name="loginPassword"  type="password" placeholder="Your Password Here" onChange={(e)=>setLoginData({...loginData,password:e.target.value})} id="passwordInput" className="loginInput" required></input>
                     <br></br>
                     {/* <input type="submit" value="Play Now" id="form_button" className="playNow centerBTN moveUp"/> */}
                     <Button variant="dark" onClick={loginSubmit}  className="playNow centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
                     <Button variant="dark" onClick={handleShow} className="playNow centerBTN moveUp openModal" style={{margin: "10px"}}>Sign Up</Button>
                     </form>
-                    <Modal {...props} show={show} onHide={handleClose} backdrop="static" keyboard={false} aria-labelledby="contained-modal-title-vcenter">
+                    <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} aria-labelledby="contained-modal-title-vcenter">
                     <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">Sign Up</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                     <Form.Label >Battle Name</Form.Label>
-                        <Form.Control as='textarea' id="characterName"  onChange={(e)=>setSignupData({...signupData,username:e.target.value})} rows={1} style = {{resize: "none"}}/>
+                        <Form.Control name="signupUsername" value={loginData.username} as='textarea' id="characterName"  onChange={(e)=>setSignupData({...signupData,username:e.target.value})} rows={1} style = {{resize: "none"}}/>
                         <br></br>
                     {/* <Form.Label>Email</Form.Label>
                         <Form.Control as='textarea' id="newEmail" rows={1} style = {{resize: "none"}}/>
                         <br></br> */}
                     <Form.Label>Password</Form.Label>
-                        <Form.Control as='textarea' id="newPassword" type="password" onChange={(e)=>setSignupData({...signupData,password:e.target.value})} rows={1} style = {{resize: "none"}}/>
+                        <Form.Control name="signupPassword" value={loginData.password} as='textarea' id="newPassword" type="password" onChange={(e)=>setSignupData({...signupData,password:e.target.value})} rows={1} style = {{resize: "none"}}/>
                     </Modal.Body>
                     <Modal.Footer>
                     <div className="signUpBTN">
