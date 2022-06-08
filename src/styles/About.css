@@ -86,13 +86,13 @@ body {
 }
 
 /* ----------------Sprite CSS---------------- */
-/* .characterArea {
+.characterArea {
  display: flex;
  margin-left: 25%;
  width: 50%;
  flex-direction: row;
  justify-content: space-around;
-} */
+}
 
 .characterBox {
  justify-content: center;
