@@ -1,11 +1,13 @@
 import React, {useEffect,useState} from 'react';
 import MainScene from "./main"
 import DahliaScene from "./dahliaBoss"
+import JamesScene from "./jamesBoss"
 import Phaser from "phaser"
 import CharacterSelection from './characterSelection';
 import eventsCenter from '../scripts/EventEmitter';
 import BrookeScene from "./brookeBoss"
 import CatScene from "./catbBoss"
+import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 
 export default function Main(props) {
     var game = null;
@@ -30,7 +32,15 @@ export default function Main(props) {
                     debug: false
                 }
             },
-            scene: [CharacterSelection, MainScene, DahliaScene, BrookeScene, CatScene] 
+            // add both BrookeScene and Cat Scene back in if not there
+            scene: [CharacterSelection, MainScene, DahliaScene,JamesScene, BrookeScene, CatScene] ,
+            plugins: {
+                scene: [{
+                    key: 'rexUI',
+                    plugin: RexUIPlugin,
+                    mapping: 'rexUI'
+                }]
+            }
         }
          game = new Phaser.Game(config);
     },[])

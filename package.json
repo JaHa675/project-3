@@ -13,6 +13,7 @@
     "http-server": "^14.1.1",
     "jquery": "^3.6.0",
     "phaser": "^3.55.2",
+    "phaser3-rex-plugins": "^1.1.70",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",

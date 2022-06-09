@@ -15,12 +15,15 @@ var platforms;
 var cursors;
 var doors;
 var door1;
+
 var firstPlayDahlia = true;
 let dahliaBossDefeated = false;
 var firstPlayCat = true;
 let catBossDefeated = false;
 var firstPlayBrooke = true;
 let brookeBossDefeated = false;
+var firstPlayJames = true;
+let jamesBossDefeated = true;
 // var safeHouse;
 
 // MAIN acts as the directory for the other scenes
@@ -195,12 +198,28 @@ this.input.keyboard.on('keydown-L', () => {
             //   console.log(firstPlay, dahliaBossDefeated)
              
          })
+         this.input.keyboard.on('keydown-J', () => {
+            //   console.log(firstPlay, jamesBossDefeated)
+             if (firstPlayJames !== false) {
+                firstPlayJames = false;
+                 console.log("input A test",firstPlayJames);
+                this.scene.start ('Jamess')
+             } else if (jamesBossDefeated === false && firstPlayJames === false ) {
+                 console.log(jamesBossDefeated)
+                 this.scene.switch('Jamess')
+             }
+         })
 
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
         // this.physics.add.collider(player, doors);
         // this.physics.add.collider(boss, platforms);
     }
+
+    dahliaDefeated(){
+        dahliaBossDefeated = true;
+    }
+
 
     updateClass(characterClass)
     {

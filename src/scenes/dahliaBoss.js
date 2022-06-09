@@ -12,6 +12,7 @@ import warrior from "../assets/characters/Warrior.png"
 import bridge from "../assets/extras/TomatoPlatform.png"
 import { mageAttack, warriorAttack, dahliaAttack } from '../scripts/attack';
 import { getOneCharacter } from '../utils/API';
+import eventsCenter from '../scripts/EventEmitter';
 
 const currentChar = getOneCharacter(1);
 
@@ -26,6 +27,7 @@ var attackText;
 var defendText;
 var text6;
 var text7;
+
 
 class Dahlias extends Phaser.Scene {
     constructor() {
@@ -43,9 +45,17 @@ class Dahlias extends Phaser.Scene {
         });
     }
     create() {
-        
+
+        createTextBox(this, 100, 400, {
+            wrapWidth: 500,
+            fixedWidth: 500,
+            fixedHeight: 65,
+        })
+            .start(content, 50);
+
+
         platforms = this.physics.add.staticGroup();
-        
+
         platforms.create(400, 300, 'dgBattle').refreshBody();
         
         platforms.create(400, 500, 'bossPlatform').setScale(4);
@@ -65,13 +75,13 @@ class Dahlias extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
-        
+
         this.anims.create({
             key: 'turn',
             frames: [{ key: 'mage', frame: 4 }],
             frameRate: 20
         });
-        
+
         this.anims.create({
             key: 'right',
             frames: this.anims.generateFrameNumbers('mage', { start: 6, end: 7 }),
@@ -79,41 +89,40 @@ class Dahlias extends Phaser.Scene {
             repeat: -1
         });
 
-// Scene change handler currently on key, needs to be onClick or bound condtionally
-//  Please leave console logs for testing purposes as the game grows
+        // Scene change handler currently on key, needs to be onClick or bound condtionally
+        //  Please leave console logs for testing purposes as the game grows
         cursors = this.input.keyboard.createCursorKeys();
-        let dahliaBossDefeated = false
-        this.input.keyboard.on('keydown-R', () => {
-            // console.log('R button pressed');
-            this.scene.switch('Mains')
-        }, this);
-        
+        // this.input.keyboard.on('keydown-R', () => {
+        //     // console.log('R button pressed');
+        //     this.scene.switch('Mains')
+        // }, this);
+
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(boss, platforms);
-        
+
         const playerText = this.add.text(50, 50, '');
         const bossText = this.add.text(630, 50, '');
 
         let currentTurn = 'player';
-        
+
         player.setDataEnabled();
         boss.setDataEnabled();
-        
+
         // console.log(currentChar)
 
         player.data.set('name', 'dog');
         player.data.set('class', 'mage');
-        player.data.set('level', 2);
-        player.data.set('attack', player.data.get('level')*2);
+        player.data.set('level', 4);
+        player.data.set('attack', player.data.get('level') * 2);
         player.data.set('hp', 20);
-        
+
         boss.data.set('name', 'Dahlia');
         boss.data.set('level', 5);
         boss.data.set('attack', 1);
         boss.data.set('hp', 100);
         boss.data.set('defense', 2);
-        
+
         //  Display it
         playerText.setText([
             'Name: ' + player.data.get('name'),
@@ -163,6 +172,8 @@ class Dahlias extends Phaser.Scene {
                 let damage = mageAttack(player.data.get('level'), boss.data.get('defense'))
                 boss.data.set('hp', hp - damage);
                 console.log(boss.data.get('hp'))
+
+                // TODO: display damage dealt
                 currentTurn = 'boss';
                 bossAttack();
             }
@@ -173,10 +184,22 @@ class Dahlias extends Phaser.Scene {
 
         const bossAttack = () => {
             const hp = boss.data.get('hp')
-            let damage = dahliaAttack();
-            player.data.set('hp', hp - damage);
-            console.log(player.data.get('hp'))
-            currentTurn = 'player';
+            if (hp > 0) {
+                let damage = dahliaAttack();
+                player.data.set('hp', player.data.get('hp') - damage);
+                if (player.data.get('hp') < 1) {
+                    boss.data.set('hp', 100);
+                    player.data.set('hp', 20);
+                    this.scene.switch('Mains')
+                }
+                // TODO: make a display for damage dealt
+                console.log(player.data.get('hp'))
+                currentTurn = 'player';
+            } else {
+                // TODO: maybe give them a nice animation for leveling up
+                eventsCenter.emit('dahlia-defeated')
+                this.scene.switch('Mains')
+            }
         }
 
         graphics = this.add.graphics();
@@ -188,13 +211,6 @@ class Dahlias extends Phaser.Scene {
         graphics.strokeRectShape(defendText.getBounds());
 
 
-        // while (boss.data.get('hp') > 0 || player.data.get('hp')) {
-        //     if(currentTurn === 'player'){
-        //         currentTurn = 'boss'
-        //     } else {
-        //         currentTurn = 'player'
-        //     }
-        // }
         // Commented out character movement
 
         //     if (cursors.left.isDown)
@@ -223,5 +239,7 @@ class Dahlias extends Phaser.Scene {
     }
 
 }
+
+
 
 export default Dahlias
