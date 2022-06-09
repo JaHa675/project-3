@@ -14,7 +14,7 @@ var platforms;
 var cursors;
 var doors;
 var firstPlayDahlia = true;
-let dahliaBossDefeated = true;
+let dahliaBossDefeated =false;
 // var safeHouse;
 
 // MAIN acts as the directory for the other scenes
@@ -95,7 +95,11 @@ class Mains extends Phaser.Scene {
         // })
 
         cursors = this.input.keyboard.createCursorKeys();
-        
+
+        // EVENT EMITTER LISTENERS
+        eventsCenter.on('dahlia-defeated', this.dahliaDefeated, this)
+
+
 // Scene change handler currently on key, needs to be on press or bound condtionally (i.e. character position on a door)
 //  Please leave console logs for testing purposes as the game grows
 cursors = this.input.keyboard.createCursorKeys();
@@ -117,6 +121,11 @@ this.input.keyboard.on('keydown-A', () => {
         // this.physics.add.collider(player, doors);
         // this.physics.add.collider(boss, platforms);
     }
+
+    dahliaDefeated(){
+        dahliaBossDefeated = true;
+    }
+
 
     updateClass(characterClass)
     {
