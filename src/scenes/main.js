@@ -20,6 +20,7 @@ var doors;
 var door1;
 
 var firstPlayDahlia = true;
+
 let dahliaBossDefeated = false;
 var firstPlayCat = true;
 let catBossDefeated = false;
@@ -98,28 +99,41 @@ class Mains extends Phaser.Scene {
             });
             doorX += 165;
         }
-
         
         // add inputEnabled = true
 
-        // doors.create(70, 440, 'door').refreshBody().setScale(1.3);
-        // doors.create(235, 440, 'door').refreshBody().setScale(1.3);
-        // doors.create(395, 440, 'door').refreshBody().setScale(1.3);
-        // doors.create(570, 440, 'door').refreshBody().setScale(1.3);
-        // doors.create(725, 440, 'door').refreshBody().setScale(1.3);
-
-
-        // getting the player to render 
-        player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
-        // if(state.charClass === 'mage'){
-        //     player = this.physics.add.sprite(350, 100, 'mage');
-        // } else {
-        //     player = this.physics.add.sprite(350, 100, 'warrior');
-        // }
         
+        
+        eventsCenter.on('classSelect', function(playerChange){
+            player.data.set('class',playerChange);
+            console.log(player.data);
+        })
+        
+        // getting the player to render 
+        // player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
+        if(player.data.get('class') === 'mage'){
+            console.log('before')
+            mage();
+            console.log('after')
+        } else {
+            console.log('before')
+            warrior();
+            console.log('after')
+        }
+
+        const mage = ()=>{
+            console.log('before')
+            player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
+            console.log('after')
+        }
+        const warrior = ()=>{
+            console.log('before')
+            player = this.physics.add.sprite(350, 100, 'warrior').setScale(2);
+            console.log('after')
+        }
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
-        
+        player.setDataEnabled();
         // getting a ground to render on the bottom
         let groundX = this.sys.game.config.width / 3;
         let groundY = this.sys.game.config.height * .95;
@@ -155,10 +169,19 @@ class Mains extends Phaser.Scene {
             console.log("clicked door 1")
     
         });
+        
+        
+
+        cursors = this.input.keyboard.createCursorKeys();
+        
+        // EVENT EMITTER LISTENERS
+        eventsCenter.on('dahlia-defeated', this.dahliaDefeated, this)
+
+
 // Scene change handler currently on key, needs to be on press or bound condtionally (i.e. character position on a door)
 //  Please leave console logs for testing purposes as the game grows
-        cursors = this.input.keyboard.createCursorKeys();
-
+cursors = this.input.keyboard.createCursorKeys();
+         
         let DahliaRoom = () => {
             if (firstPlayDahlia !== false) {
                 firstPlayDahlia = false;
@@ -246,6 +269,7 @@ class Mains extends Phaser.Scene {
 //          })
 // ======================================================================================
 
+
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
         // this.physics.add.collider(player, doors);
@@ -290,5 +314,6 @@ class Mains extends Phaser.Scene {
         }
     }
 
-}
+    }
+
 export default Mains
