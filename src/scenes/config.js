@@ -6,6 +6,7 @@ import LucasScene from "./lucasBoss"
 import Phaser from "phaser"
 import CharacterSelection from './characterSelection';
 import eventsCenter from '../scripts/EventEmitter';
+import PlayerHouse from './playerHouse'
 import BrookeScene from "./brookeBoss"
 import CatScene from "./catbBoss"
 import TextBox from "./textbox"
@@ -33,7 +34,7 @@ export default function Main(props) {
                 }
             },
             // add both BrookeScene and Cat Scene back in if not there
-            scene: [CharacterSelection, MainScene, DahliaScene,JamesScene, LucasScene BrookeScene, CatScene, TextBox] ,
+            scene: [CharacterSelection, MainScene, DahliaScene,JamesScene, LucasScene, BrookeScene, CatScene, TextBox, PlayerHouse] ,
         
         }
          game = new Phaser.Game(config);
