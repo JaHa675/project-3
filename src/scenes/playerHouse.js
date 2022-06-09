@@ -1,27 +1,51 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
-import housebg from "../assets/backgrounds/BattleOption5.png"
+import housebg from "../assets/backgrounds/Room.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
+import floor from "../assets/backgrounds/RoomFloor.JPG"
 
 var player;
 var platforms;
 var cursors;
 
-class playerHouse extends Phaser.Scene {
+class House extends Phaser.Scene {
     constructor () {
-        super('playerHouse')
+        super('House')
     }
     preload () {
+
         this.load.image('housebg',housebg);
+        this.load.image('floor',floor);
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
     }
     create () {
         platforms = this.physics.add.staticGroup();
-        platforms.create(400, 300, 'housebg').refreshBody();
+        platforms.create(400, 300, 'floor').setScale(2).refreshBody();
 
-        player = this.physics.add.sprite(350, 100, 'mage');
-        player.setCollideWorldBounds(true).setBounce(0.2).setScale(2);
+        const layer =this.add.layer();
+        console.log(layer);
+        // adding the background image as a layer above the floor
+
+        layer.add(this.make.image({x:400, y:400, key:'housebg'},false));
+
+        // layer.add(this.add.text(25, 50, 'Player House', { fontFamily: 'Press Start 2P', fontSize: 300, color: 'goldenrod' }))
+        
+
+
+        player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
+        player.setBounce(0.2);
+        player.setCollideWorldBounds(true);
+
+        // let groundX = this.sys.game.config.width / 3;
+        // // getting a ground to render on the bottom
+        // let ground = this.physics.add.image(groundX, groundY, "ground");
+        // let groundY = this.sys.game.config.height * .95;
+        // ground.setBounce(0);
+        // ground.displayWidth = this.sys.game.config.width * 1.0;
+        // ground.setCollideWorldBounds(true);
+        // ground.setImmovable();
+        
 
         this.anims.create({
             key: 'left',
@@ -44,7 +68,9 @@ class playerHouse extends Phaser.Scene {
         });
 
         cursors = this.input.keyboard.createCursorKeys();
+
         this.physics.add.collider(player, platforms);
+
         player.setDataEnabled();
     }
     update () {
@@ -73,7 +99,7 @@ class playerHouse extends Phaser.Scene {
         }
     }
 }
-export default playerHouse
+export default House
 
 // export default function House(props) {
 //     var game = null;
