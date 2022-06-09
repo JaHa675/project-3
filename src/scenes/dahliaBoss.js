@@ -160,6 +160,7 @@ class Dahlias extends Phaser.Scene {
             if (player.data.get('class') === 'mage') {
                 let damage = mageAttack(player.data.get('level'), boss.data.get('defense'))
                 boss.data.set('hp', hp - damage);
+                eventsCenter.emit('playerAttack', damage)
                 console.log(boss.data.get('hp'))
 
                 // TODO: display damage dealt
@@ -175,6 +176,7 @@ class Dahlias extends Phaser.Scene {
             const hp = boss.data.get('hp')
             if (hp > 0) {
                 let damage = dahliaAttack();
+                eventsCenter.emit('bossAttack', damage)
                 player.data.set('hp', player.data.get('hp') - damage);
                 if (player.data.get('hp') < 1) {
                     boss.data.set('hp', 100);
@@ -198,7 +200,6 @@ class Dahlias extends Phaser.Scene {
 
         graphics.strokeRectShape(attackText.getBounds());
         graphics.strokeRectShape(defendText.getBounds());
-
 
         // Commented out character movement
 

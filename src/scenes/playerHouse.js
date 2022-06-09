@@ -5,6 +5,7 @@ import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import floor from "../assets/backgrounds/RoomFloor.png"
 
+
 var player;
 var platforms;
 var cursors;
@@ -30,8 +31,6 @@ class House extends Phaser.Scene {
         layer.add(this.make.image({x:400, y:400, key:'housebg'},false));
 
         // layer.add(this.add.text(25, 50, 'Player House', { fontFamily: 'Press Start 2P', fontSize: 300, color: 'goldenrod' }))
-        
-
 
         player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         player.setBounce(0.2);
@@ -100,3 +99,4 @@ class House extends Phaser.Scene {
     }
 }
 export default House
+

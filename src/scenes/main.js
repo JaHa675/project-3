@@ -9,7 +9,7 @@ import DahliaScene from "./dahliaBoss"
 import JamesScene from "./jamesBoss"
 import LucasScene from "./lucasBoss"
 import CatScene from "./catbBoss"
-import playerHouse from "./playerHouse"
+import House from "./playerHouse"
 import eventsCenter from '../scripts/EventEmitter'
 // import React, {useEffect,useState} from 'react';
 
