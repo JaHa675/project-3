@@ -46,12 +46,6 @@ class Dahlias extends Phaser.Scene {
     }
     create() {
 
-        createTextBox(this, 100, 400, {
-            wrapWidth: 500,
-            fixedWidth: 500,
-            fixedHeight: 65,
-        })
-            .start(content, 50);
 
 
         platforms = this.physics.add.staticGroup();
