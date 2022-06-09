@@ -14,7 +14,10 @@ var platforms;
 var cursors;
 var doors;
 var firstPlayDahlia = true;
-let dahliaBossDefeated =false;
+
+let dahliaBossDefeated = false;
+var firstPlayJames = true;
+let jamesBossDefeated = true;
 // var safeHouse;
 
 // MAIN acts as the directory for the other scenes
@@ -39,14 +42,15 @@ class Mains extends Phaser.Scene {
 
                 // adding the door to the game 
         doors =this.physics.add.staticGroup();
-        doors.create(100,440,'door').refreshBody();
-        doors.create(300, 440, 'door').refreshBody();
-        doors.create(500, 440, 'door').refreshBody();
-        doors.create(700, 440, 'door').refreshBody();
+        doors.create(70,440,'door').refreshBody().setScale(1.3);
+        doors.create(235, 440, 'door').refreshBody().setScale(1.3);
+        doors.create(395, 440, 'door').refreshBody().setScale(1.3);
+        doors.create(570, 440, 'door').refreshBody().setScale(1.3);
+        doors.create(725, 440, 'door').refreshBody().setScale(1.3);
 
 
         // getting the player to render 
-        player = this.physics.add.sprite(350, 100, 'mage');
+        player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         // if(state.charClass === 'mage'){
         //     player = this.physics.add.sprite(350, 100, 'mage');
         // } else {
@@ -87,7 +91,7 @@ class Mains extends Phaser.Scene {
             repeat: -1
         });
 
-        player.setDataEnabled();
+        
 
         // eventsCenter.on('classSelect', function(playerChange){
         //     player.data.set('class',playerChange);
@@ -113,6 +117,17 @@ this.input.keyboard.on('keydown-A', () => {
              } else if (dahliaBossDefeated === false && firstPlayDahlia === false ) {
                  console.log(dahliaBossDefeated)
                  this.scene.switch('Dahlias')
+             }
+         })
+         this.input.keyboard.on('keydown-J', () => {
+            //   console.log(firstPlay, jamesBossDefeated)
+             if (firstPlayJames !== false) {
+                firstPlayJames = false;
+                 console.log("input A test",firstPlayJames);
+                this.scene.start ('Jamess')
+             } else if (jamesBossDefeated === false && firstPlayJames === false ) {
+                 console.log(jamesBossDefeated)
+                 this.scene.switch('Jamess')
              }
          })
 

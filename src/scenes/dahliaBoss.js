@@ -57,19 +57,18 @@ class Dahlias extends Phaser.Scene {
         platforms = this.physics.add.staticGroup();
 
         platforms.create(400, 300, 'dgBattle').refreshBody();
-
-        platforms.create(400, 500, 'bossPlatform').setScale(3);
-
+        
+        platforms.create(400, 500, 'bossPlatform').setScale(4);
+        
         player = this.physics.add.sprite(350, 100, 'mage');
-
-        player.setBounce(0.2);
-        player.setCollideWorldBounds(true);
-
+        
+        player.setCollideWorldBounds(true).setBounce(0.2).setScale(2);
+        
         boss = this.physics.add.sprite(450, 100, 'dahliaBoss');
-        boss.setBounce(0.2);
-        boss.setCollideWorldBounds(true);
 
-
+        boss.setCollideWorldBounds(true).setScale(2).setBounce(0.2);
+        
+        
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
