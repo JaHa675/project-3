@@ -143,6 +143,7 @@ class Mains extends Phaser.Scene {
                 firstPlayDahlia = false;
                  console.log("input A test",firstPlayDahlia);
                 this.scene.start ('Dahlias')
+                this.scene.launch('BattleLog')
              } else if (dahliaBossDefeated === false && firstPlayDahlia === false ) {
                  console.log(dahliaBossDefeated)
                  this.scene.switch('Dahlias')
