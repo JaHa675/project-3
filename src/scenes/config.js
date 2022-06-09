@@ -4,7 +4,8 @@ import DahliaScene from "./dahliaBoss"
 import Phaser from "phaser"
 import CharacterSelection from './characterSelection';
 import eventsCenter from '../scripts/EventEmitter';
-
+import BrookeScene from "./brookeBoss"
+import CatScene from "./catbBoss"
 
 export default function Main(props) {
     var game = null;
@@ -29,7 +30,7 @@ export default function Main(props) {
                     debug: false
                 }
             },
-            scene: [CharacterSelection, MainScene, DahliaScene] 
+            scene: [CharacterSelection, MainScene, DahliaScene, BrookeScene, CatScene] 
         }
          game = new Phaser.Game(config);
     },[])
