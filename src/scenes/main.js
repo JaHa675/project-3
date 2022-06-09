@@ -6,7 +6,10 @@ import warrior from "../assets/characters/Warrior.png"
 import ground from "../assets/backgrounds/BattleOption4ground.png"
 import door from "../assets/backgrounds/DoorsTrial1.png"
 import DahliaScene from "./dahliaBoss"
+import JamesScene from "./jamesBoss"
+import LucasScene from "./lucasBoss"
 import CatScene from "./catbBoss"
+import playerHouse from "./playerHouse"
 import eventsCenter from '../scripts/EventEmitter'
 // import React, {useEffect,useState} from 'react';
 
@@ -24,6 +27,10 @@ var firstPlayBrooke = true;
 let brookeBossDefeated = false;
 var firstPlayJames = true;
 let jamesBossDefeated = true;
+var firstPlayLucas = true;
+let lucasBossDefeated = true;
+var firstPlayHouse = true;
+let houseBossDefeated = true;
 // var safeHouse;
 
 // MAIN acts as the directory for the other scenes
@@ -69,6 +76,21 @@ class Mains extends Phaser.Scene {
                             BrookeRoom();
                             break;
                         }
+                    case 400 :
+                        {
+                            JamesRoom();
+                            break;
+                        }
+                    case 565 : 
+                    {
+                        LucasRoom()
+                        break;
+                    }
+                    case 730: 
+                    {
+                        HouseRoom()
+                        break;
+                    }
                 
                     default:
                         break;
@@ -137,8 +159,7 @@ class Mains extends Phaser.Scene {
 //  Please leave console logs for testing purposes as the game grows
         cursors = this.input.keyboard.createCursorKeys();
 
-
-        var DahliaRoom = () => {
+        let DahliaRoom = () => {
             if (firstPlayDahlia !== false) {
                 firstPlayDahlia = false;
                  console.log("input A test",firstPlayDahlia);
@@ -147,8 +168,8 @@ class Mains extends Phaser.Scene {
                  console.log(dahliaBossDefeated)
                  this.scene.switch('Dahlias')
              } 
-            }
-        var CatRoom = () => {
+        };
+        let CatRoom = () => {
                 //   console.log(firstPlay, dahliaBossDefeated)
                  if (firstPlayCat !== false) {
                     firstPlayCat = false;
@@ -158,8 +179,8 @@ class Mains extends Phaser.Scene {
                      console.log(catBossDefeated)
                      this.scene.switch('Cats')
                  } 
-             }
-        var BrookeRoom = () => {
+        };
+        let BrookeRoom = () => {
             if (firstPlayBrooke !== false) {
                 firstPlayBrooke = false;
                  console.log("input A test",firstPlayBrooke);
@@ -168,7 +189,37 @@ class Mains extends Phaser.Scene {
                  console.log(brookeBossDefeated)
                  this.scene.switch('Brookes')
              } 
-        }
+        };
+        let JamesRoom = () => {
+            if (firstPlayJames !== false) {
+                firstPlayJames = false;
+                 console.log("input A test",firstPlayJames);
+                this.scene.start ('Jamess')
+             } else if (jamesBossDefeated === false && firstPlayJames === false ) {
+                 console.log(jamesBossDefeated)
+                 this.scene.switch('Jamess')
+             } 
+        };
+        let LucasRoom = () => {
+            if (firstPlayLucas !== false) {
+                firstPlayLucas = false;
+                 console.log("input A test",firstPlayLucas);
+                this.scene.start ('Lucass')
+             } else if (lucasBossDefeated === false && firstPlayLucas === false ) {
+                 console.log(lucasBossDefeated)
+                 this.scene.switch('Lucass')
+             } 
+        };
+        let HouseRoom = () => {
+            if (firstPlayHouse !== false) {
+                firstPlayHouse = false;
+                 console.log("input A test",firstPlayHouse);
+                this.scene.start ('Houses')
+             } else if (houseBossDefeated === false && firstPlayHouse === false ) {
+                 console.log(houseBossDefeated)
+                 this.scene.switch('Houses')
+             } 
+        };
         // eventsCenter.on('classSelect', function(playerChange){
         //     player.data.set('class',playerChange);
         //     console.log(player.data);
@@ -193,22 +244,6 @@ class Mains extends Phaser.Scene {
 //              } 
 //          })
 // ======================================================================================
-
-this.input.keyboard.on('keydown-L', () => {
-            //   console.log(firstPlay, dahliaBossDefeated)
-             
-         })
-         this.input.keyboard.on('keydown-J', () => {
-            //   console.log(firstPlay, jamesBossDefeated)
-             if (firstPlayJames !== false) {
-                firstPlayJames = false;
-                 console.log("input A test",firstPlayJames);
-                this.scene.start ('Jamess')
-             } else if (jamesBossDefeated === false && firstPlayJames === false ) {
-                 console.log(jamesBossDefeated)
-                 this.scene.switch('Jamess')
-             }
-         })
 
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
