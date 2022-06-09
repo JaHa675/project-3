@@ -2,6 +2,7 @@ import React, {useEffect,useState} from 'react';
 import MainScene from "./main"
 import DahliaScene from "./dahliaBoss"
 import JamesScene from "./jamesBoss"
+import LucasScene from "./lucasBoss"
 import Phaser from "phaser"
 import CharacterSelection from './characterSelection';
 import eventsCenter from '../scripts/EventEmitter';
@@ -32,7 +33,7 @@ export default function Main(props) {
                 }
             },
             // add both BrookeScene and Cat Scene back in if not there
-            scene: [CharacterSelection, MainScene, DahliaScene,JamesScene, BrookeScene, CatScene, TextBox] ,
+            scene: [CharacterSelection, MainScene, DahliaScene,JamesScene, LucasScene BrookeScene, CatScene, TextBox] ,
         
         }
          game = new Phaser.Game(config);
