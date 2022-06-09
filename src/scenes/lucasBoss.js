@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
 // import playGame from "../phaserGame"
-import lucasBattle from "../assets/backgrounds/BattleOption9.jpg"
+import lucasBattle from "../assets/backgrounds/LucasBackground.png"
 import lucasBoss from "../assets/characters/Lucas.png"
-import ground from "../assets/backgrounds/Ground1.png"
+import bottom from "../assets/backgrounds/LucasGround.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 
@@ -29,7 +29,7 @@ class Lucass extends Phaser.Scene {
     }
     preload () {
         this.load.image('lucasBattle',lucasBattle)
-        this.load.image('ground', ground)
+        this.load.image('bottom', bottom)
         this.load.spritesheet('mage', mage, {
             frameWidth: 48, frameHeight: 48
         });
@@ -38,14 +38,10 @@ class Lucass extends Phaser.Scene {
         });
     }
     create() {
-
-
-
         platforms = this.physics.add.staticGroup();
 
-        platforms.create(400, 300, 'lucasBattle').refreshBody();
-        
-        // platforms.create(400, 500, 'bossPlatform').setScale(4);
+        platforms.create(400, 300, 'lucasBattle').setScale(1.5).refreshBody();
+        platforms.create(400, 480, 'bottom').setScale(1.5).refreshBody();
         
         player = this.physics.add.sprite(350, 100, 'mage');
         
@@ -54,15 +50,6 @@ class Lucass extends Phaser.Scene {
         boss = this.physics.add.sprite(450, 100, 'lucasBoss');
 
         boss.setCollideWorldBounds(true).setScale(2).setBounce(0.2);
-
-        let groundX = this.sys.game.config.width / 3;
-        let groundY = this.sys.game.config.height * .95;
-        let ground = this.physics.add.image(groundX, groundY, "ground");
-        ground.displayWidth = this.sys.game.config.width * 1.0;
-        ground.setBounce(0);
-        ground.setImmovable();
-        ground.setCollideWorldBounds(true);
-        
         
         this.anims.create({
             key: 'left',
@@ -93,10 +80,8 @@ class Lucass extends Phaser.Scene {
         // }, this);
 
         // collider only takes in two parameters
-        this.physics.add.collider(player, ground);
-        this.physics.add.collider(boss, ground);
-        // this.physics.add.collider(player, platforms);
-        // this.physics.add.collider(boss, platforms);
+        this.physics.add.collider(player, platforms);
+        this.physics.add.collider(boss, platforms);
 
         const playerText = this.add.text(50, 50, '');
         const bossText = this.add.text(630, 50, '');

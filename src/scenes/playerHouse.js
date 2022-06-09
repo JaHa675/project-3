@@ -3,7 +3,8 @@ import Phaser from "phaser";
 import housebg from "../assets/backgrounds/Room.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
-import floor from "../assets/backgrounds/RoomFloor.JPG"
+import floor from "../assets/backgrounds/RoomFloor.png"
+
 
 var player;
 var platforms;
@@ -30,8 +31,6 @@ class House extends Phaser.Scene {
         layer.add(this.make.image({x:400, y:400, key:'housebg'},false));
 
         // layer.add(this.add.text(25, 50, 'Player House', { fontFamily: 'Press Start 2P', fontSize: 300, color: 'goldenrod' }))
-        
-
 
         player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         player.setBounce(0.2);
@@ -101,24 +100,3 @@ class House extends Phaser.Scene {
 }
 export default House
 
-// export default function House(props) {
-//     var game = null;
-
-    
-//     useEffect((props) => {
-//         const config = {
-//             type: Phaser.AUTO,
-//             parent: "phaser",
-//             width: 800,
-//             height: 600,
-//             scene: playerHouse
-//         }
-//          game = new Phaser.Game(config);
-//     },[])
-    
-//     return (
-//         <div id="battle">{game ? game :""}</div>
-        
-//     )
-    
-// }
