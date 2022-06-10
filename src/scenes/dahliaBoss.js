@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import Phaser from "phaser";
-import dgBattle from "../assets/backgrounds/BattleOption5.png"
-import bossPlatform from "../assets/extras/TomatoPlatform.png"
+import BattleBackground from "../assets/backgrounds/DahliaBackground.png"
+// import bossPlatform from "../assets/extras/TomatoPlatform.png"
 import dahliaBoss from '../assets/characters/Dahlia.png'
+import floor from '../assets/backgrounds/DahliaGround.png'
 // import dahliaBattlePos from '../assets/characters/DahliaBattlePositions.png'
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
@@ -25,8 +26,8 @@ var graphics;
 var selectText;
 var attackText;
 var defendText;
-var text6;
-var text7;
+// var titleText;
+// var fightText;
 
 
 class Dahlias extends Phaser.Scene {
@@ -34,9 +35,9 @@ class Dahlias extends Phaser.Scene {
         super('Dahlias')
     }
     preload() {
-        this.load.image('dgBattle', dgBattle);
-        this.load.image('bridge', bridge);
-        this.load.image('bossPlatform', bossPlatform);
+        this.load.image('BattleBackground', BattleBackground)
+        this.load.image('bridge', bridge)
+        this.load.image('floor', floor)
         this.load.spritesheet('mage', mage, {
             frameWidth: 48, frameHeight: 48
         });
@@ -47,15 +48,13 @@ class Dahlias extends Phaser.Scene {
     create() {
         platforms = this.physics.add.staticGroup();
 
-        platforms.create(400, 300, 'dgBattle').refreshBody();
-        platforms.create(400, 500, 'bossPlatform').setScale(4);
+        platforms.create(400, 300, 'BattleBackground').setScale(1.5).refreshBody();
+        platforms.create(400, 470, 'floor').setScale(1.5);
         
         player = this.physics.add.sprite(350, 100, 'mage');
-        
         player.setCollideWorldBounds(true).setBounce(0.2).setScale(2);
         
         boss = this.physics.add.sprite(450, 100, 'dahliaBoss');
-
         boss.setCollideWorldBounds(true).setScale(2).setBounce(0.2);
         
         
@@ -151,8 +150,8 @@ class Dahlias extends Phaser.Scene {
         selectText = this.add.text(50, 480, 'SELECT:', { fontFamily: '"Press Start 2P"' });
         attackText = this.add.text(50, 505, 'ATTACK', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
         defendText = this.add.text(50, 545, 'DEFEND', { fontFamily: '"Press Start 2P"' }).setPadding(5);
-        // text6 = this.add.text(220, 80, 'DEFEAT THE DAHLIA', { fontFamily: '"Press Start 2P', fontSize: '32px' })
-        // text7 = this.add.text(400, 120, 'FIGHT!', { fontFamily: '"Press Start 2P', fontSize: '32px' })
+        // titleText = this.add.text(220, 80, 'DEFEAT THE DAHLIA', { fontFamily: '"Press Start 2P', fontSize: '32px' })
+        // fightText = this.add.text(400, 120, 'FIGHT!', { fontFamily: '"Press Start 2P', fontSize: '32px' })
 
 
         // Beginnings of code for click functions for attack and defend 

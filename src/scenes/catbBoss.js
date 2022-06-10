@@ -3,8 +3,9 @@ import Phaser from "phaser";
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 // import playGame from "../phaserGame"
-import catBattle from "../assets/backgrounds/BattleOption5.png"
-import CatSprite from "../assets/characters/Warrior.png"
+import catBattle from "../assets/backgrounds/CatBossBackground.jpg"
+import CatSprite from "../assets/characters/CatBoss2.png"
+import bottom from "../assets/backgrounds/CatGround.jpg"
 import { mageAttack, warriorAttack, dahliaAttack } from '../scripts/attack';
 
 var player;
@@ -25,15 +26,17 @@ class Cats extends Phaser.Scene {
         super('Cats')
     }
     preload() {
-        this.load.image('catBattle', catBattle)
+        this.load.image('catBattle', catBattle);
+        this.load.image('bottom', bottom)
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
-        this.load.spritesheet('CatSprite', CatSprite, {frameWidth: 48, frameHeight: 48});
+        this.load.spritesheet('CatSprite', CatSprite, {frameWidth: 129, frameHeight: 129});
     }
     create() {
         
         platforms = this.physics.add.staticGroup();
         
-        platforms.create(400, 300, 'catBattle').refreshBody();
+        platforms.create(400, 300, 'catBattle').setScale(1.5).refreshBody();
+        platforms.create(400, 540, 'bottom').setScale(1.5).refreshBody();
         
         // platforms.create(400, 500, 'bossPlatform').setScale(4);
         
@@ -43,7 +46,7 @@ class Cats extends Phaser.Scene {
         
          boss = this.physics.add.sprite(450, 100, 'CatSprite');
 
-         boss.setCollideWorldBounds(true).setScale(2).setBounce(0.2);
+         boss.setCollideWorldBounds(true).setBounce(0.2);
         
         
         this.anims.create({
