@@ -4,8 +4,6 @@ import housebg from "../assets/backgrounds/Room.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import floor from "../assets/backgrounds/RoomFloor.png"
-import floorPlatform from "../assets/backgrounds/RoomPlatform.png"
-import KingJoe from "../assets/characters/KingJoe.png"
 
 
 var player;
@@ -19,15 +17,12 @@ class House extends Phaser.Scene {
     preload () {
 
         this.load.image('housebg',housebg);
-        this.load.image('floorPlatform',floorPlatform);
         this.load.image('floor',floor);
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
-        this.load.spritesheet('KingJoe', KingJoe, {frameWidth: 48, frameHeight: 48});
     }
     create () {
         platforms = this.physics.add.staticGroup();
-        platforms.create(400, 300, 'floor').refreshBody();
-        platforms.create(380, 600, 'floorPlatform').refreshBody();
+        platforms.create(400, 300, 'floor').setScale(2).refreshBody();
 
         const layer =this.add.layer();
         console.log(layer);
@@ -40,8 +35,6 @@ class House extends Phaser.Scene {
         player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
-
-        this.add.sprite(650,300,'KingJoe').setScale(2);
 
         // let groundX = this.sys.game.config.width / 3;
         // // getting a ground to render on the bottom
