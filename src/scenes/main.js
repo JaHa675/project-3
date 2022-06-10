@@ -168,6 +168,7 @@ class Mains extends Phaser.Scene {
              } else if (dahliaBossDefeated === false && firstPlayDahlia === false ) {
                  console.log(dahliaBossDefeated)
                  this.scene.switch('Dahlias')
+                 this.scene.launch('BattleLog')
              } 
         };
         let CatRoom = () => {
