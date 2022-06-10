@@ -1,15 +1,16 @@
 
 import Phaser from "phaser";
-import dgBattle from "../assets/backgrounds/BattleOption4.png"
+import mainBackground from "../assets/backgrounds/MainBackground.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
-import ground from "../assets/backgrounds/BattleOption4ground.png"
-import door from "../assets/backgrounds/DoorsTrial1.png"
+import mainPlatform from "../assets/backgrounds/MainPlatform.png"
+import mainFloor from "../assets/backgrounds/MainFloor.png"
+import door from "../assets/backgrounds/TransparentDoor.png"
 import DahliaScene from "./dahliaBoss"
 import JamesScene from "./jamesBoss"
 import LucasScene from "./lucasBoss"
 import CatScene from "./catbBoss"
-import House from "./playerHouse"
+import playerHouse from "./playerHouse"
 import eventsCenter from '../scripts/EventEmitter'
 // import React, {useEffect,useState} from 'react';
 
@@ -40,18 +41,26 @@ class Mains extends Phaser.Scene {
         super('Mains')
     }
     preload () {
-        this.load.image('dgBattle',dgBattle)
+        this.load.image('mainBackground',mainBackground)
         this.load.image('door',door)
+        this.load.image('mainPlatform',mainPlatform)
+        this.load.image('mainFloor',mainFloor)
         this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
         this.load.spritesheet('warrior',warrior,{frameWidth: 48, frameHeight: 48});
-        this.load.image("ground", ground)
     }
     create () {
 
         this.character= ""
         // create a background 
         platforms = this.physics.add.staticGroup();
-        platforms.create(400, 300, 'dgBattle').refreshBody();
+        platforms.create(400, 540, 'mainPlatform').refreshBody();
+        platforms.create(400, 540, 'mainFloor').refreshBody();
+
+        const layer =this.add.layer();
+        console.log(layer);
+        // adding the background image as a layer above the floor
+
+        layer.add(this.make.image({x:400, y:500, key:'mainBackground'},false).setScale(1.5));
 
         // adding the door to the game 
         doors =this.physics.add.staticGroup();
@@ -59,7 +68,7 @@ class Mains extends Phaser.Scene {
 
         let doorX = 70;
         for(let i=0; i < 5; i++) {
-            var door = doors.create(doorX, 440,'door').refreshBody().setScale(1.3).setInteractive();
+            var door = doors.create(doorX, 300,'door').refreshBody().setScale(1.3).setInteractive();
             door.on('pointerdown', function (pointer) {
                 console.log("this");
                 console.log(this);
@@ -110,7 +119,7 @@ class Mains extends Phaser.Scene {
 
 
         // getting the player to render 
-        player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
+        player = this.physics.add.sprite(350, 250, 'mage').setScale(2);
         // if(state.charClass === 'mage'){
         //     player = this.physics.add.sprite(350, 100, 'mage');
         // } else {
@@ -119,15 +128,6 @@ class Mains extends Phaser.Scene {
         
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
-        
-        // getting a ground to render on the bottom
-        let groundX = this.sys.game.config.width / 3;
-        let groundY = this.sys.game.config.height * .95;
-        let ground = this.physics.add.image(groundX, groundY, "ground");
-        ground.displayWidth = this.sys.game.config.width * 1.0;
-        ground.setBounce(0);
-        ground.setImmovable();
-        ground.setCollideWorldBounds(true);
 
 
         // player changing to right left and center positions
@@ -227,9 +227,6 @@ class Mains extends Phaser.Scene {
         // })
        
         
-        
-
-
 // console.log(dahliaBossDefeated);
 // this is how originally worked ====================================================
 this.input.keyboard.on('keydown-C', () => {
@@ -247,7 +244,7 @@ this.input.keyboard.on('keydown-C', () => {
 // ======================================================================================
 
         // collider only takes in two parameters
-        this.physics.add.collider(player, ground);
+        this.physics.add.collider(player, platforms);
         // this.physics.add.collider(player, doors);
         // this.physics.add.collider(boss, platforms);
     }
