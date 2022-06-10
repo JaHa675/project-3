@@ -101,7 +101,6 @@ class Mains extends Phaser.Scene {
         }
         
         // add inputEnabled = true
-
         
         
         eventsCenter.on('classSelect', function(playerChange){
