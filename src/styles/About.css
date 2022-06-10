@@ -142,3 +142,29 @@ canvas {
      transform: translate3d(-100%,0,0)
   }
 }
+
+@media screen and (max-width: 786px) {
+  .infoContainer {
+    position: relaitve;
+    width: 500px;
+    height: 100px;
+    left: 600px;
+  }
+  .aboutTitle {
+    font-size: 15px;
+  }
+  .aboutUsPara {
+    font-size: 10px;
+  }
+  h4 {
+    font-size: 15px;
+  }
+  .characterArea {
+    width: 1%;
+    position: relative;
+    bottom: 10%;
+  }
+  .avatar {
+    transform: scale(0.25)
+  }
+}

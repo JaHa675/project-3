@@ -33,3 +33,30 @@ button:hover {
 a {
     text-decoration: none;
 }
+@media screen and (width: 768px) {
+    html {
+        transform: rotate(90deg);
+    }
+}
+@media screen and (width: 425px) {
+    html {
+        transform: rotate(90deg);
+    }
+    .battleLogo {
+        width: 200px;
+        position: relative;
+        left: 220px;
+    }
+    .playNow {
+        position: relative;
+        left: 220px;
+    }
+}
+@media screen and (width: 375px) {
+    html {
+        transform: rotate(90deg);
+    }
+    .canvas {
+        width: 200px;
+    }
+}

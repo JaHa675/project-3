@@ -91,3 +91,19 @@ a {
   padding: 20px;
   background-color: antiquewhite !important;
 }
+
+@media screen and (width: 425) {
+  .scrollImage {
+    position: realtive;
+    left: 500px;
+    width: 200px;
+    transform: scale(0.2);
+  }
+  .loginInput {
+    position: relative;
+    left: 200px;
+  }
+  .subHeaders {
+    font-size: 15px;
+}
+}
