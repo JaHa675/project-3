@@ -1,9 +1,9 @@
 // IMPORTANT NOTE you gotta run the backend on localhost 3001 to make the dev environment work once it's deployed we swap these two things here
 
 //DEVELOP
-// const BASE_URL="http://localhost:3001"
+const BASE_URL="http://localhost:3001"
 //PROD
-const BASE_URL="https://battle-trail-backend.herokuapp.com"
+// const BASE_URL="https://battle-trail-backend.herokuapp.com"
 
 
 module.exports = {
@@ -28,6 +28,9 @@ module.exports = {
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
+        .catch((err) => {
+            console.log(err)
+        });
     },
     signup:userData=>{
         return fetch(`${BASE_URL}/api/users`,{
@@ -37,6 +40,9 @@ module.exports = {
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
+        .catch((err) => {
+            console.log(err)
+        });
     },
     getAllCharacters:()=>{
         return fetch(`${BASE_URL}/api/characters`).then(res=>res.json())

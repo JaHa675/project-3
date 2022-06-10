@@ -1,11 +1,23 @@
 import React, {useEffect} from 'react';
 import Phaser from "phaser";
 // import playGame from "../phaserGame.js";
-import blBattle from "../assets/backgrounds/BattleOption8.jpg"
+import mage from "../assets/characters/Mage.png"
+import blBattle from "../assets/backgrounds/BrookeBackground.png"
 import BrookeBoss from '../assets/characters/Brooke.png'
+import bottom from "../assets/backgrounds/BrookeGround.png"
+import { mageAttack, warriorAttack, brookeAttack } from '../scripts/attack';
+
 var player;
 var platforms;
 var cursors;
+var boss;
+var graphics;
+var selectText;
+var attackText;
+var defendText;
+var titleText;
+var fightText;
+
 
 class Brookes extends Phaser.Scene {
     constructor () {
@@ -13,105 +25,144 @@ class Brookes extends Phaser.Scene {
     }
     preload () {
         this.load.image('blBattle',blBattle)
-        this.load.spritesheet('BrookeBoss',BrookeBoss,{
-            frameWidth: 48, frameHeight: 48
-        });
+        this.load.spritesheet('BrookeBoss',BrookeBoss,{frameWidth: 48, frameHeight: 48});
+        this.load.image("bottom", bottom)
+        this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
     }
     create () {
-        // const bgImages = this.add.image(400,300,'blBattle');
+
         platforms = this.physics.add.staticGroup();
+        platforms.create(400, 300, 'blBattle').setScale(1.5).refreshBody();
+        platforms.create(400, 480, 'bottom').setScale(1.5).refreshBody();
 
-        platforms.create(400, 300, 'blBattle').refreshBody();
-        // .setScale(2) - option for images. Scales the size
+        boss = this.physics.add.sprite(500, 200, 'BrookeBoss').setBounce(0.2).setCollideWorldBounds(true).setScale(2);
+        // player.setCollideWorldBounds(true);
+        player = this.physics.add.sprite(300, 200, 'mage').setBounce(0.2).setCollideWorldBounds(true).setScale(2);
 
-        // platforms.create(600, 400, 'blBattle');
-        // platforms.create(50, 250, 'blBattle');
-        // platforms.create(750, 220, 'blBattle');
+        cursors = this.input.keyboard.createCursorKeys();
+        // makes the boss touch the ground
+        this.physics.add.collider(boss, platforms);
+        // this.physics.add.collider(boss, bottom);
 
-        player = this.physics.add.sprite(100, 450, 'BrookeBoss');
+        // makes the boss touch the ground
+        this.physics.add.collider(player, platforms);
+        // this.physics.add.collider(player, bottom);
+        // console.log(currentChar)
 
-        player.setBounce(0.2);
-        player.setCollideWorldBounds(true);
-
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('BrookeBoss', { start: 0, end: 3 }),
-            frameRate: 10,
-            repeat: -1
-        });
-
-        this.anims.create({
-            key: 'turn',
-            frames: [ { key: 'BrookeBoss', frame: 4 } ],
-            frameRate: 20
-        });
-
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('BrookeBoss', { start: 5, end: 8 }),
-            frameRate: 10,
-            repeat: -1
-        });
+            // Scene change handler currently on key, needs to be onClick or bound condtionally
+        //  Please leave console logs for testing purposes as the game grows
         cursors = this.input.keyboard.createCursorKeys();
 
-        this.physics.add.collider(player, platforms);
-    }
-     update ()
-    {
-        if (cursors.left.isDown)
-        {
-            player.setVelocityX(-160);
+        let BrookeBossDefeated = false
+        this.input.keyboard.on('keydown-R', () => {
+            // console.log('R button pressed');
+            this.scene.switch('Mains')
+        }, this);
 
-            player.anims.play('left', true);
-        }
-        else if (cursors.right.isDown)
-        {
-            player.setVelocityX(160);
+        // collider only takes in two parameters
+        this.physics.add.collider(player, bottom);
+        this.physics.add.collider(boss, bottom);
+        // this.physics.add.collider(player, platforms);
+        // this.physics.add.collider(boss, platforms);
 
-            player.anims.play('right', true);
-        }
-        else
-        {
-            player.setVelocityX(0);
+        const playerText = this.add.text(50, 50, '');
+        const bossText = this.add.text(630, 50, '');
 
-            player.anims.play('turn');
-        }
+        let currentTurn = 'player';
 
-        if (cursors.up.isDown && player.body.touching.down)
-        {
-            player.setVelocityY(-330);
-        }
-    }
+        player.setDataEnabled();
+        boss.setDataEnabled();
 
-    }
-
-
-
-export default function Brooke(props) {
-    var game = null;
-    
-    
-    useEffect((props) => {
-        const config = {
-            type: Phaser.AUTO,
-            parent: "phaser",
-            width: 800,
-            height: 600,
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    gravity: { y: 300 },
-                    debug: false
-                }
-            },
-            scene: Brookes
-        }
-         game = new Phaser.Game(config);
-    },[])
-    
-    return (
-        <div id="battle">{game ? game :""}</div>
         
-    )
-    
-}
+
+        // console.log(currentChar)
+
+        player.data.set('name', 'dog');
+        player.data.set('class', 'mage');
+        player.data.set('level', 2);
+        player.data.set('attack', player.data.get('level') * 2);
+        player.data.set('hp', 20);
+
+        boss.data.set('name', 'Brooke');
+        boss.data.set('level', 5);
+        boss.data.set('attack', 1);
+        boss.data.set('hp', 100);
+        boss.data.set('defense', 2);
+
+        //  Display it
+        playerText.setText([
+            'Name: ' + player.data.get('name'),
+            'Level: ' + player.data.get('level'),
+            'Attack: ' + player.data.get('attack'),
+            'Hp: ' + player.data.get('hp')
+        ]);
+
+        bossText.setText([
+            'Name: ' + boss.data.get('name'),
+            'Level: ' + boss.data.get('level'),
+            'Defense: ' + boss.data.get('defense'),
+            'Hp: ' + boss.data.get('hp')
+        ]);
+
+        boss.on('changedata', function (gameObject, key, value) {
+            bossText.setText([
+                'Name: ' + boss.data.get('name'),
+                'Level: ' + boss.data.get('level'),
+                'Defense: ' + boss.data.get('defense'),
+                'Hp: ' + boss.data.get('hp')
+            ]);
+        });
+
+        player.on('changedata', function (gameObject, key, value) {
+            playerText.setText([
+                'Name: ' + player.data.get('name'),
+                'Level: ' + player.data.get('level'),
+                'Attack: ' + player.data.get('attack'),
+                'Hp: ' + player.data.get('hp')
+            ]);
+
+        });
+
+
+        selectText = this.add.text(50, 480, 'SELECT:', { fontFamily: '"Press Start 2P"' });
+        attackText = this.add.text(50, 505, 'ATTACK', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
+        defendText = this.add.text(50, 545, 'DEFEND', { fontFamily: '"Press Start 2P"' }).setPadding(5);
+        titleText = this.add.text(250, 80, 'CAN YOU DEFEAT THE BROOKE', { fontFamily: '"Press Start 2P', fontSize: '12px' })
+        fightText = this.add.text(360, 120, 'FIGHT!', { fontFamily: '"Press Start 2P', fontSize: '12px' })
+
+
+        // Beginnings of code for click functions for attack and defend 
+        attackText.on('pointerdown', function () {
+            const hp = boss.data.get('hp')
+            if (player.data.get('class') === 'mage') {
+                let damage = mageAttack(player.data.get('level'), boss.data.get('defense'))
+                boss.data.set('hp', hp - damage);
+                console.log(boss.data.get('hp'))
+                currentTurn = 'boss';
+                bossAttack();
+            }
+            //  else {
+            //     console.log(warriorAttack(player.data.get('level'), boss.data.get('defense')))
+            // }
+        })
+
+        const bossAttack = () => {
+            const hp = boss.data.get('hp')
+            let damage = brookeAttack();
+            player.data.set('hp', hp - damage);
+            console.log(player.data.get('hp'))
+            currentTurn = 'player';
+        }
+
+        graphics = this.add.graphics();
+    }
+    update() {
+        graphics.lineStyle(2, 0xffffff, 2);
+
+        graphics.strokeRectShape(attackText.getBounds());
+        graphics.strokeRectShape(defendText.getBounds());
+    }
+
+    }
+
+    export default Brookes 

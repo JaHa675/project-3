@@ -1,11 +1,15 @@
 import React, {useEffect,useState} from 'react';
 import MainScene from "./main"
 import DahliaScene from "./dahliaBoss"
+import JamesScene from "./jamesBoss"
+import LucasScene from "./lucasBoss"
 import Phaser from "phaser"
 import CharacterSelection from './characterSelection';
 import eventsCenter from '../scripts/EventEmitter';
-
-
+import House from './playerHouse'
+import BrookeScene from "./brookeBoss"
+import CatScene from "./catbBoss"
+import TextBox from "./textbox"
 export default function Main(props) {
     var game = null;
     
@@ -29,7 +33,9 @@ export default function Main(props) {
                     debug: false
                 }
             },
-            scene: [CharacterSelection, MainScene, DahliaScene] 
+            // add both BrookeScene and Cat Scene back in if not there
+            scene: [CharacterSelection, MainScene, DahliaScene,JamesScene, LucasScene, BrookeScene, CatScene, TextBox, House] ,
+        
         }
          game = new Phaser.Game(config);
     },[])
