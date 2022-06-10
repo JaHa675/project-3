@@ -13,19 +13,19 @@ class TextBox extends Phaser.Scene {
     }
 
     create () {
-        image = this.add.image(650, 500, 'battleFrameTest').setScale(.5).setDepth(1)
+        image = this.add.image(650, 500, 'battleFrameTest').setScale(.5).setDepth(-1)
         function logChangeHandler () {
             BattleLog1.setText(logs[0]);
             BattleLog2.setText(logs[1]);
             BattleLog3.setText(logs[2]);
             BattleLog4.setText(logs[3]);
-            BattleLog5.setText(logs[4]);
+            // BattleLog5.setText(logs[4]);
         }
-        const BattleLog1 = this.add.text(575,350, logs[0], {fontSize: '20px', fill: 'black'});
-        const BattleLog2 = this.add.text(575,375, logs[0], {fontSize: '20px', fill: 'black'});
-        const BattleLog3 = this.add.text(575,400, logs[0], {fontSize: '20px', fill: 'black'});
-        const BattleLog4 = this.add.text(575,425, logs[0], {fontSize: '20px', fill: 'black'});
-        const BattleLog5 = this.add.text(575,450, logs[0], {fontSize: '20px', fill: 'black'});
+        const BattleLog1 = this.add.text(575,450, logs[0], {fontSize: '20px', fill: 'black'});
+        const BattleLog2 = this.add.text(575,475, logs[0], {fontSize: '20px', fill: 'black'});
+        const BattleLog3 = this.add.text(575,500, logs[0], {fontSize: '20px', fill: 'black'});
+        const BattleLog4 = this.add.text(575,525, logs[0], {fontSize: '20px', fill: 'black'});
+        // const BattleLog5 = this.add.text(575,550, logs[0], {fontSize: '20px', fill: 'black'});
         eventsCenter.on('logChange', logChangeHandler,this);
         eventsCenter.on('playerAttack', this.playerAttackHandler,this);
         eventsCenter.on('bossAttack', this.bossAttackHandler,this);
