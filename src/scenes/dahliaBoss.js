@@ -182,6 +182,7 @@ class Dahlias extends Phaser.Scene {
                     boss.data.set('hp', 100);
                     player.data.set('hp', 20);
                     this.scene.switch('Mains')
+                    this.scene.stop('BattleLog')
                 }
                 // TODO: make a display for damage dealt
                 console.log(player.data.get('hp'))
