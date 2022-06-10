@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import Phaser from "phaser";
 // import playGame from "../phaserGame"
-import jamesBattle from "../assets/backgrounds/BattleOption9.jpg"
+import BattleBackground from "../assets/backgrounds/JamesBackground.png"
 import jamesBoss from "../assets/characters/James.png"
-import ground from "../assets/backgrounds/BattleOption4ground.png"
+import bottom from "../assets/backgrounds/JamesGround.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import { mageAttack, warriorAttack, jamesAttack } from '../scripts/attack';
@@ -27,8 +27,8 @@ class Jamess extends Phaser.Scene {
         super('Jamess')
     }
     preload() {
-        this.load.image('jamesBattle', jamesBattle)
-        this.load.image('ground', ground)
+        this.load.image('BattleBackground', BattleBackground)
+        this.load.image('bottom', bottom)
         this.load.spritesheet('mage', mage, {
             frameWidth: 48, frameHeight: 48
         });
@@ -40,23 +40,14 @@ class Jamess extends Phaser.Scene {
     create() {
 
         platforms = this.physics.add.staticGroup();
-        platforms.create(400, 300, 'jamesBattle').refreshBody();
+        platforms.create(400, 300, 'BattleBackground').setScale(1.5).refreshBody();
+        platforms.create(400, 465, 'bottom').setScale(1.5).refreshBody();
 
         player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         player.setCollideWorldBounds(true).setBounce(0.2);
 
         boss = this.physics.add.sprite(450, 100, 'jamesBoss').setScale(2);
         boss.setCollideWorldBounds(true).setBounce(0.2);
-
-        // getting a ground to render on the bottom
-        let groundX = this.sys.game.config.width / 3;
-        let groundY = this.sys.game.config.height * .95;
-        let ground = this.physics.add.image(groundX, groundY, "ground");
-        ground.displayWidth = this.sys.game.config.width * 1.0;
-        ground.setBounce(0);
-        ground.setImmovable();
-        ground.setCollideWorldBounds(true);
-
 
         this.anims.create({
             key: 'left',
@@ -89,8 +80,8 @@ class Jamess extends Phaser.Scene {
         }, this);
 
         // collider only takes in two parameters
-        this.physics.add.collider(player, ground);
-        this.physics.add.collider(boss, ground);
+        this.physics.add.collider(player, platforms);
+        this.physics.add.collider(boss, platforms);
         // this.physics.add.collider(player, platforms);
         // this.physics.add.collider(boss, platforms);
 
