@@ -20,46 +20,50 @@ var doors;
 var door1;
 
 var firstPlayDahlia = true;
+
 let dahliaBossDefeated = false;
 var firstPlayCat = true;
 let catBossDefeated = false;
 var firstPlayBrooke = true;
 let brookeBossDefeated = false;
 var firstPlayJames = true;
-let jamesBossDefeated = true;
+let jamesBossDefeated = false;
 var firstPlayLucas = true;
-let lucasBossDefeated = true;
+let lucasBossDefeated = false;
 var firstPlayHouse = true;
-let houseBossDefeated = true;
+let houseBossDefeated = false;
 // var safeHouse;
 
 // MAIN acts as the directory for the other scenes
 
 class Mains extends Phaser.Scene {
-    constructor () {
+    constructor() {
         super('Mains')
     }
-    preload () {
-        this.load.image('dgBattle',dgBattle)
-        this.load.image('door',door)
-        this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
-        this.load.spritesheet('warrior',warrior,{frameWidth: 48, frameHeight: 48});
+    init(data) {
+        this.charClass = data.charClass;
+    }
+
+    preload() {
+        this.load.image('dgBattle', dgBattle)
+        this.load.image('door', door)
+        this.load.spritesheet('mage', mage, { frameWidth: 48, frameHeight: 48 });
+        this.load.spritesheet('warrior', warrior, { frameWidth: 48, frameHeight: 48 });
         this.load.image("ground", ground)
     }
-    create () {
-
-        this.character= ""
+    create() {
+        this.character = ""
         // create a background 
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'dgBattle').refreshBody();
 
         // adding the door to the game 
-        doors =this.physics.add.staticGroup();
-        door1 =this.physics.add.staticGroup();
+        doors = this.physics.add.staticGroup();
+        door1 = this.physics.add.staticGroup();
 
         let doorX = 70;
-        for(let i=0; i < 5; i++) {
-            var door = doors.create(doorX, 440,'door').refreshBody().setScale(1.3).setInteractive();
+        for (let i = 0; i < 5; i++) {
+            var door = doors.create(doorX, 440, 'door').refreshBody().setScale(1.3).setInteractive();
             door.on('pointerdown', function (pointer) {
                 console.log("this");
                 console.log(this);
@@ -71,27 +75,27 @@ class Mains extends Phaser.Scene {
                             DahliaRoom();
                             break;
                         }
-                    case 235 :
+                    case 235:
                         {
                             BrookeRoom();
                             break;
                         }
-                    case 400 :
+                    case 400:
                         {
                             JamesRoom();
                             break;
                         }
-                    case 565 : 
-                    {
-                        LucasRoom()
-                        break;
-                    }
-                    case 730: 
-                    {
-                        HouseRoom()
-                        break;
-                    }
-                
+                    case 565:
+                        {
+                            LucasRoom()
+                            break;
+                        }
+                    case 730:
+                        {
+                            HouseRoom()
+                            break;
+                        }
+
                     default:
                         break;
                 }
@@ -99,27 +103,36 @@ class Mains extends Phaser.Scene {
             doorX += 165;
         }
 
-        
         // add inputEnabled = true
-
-        // doors.create(70, 440, 'door').refreshBody().setScale(1.3);
-        // doors.create(235, 440, 'door').refreshBody().setScale(1.3);
-        // doors.create(395, 440, 'door').refreshBody().setScale(1.3);
-        // doors.create(570, 440, 'door').refreshBody().setScale(1.3);
-        // doors.create(725, 440, 'door').refreshBody().setScale(1.3);
-
-
-        // getting the player to render 
-        player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
-        // if(state.charClass === 'mage'){
-        //     player = this.physics.add.sprite(350, 100, 'mage');
-        // } else {
-        //     player = this.physics.add.sprite(350, 100, 'warrior');
-        // }
         
+        player = this.physics.add.sprite(350, 100, `${this.charClass}`).setScale(2);
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
-        
+        player.setDataEnabled();
+        player.data.set('class', this.charClass);
+
+        // getting the player to render 
+        const mage = () => {
+            console.log('before')
+            player.setTexture('mage');
+            console.log('after')
+        }
+        const warrior = () => {
+            console.log(this.charClass)
+            console.log('before function warrior')
+            player.setTexture('warrior');
+            console.log('after function warrior')
+        }
+        if (player.data.get('class') === 'mage') {
+            console.log('before')
+            mage();
+            console.log('after')
+        } else {
+            console.log('before if statement warrior')
+            warrior();
+            console.log('after if statement warrior')
+        }
+
         // getting a ground to render on the bottom
         let groundX = this.sys.game.config.width / 3;
         let groundY = this.sys.game.config.height * .95;
@@ -133,119 +146,127 @@ class Mains extends Phaser.Scene {
         // player changing to right left and center positions
         this.anims.create({
             key: 'left',
-            frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
+            frames: this.anims.generateFrameNumbers(`${this.charClass}`, { start: 4, end: 5 }),
             frameRate: 10,
             repeat: -1
         });
-        
+
         this.anims.create({
             key: 'turn',
-            frames: [ { key: 'mage', frame: 4} ],
+            frames: [{ key: `${this.charClass}`, frame: 4 }],
             frameRate: 20
         });
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('mage', { start: 6, end: 7}),
+            frames: this.anims.generateFrameNumbers(`${this.charClass}`, { start: 6, end: 7 }),
             frameRate: 10,
             repeat: -1
         });
         door1.on('pointerdown', function (pointer) {
 
             console.log("clicked door 1")
-    
+
         });
-// Scene change handler currently on key, needs to be on press or bound condtionally (i.e. character position on a door)
-//  Please leave console logs for testing purposes as the game grows
+
+
+
+        // EVENT EMITTER LISTENERS
+        eventsCenter.on('dahlia-defeated', this.dahliaDefeated, this)
+
+
+        // Scene change handler currently on key, needs to be on press or bound conditionally (i.e. character position on a door)
+        //  Please leave console logs for testing purposes as the game grows
         cursors = this.input.keyboard.createCursorKeys();
 
         let DahliaRoom = () => {
             if (firstPlayDahlia !== false) {
                 firstPlayDahlia = false;
-                 console.log("input A test",firstPlayDahlia);
-                this.scene.start ('Dahlias')
+                console.log("input A test", firstPlayDahlia);
+                this.scene.start('Dahlias')
                 this.scene.launch('BattleLog')
-             } else if (dahliaBossDefeated === false && firstPlayDahlia === false ) {
-                 console.log(dahliaBossDefeated)
-                 this.scene.switch('Dahlias')
-                 this.scene.launch('BattleLog')
-             } 
+            } else if (dahliaBossDefeated === false && firstPlayDahlia === false) {
+                console.log(dahliaBossDefeated)
+                this.scene.switch('Dahlias')
+                this.scene.launch('BattleLog')
+            }
         };
         let CatRoom = () => {
-                //   console.log(firstPlay, dahliaBossDefeated)
-                 if (firstPlayCat !== false) {
-                    firstPlayCat = false;
-                     console.log("input A test",firstPlayCat);
-                    this.scene.start ('Cats')
-                 } else if (catBossDefeated === false && firstPlayCat === false ) {
-                     console.log(catBossDefeated)
-                     this.scene.switch('Cats')
-                 } 
+            //   console.log(firstPlay, dahliaBossDefeated)
+            if (firstPlayCat !== false) {
+                firstPlayCat = false;
+                console.log("input A test", firstPlayCat);
+                this.scene.start('Cats')
+            } else if (catBossDefeated === false && firstPlayCat === false) {
+                console.log(catBossDefeated)
+                this.scene.switch('Cats')
+            }
         };
         let BrookeRoom = () => {
             if (firstPlayBrooke !== false) {
                 firstPlayBrooke = false;
-                 console.log("input A test",firstPlayBrooke);
-                this.scene.start ('Brookes')
-             } else if (brookeBossDefeated === false && firstPlayBrooke === false ) {
-                 console.log(brookeBossDefeated)
-                 this.scene.switch('Brookes')
-             } 
+                console.log("input A test", firstPlayBrooke);
+                this.scene.start('Brookes')
+            } else if (brookeBossDefeated === false && firstPlayBrooke === false) {
+                console.log(brookeBossDefeated)
+                this.scene.switch('Brookes')
+            }
         };
         let JamesRoom = () => {
             if (firstPlayJames !== false) {
                 firstPlayJames = false;
-                 console.log("input A test",firstPlayJames);
-                this.scene.start ('Jamess')
-             } else if (jamesBossDefeated === false && firstPlayJames === false ) {
-                 console.log(jamesBossDefeated)
-                 this.scene.switch('Jamess')
-             } 
+                console.log("input A test", firstPlayJames);
+                this.scene.start('Jamess')
+            } else if (jamesBossDefeated === false && firstPlayJames === false) {
+                console.log(jamesBossDefeated)
+                this.scene.switch('Jamess')
+            }
         };
         let LucasRoom = () => {
             if (firstPlayLucas !== false) {
                 firstPlayLucas = false;
-                 console.log("input A test",firstPlayLucas);
-                this.scene.start ('Lucass')
-             } else if (lucasBossDefeated === false && firstPlayLucas === false ) {
-                 console.log(lucasBossDefeated)
-                 this.scene.switch('Lucass')
-             } 
+                console.log("input A test", firstPlayLucas);
+                this.scene.start('Lucass')
+            } else if (lucasBossDefeated === false && firstPlayLucas === false) {
+                console.log(lucasBossDefeated)
+                this.scene.switch('Lucass')
+            }
         };
         let HouseRoom = () => {
             if (firstPlayHouse !== false) {
                 firstPlayHouse = false;
-                 console.log("input A test",firstPlayHouse);
-                this.scene.start ('House')
-             } else if (houseBossDefeated === false && firstPlayHouse === false ) {
-                 console.log(houseBossDefeated)
-                 this.scene.switch('House')
-             } 
+                console.log("input A test", firstPlayHouse);
+                this.scene.start('House')
+            } else if (houseBossDefeated === false && firstPlayHouse === false) {
+                console.log(houseBossDefeated)
+                this.scene.switch('House')
+            }
         };
         // eventsCenter.on('classSelect', function(playerChange){
         //     player.data.set('class',playerChange);
         //     console.log(player.data);
         // })
-       
-        
-        
 
 
-// console.log(dahliaBossDefeated);
-// this is how originally worked ====================================================
-this.input.keyboard.on('keydown-C', () => {
+
+
+
+        // console.log(dahliaBossDefeated);
+        // this is how originally worked ====================================================
+        this.input.keyboard.on('keydown-C', () => {
             //   console.log(firstPlay, dahliaBossDefeated)
-        
-             if (firstPlayCat !== false) {
+
+            if (firstPlayCat !== false) {
                 firstPlayCat = false;
-                 console.log("input A test",firstPlayCat);
-                this.scene.start ('Cats')
-             } else if (catBossDefeated === false && firstPlayCat === false ) {
-                 console.log(dahliaBossDefeated)
-                 this.scene.switch('Cats')
-             } 
-         })
-// ======================================================================================
+                console.log("input A test", firstPlayCat);
+                this.scene.start('Cats')
+            } else if (catBossDefeated === false && firstPlayCat === false) {
+                console.log(dahliaBossDefeated)
+                this.scene.switch('Cats')
+            }
+        })
+        // ======================================================================================
+
 
         // collider only takes in two parameters
         this.physics.add.collider(player, ground);
@@ -253,43 +274,38 @@ this.input.keyboard.on('keydown-C', () => {
         // this.physics.add.collider(boss, platforms);
     }
 
-    dahliaDefeated(){
+    dahliaDefeated() {
         dahliaBossDefeated = true;
     }
 
 
-    updateClass(characterClass)
-    {
-        this.player.data.set = ('class',characterClass)
+    updateClass(characterClass) {
+        this.player.data.set = ('class', characterClass)
     }
 
-     update ()
-    {
+    update() {
 
-        if (cursors.left.isDown)
-        {
+        if (cursors.left.isDown) {
             player.setVelocityX(-160);
 
             player.anims.play('left', true);
         }
-        else if (cursors.right.isDown)
-        {
+        else if (cursors.right.isDown) {
             player.setVelocityX(160);
 
             player.anims.play('right', true);
         }
-        else
-        {
+        else {
             player.setVelocityX(0);
 
             player.anims.play('turn');
         }
 
-        if (cursors.up.isDown && player.body.touching.down)
-        {
+        if (cursors.up.isDown && player.body.touching.down) {
             player.setVelocityY(-330);
         }
     }
 
 }
+
 export default Mains

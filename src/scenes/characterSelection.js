@@ -13,6 +13,7 @@ var graphics;
 var mageSelect;
 var warriorSelect;
 var text6;
+let charClass;
 
 
 class CharacterSelection extends Scene {
@@ -55,17 +56,15 @@ class CharacterSelection extends Scene {
         text6 = this.add.text(120, 80, 'CHARACTER SELECTION:', { fontFamily: '"Press Start 2P', fontSize: '32px' });
 
 
-
         mageSelect.on('pointerdown', function () {
+            charClass = 'mage'
             goToMain();
-            eventsCenter.emit('classSelect', 'mage')
             console.log(' mage button pushed');
-
         })
 
         warriorSelect.on('pointerdown', function () {
+            charClass = 'warrior'
             goToMain();
-            eventsCenter.emit('classSelect', 'warrior');
             console.log('warrior button pushed');
 
         })
@@ -75,7 +74,7 @@ class CharacterSelection extends Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
         const goToMain = () => {
-            this.scene.switch('Mains')
+            this.scene.start('Mains', {charClass: charClass})
         }
         // this.input.keyboard.on('keydown-U', () => {
         //     this.scene.add('main', MainScene, true, {x:800, y:600})
