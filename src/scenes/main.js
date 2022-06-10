@@ -9,7 +9,7 @@ import DahliaScene from "./dahliaBoss"
 import JamesScene from "./jamesBoss"
 import LucasScene from "./lucasBoss"
 import CatScene from "./catbBoss"
-import playerHouse from "./playerHouse"
+import House from "./playerHouse"
 import eventsCenter from '../scripts/EventEmitter'
 // import React, {useEffect,useState} from 'react';
 
@@ -190,6 +190,7 @@ cursors = this.input.keyboard.createCursorKeys();
              } else if (dahliaBossDefeated === false && firstPlayDahlia === false ) {
                  console.log(dahliaBossDefeated)
                  this.scene.switch('Dahlias')
+                 this.scene.launch('BattleLog')
              } 
         };
         let CatRoom = () => {
@@ -237,10 +238,10 @@ cursors = this.input.keyboard.createCursorKeys();
             if (firstPlayHouse !== false) {
                 firstPlayHouse = false;
                  console.log("input A test",firstPlayHouse);
-                this.scene.start ('Houses')
+                this.scene.start ('House')
              } else if (houseBossDefeated === false && firstPlayHouse === false ) {
                  console.log(houseBossDefeated)
-                 this.scene.switch('Houses')
+                 this.scene.switch('House')
              } 
         };
         // eventsCenter.on('classSelect', function(playerChange){
@@ -254,18 +255,18 @@ cursors = this.input.keyboard.createCursorKeys();
 
 // console.log(dahliaBossDefeated);
 // this is how originally worked ====================================================
-// this.input.keyboard.on('keydown-A', () => {
-//             //   console.log(firstPlay, dahliaBossDefeated)
+this.input.keyboard.on('keydown-C', () => {
+            //   console.log(firstPlay, dahliaBossDefeated)
         
-//              if (firstPlayDahlia !== false) {
-//                 firstPlayDahlia = false;
-//                  console.log("input A test",firstPlayDahlia);
-//                 this.scene.start ('Dahlias')
-//              } else if (dahliaBossDefeated === false && firstPlayDahlia === false ) {
-//                  console.log(dahliaBossDefeated)
-//                  this.scene.switch('Dahlias')
-//              } 
-//          })
+             if (firstPlayCat !== false) {
+                firstPlayCat = false;
+                 console.log("input A test",firstPlayCat);
+                this.scene.start ('Cats')
+             } else if (catBossDefeated === false && firstPlayCat === false ) {
+                 console.log(dahliaBossDefeated)
+                 this.scene.switch('Cats')
+             } 
+         })
 // ======================================================================================
 
 
