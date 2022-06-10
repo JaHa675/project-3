@@ -34,9 +34,9 @@ class Dahlias extends Phaser.Scene {
         super('Dahlias')
     }
     preload() {
-        this.load.image('dgBattle', dgBattle)
-        this.load.image('bridge', bridge)
-        this.load.image('bossPlatform', bossPlatform)
+        this.load.image('dgBattle', dgBattle);
+        this.load.image('bridge', bridge);
+        this.load.image('bossPlatform', bossPlatform);
         this.load.spritesheet('mage', mage, {
             frameWidth: 48, frameHeight: 48
         });
@@ -45,13 +45,9 @@ class Dahlias extends Phaser.Scene {
         });
     }
     create() {
-
-
-
         platforms = this.physics.add.staticGroup();
 
         platforms.create(400, 300, 'dgBattle').refreshBody();
-        
         platforms.create(400, 500, 'bossPlatform').setScale(4);
         
         player = this.physics.add.sprite(350, 100, 'mage');

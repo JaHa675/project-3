@@ -1,18 +1,19 @@
 import Phaser from "phaser";
 import eventsCenter from '../scripts/EventEmitter';
-
+import battleFrame from '../assets/extras/frame2.png'
 const logs = ['','','','','']
+
+var image;
 class TextBox extends Phaser.Scene {
     constructor(){
         super('BattleLog')
     }
     preload () {
-        // this.load.image('tomato', test)
+        this.load.image('battleFrameTest', battleFrame);
     }
 
     create () {
-        // platforms = this.physics.add.staticGroup();
-        // platforms.create(400, 300, 'tomato').refreshBody();
+        image = this.add.image(650, 500, 'battleFrameTest').setScale(.5).setDepth(1)
         function logChangeHandler () {
             BattleLog1.setText(logs[0]);
             BattleLog2.setText(logs[1]);
@@ -20,14 +21,15 @@ class TextBox extends Phaser.Scene {
             BattleLog4.setText(logs[3]);
             BattleLog5.setText(logs[4]);
         }
-        const BattleLog1 = this.add.text(400,300, logs[0], {fontSize: '20px', fill: 'white'});
-        const BattleLog2 = this.add.text(400,350, logs[0], {fontSize: '20px', fill: 'white'});
-        const BattleLog3 = this.add.text(400,400, logs[0], {fontSize: '20px', fill: 'white'});
-        const BattleLog4 = this.add.text(400,450, logs[0], {fontSize: '20px', fill: 'white'});
-        const BattleLog5 = this.add.text(400,500, logs[0], {fontSize: '20px', fill: 'white'});
+        const BattleLog1 = this.add.text(575,350, logs[0], {fontSize: '20px', fill: 'black'});
+        const BattleLog2 = this.add.text(575,375, logs[0], {fontSize: '20px', fill: 'black'});
+        const BattleLog3 = this.add.text(575,400, logs[0], {fontSize: '20px', fill: 'black'});
+        const BattleLog4 = this.add.text(575,425, logs[0], {fontSize: '20px', fill: 'black'});
+        const BattleLog5 = this.add.text(575,450, logs[0], {fontSize: '20px', fill: 'black'});
         eventsCenter.on('logChange', logChangeHandler,this);
         eventsCenter.on('playerAttack', this.playerAttackHandler,this);
         eventsCenter.on('bossAttack', this.bossAttackHandler,this);
+        
     }
     playerAttackHandler(damage) {
         console.log(logs, "battle log")
