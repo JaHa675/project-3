@@ -23,8 +23,6 @@ var door1;
 var firstPlayDahlia = true;
 
 let dahliaBossDefeated = false;
-var firstPlayCat = true;
-let catBossDefeated = false;
 var firstPlayBrooke = true;
 let brookeBossDefeated = false;
 var firstPlayJames = true;
@@ -32,7 +30,11 @@ let jamesBossDefeated = false;
 var firstPlayLucas = true;
 let lucasBossDefeated = false;
 var firstPlayHouse = true;
-let houseBossDefeated = false;
+let houseBossDefeated = true;
+var firstPlayCat = true;
+let catBossDefeated = false;
+var firstPlayCatDoor = true;
+let catDoorBossDefeated = true;
 // var safeHouse;
 
 // MAIN acts as the directory for the other scenes
@@ -187,17 +189,7 @@ class Mains extends Phaser.Scene {
                 this.scene.launch('BattleLog')
             }
         };
-        let CatRoom = () => {
-            //   console.log(firstPlay, dahliaBossDefeated)
-            if (firstPlayCat !== false) {
-                firstPlayCat = false;
-                console.log("input A test", firstPlayCat);
-                this.scene.start('Cats')
-            } else if (catBossDefeated === false && firstPlayCat === false) {
-                console.log(catBossDefeated)
-                this.scene.switch('Cats')
-            }
-        };
+        
         let BrookeRoom = () => {
             if (firstPlayBrooke !== false) {
                 firstPlayBrooke = false;
@@ -251,15 +243,19 @@ this.input.keyboard.on('keydown-C', () => {
 
             if (firstPlayCat !== false) {
                 firstPlayCat = false;
-                console.log("input A test", firstPlayCat);
-                this.scene.start('Cats')
-            } else if (catBossDefeated === false && firstPlayCat === false) {
-                console.log(dahliaBossDefeated)
-                this.scene.switch('Cats')
-            }
-        })
-        // ======================================================================================
+                 console.log("input A test",firstPlayCat);
+                this.scene.start ('Cats')
+             } else if (catBossDefeated === false && firstPlayCat === false ) {
+                 console.log(catBossDefeated)
+                 this.scene.switch('Cats')
+             } 
+})
 
+this.input.keyboard.on('keydown-F', () => {
+        this.scene.start ('CatDoors')
+ 
+ })
+//======================================================================================
 
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
