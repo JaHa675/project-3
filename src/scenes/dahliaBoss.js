@@ -15,7 +15,7 @@ import { mageAttack, warriorAttack, dahliaAttack } from '../scripts/attack';
 import { getOneCharacter } from '../utils/API';
 import eventsCenter from '../scripts/EventEmitter';
 
-const currentChar = getOneCharacter(1);
+// const currentChar = ;
 
 
 var player;
