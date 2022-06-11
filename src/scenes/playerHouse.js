@@ -5,6 +5,7 @@ import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import floor from "../assets/backgrounds/RoomFloor.png"
 import floorPlatform from "../assets/backgrounds/RoomPlatform.png"
+import KingJoe from "../assets/characters/KingJoe.png"
 
 
 var player;
@@ -21,6 +22,7 @@ class House extends Phaser.Scene {
         this.load.image('floor',floor);
         this.load.image('floorPlatform',floorPlatform);
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
+        this.load.spritesheet('KingJoe', KingJoe, {frameWidth: 48, frameHeight: 48});
     }
     create () {
         platforms = this.physics.add.staticGroup();
@@ -34,6 +36,8 @@ class House extends Phaser.Scene {
         layer.add(this.make.image({x:400, y:400, key:'housebg'},false));
 
         // layer.add(this.add.text(25, 50, 'Player House', { fontFamily: 'Press Start 2P', fontSize: 300, color: 'goldenrod' }))
+
+        this.add.sprite(600,300,'KingJoe').setScale(2);
 
         player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         player.setBounce(0.2);
