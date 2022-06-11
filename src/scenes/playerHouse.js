@@ -4,6 +4,7 @@ import housebg from "../assets/backgrounds/Room.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import floor from "../assets/backgrounds/RoomFloor.png"
+import floorPlatform from "../assets/backgrounds/RoomPlatform.png"
 
 
 var player;
@@ -18,11 +19,13 @@ class House extends Phaser.Scene {
 
         this.load.image('housebg',housebg);
         this.load.image('floor',floor);
+        this.load.image('floorPlatform',floorPlatform);
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
     }
     create () {
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'floor').setScale(2).refreshBody();
+        platforms.create(400, 560, 'floorPlatform').setScale(1.5).refreshBody();
 
         const layer =this.add.layer();
         console.log(layer);
