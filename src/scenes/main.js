@@ -11,6 +11,7 @@ import LucasScene from "./lucasBoss"
 import CatScene from "./catbBoss"
 import House from "./playerHouse"
 import eventsCenter from '../scripts/EventEmitter'
+import Dialogue from '../assets/extras/charDialogue1.png'
 // import React, {useEffect,useState} from 'react';
 
 var player;
@@ -18,6 +19,7 @@ var platforms;
 var cursors;
 var doors;
 var door1;
+var dialogueImage;
 
 var firstPlayDahlia = true;
 
@@ -33,7 +35,7 @@ let lucasBossDefeated = false;
 var firstPlayHouse = true;
 let houseBossDefeated = false;
 // var safeHouse;
-
+var timedEvent;
 // MAIN acts as the directory for the other scenes
 
 class Mains extends Phaser.Scene {
@@ -50,10 +52,12 @@ class Mains extends Phaser.Scene {
         this.load.spritesheet('mage', mage, { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet('warrior', warrior, { frameWidth: 48, frameHeight: 48 });
         this.load.image("ground", ground)
+        this.load.image("charDialogue", Dialogue)
     }
     create() {
         this.character = ""
         // create a background 
+        dialogueImage = this.add.image(400, 100, 'charDialogue').setScale(.6).setDepth(.5)
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'dgBattle').refreshBody();
 
@@ -178,12 +182,16 @@ class Mains extends Phaser.Scene {
         // Scene change handler currently on key, needs to be on press or bound conditionally (i.e. character position on a door)
         //  Please leave console logs for testing purposes as the game grows
         cursors = this.input.keyboard.createCursorKeys();
-
         let DahliaRoom = () => {
+            const dahliaDoorText = this.add.text(280,200, 'Fight Dahlia?!', {fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey'})
+            timedEvent = this.time.delayedCall(1500, dgonEvent, [], this);
+            function dgonEvent() {
+                dahliaDoorText.setText('')
+            }
             if (firstPlayDahlia !== false) {
                 firstPlayDahlia = false;
+                this.input.on(dahliaDoorText)
                 console.log("input A test", firstPlayDahlia);
-                this.scene.start('Dahlias')
                 this.scene.launch('BattleLog')
             } else if (dahliaBossDefeated === false && firstPlayDahlia === false) {
                 console.log(dahliaBossDefeated)
@@ -203,7 +211,13 @@ class Mains extends Phaser.Scene {
             }
         };
         let BrookeRoom = () => {
+            const brookeDoorText = this.add.text(280,200, 'Fight Brooke?!', {fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey'})
+            timedEvent = this.time.delayedCall(1500, blonEvent, [], this);
+            function blonEvent() {
+                brookeDoorText.setText('')
+            }
             if (firstPlayBrooke !== false) {
+                this.input.on(brookeDoorText)
                 firstPlayBrooke = false;
                 console.log("input A test", firstPlayBrooke);
                 this.scene.start('Brookes')
@@ -213,8 +227,14 @@ class Mains extends Phaser.Scene {
             }
         };
         let JamesRoom = () => {
+            const jamesDoorText = this.add.text(280,200, 'Fight James?!', {fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey'})
+            timedEvent = this.time.delayedCall(1500, dgonEvent, [], this);
+            function dgonEvent() {
+                jamesDoorText.setText('')
+            }
             if (firstPlayJames !== false) {
                 firstPlayJames = false;
+                this.input.on(jamesDoorText)
                 console.log("input A test", firstPlayJames);
                 this.scene.start('Jamess')
             } else if (jamesBossDefeated === false && firstPlayJames === false) {
@@ -223,8 +243,14 @@ class Mains extends Phaser.Scene {
             }
         };
         let LucasRoom = () => {
+            const lucasDoorText = this.add.text(280,200, 'Fight Lucas?!', {fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey'})
+            timedEvent = this.time.delayedCall(1500, dgonEvent, [], this);
+            function dgonEvent() {
+                lucasDoorText.setText('')
+            }
             if (firstPlayLucas !== false) {
                 firstPlayLucas = false;
+                this.input.on(lucasDoorText)
                 console.log("input A test", firstPlayLucas);
                 this.scene.start('Lucass')
             } else if (lucasBossDefeated === false && firstPlayLucas === false) {
@@ -233,8 +259,14 @@ class Mains extends Phaser.Scene {
             }
         };
         let HouseRoom = () => {
+            const houseDoorText = this.add.text(260,200, 'Enter your house?', {fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey'})
+            timedEvent = this.time.delayedCall(1500, dgonEvent, [], this);
+            function dgonEvent() {
+                houseDoorText.setText('')
+            }
             if (firstPlayHouse !== false) {
                 firstPlayHouse = false;
+                this.input.on(houseDoorText)
                 console.log("input A test", firstPlayHouse);
                 this.scene.start('House')
             } else if (houseBossDefeated === false && firstPlayHouse === false) {
