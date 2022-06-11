@@ -7,62 +7,72 @@ const BASE_URL="http://localhost:3001"
 
 
 module.exports = {
-    getAllUsers:()=>{
-        return fetch(`${BASE_URL}/api/users`).then(res=>res.json())
+    getAllUsers:async ()=>{
+        const res = await fetch(`${BASE_URL}/api/users`)
+        return await res.json()
     },
-    getOneUser:userId=>{
-        return fetch(`${BASE_URL}/api/users/${userId}`).then(res=>res.json())
+    getOneUser:async userId=>{
+        const res = await fetch(`${BASE_URL}/api/users/${userId}`)
+        return await res.json()
     },
-    verify:token=>{
-        return fetch(`${BASE_URL}/api/users/verifyToken`,{
-            headers:{
-                authorization:`Bearer ${token}`
+    verify:async token=>{
+        const res = await fetch(`${BASE_URL}/api/users/verifyToken`, {
+            headers: {
+                authorization: `Bearer ${token}`
             }
-        }).then(res=>res.json())
+        })
+        return await res.json()
     },
-    login:userData=>{
-        return fetch(`${BASE_URL}/api/users/login`,{
-            method:"POST",
-            body:JSON.stringify(userData),
-            headers:{
-                "Content-Type":"application/json"
-            }
-        }).then(res=>res.json())
-        .catch((err) => {
+    login:async userData=>{
+        try {
+            const res = await fetch(`${BASE_URL}/api/users/login`, {
+                method: "POST",
+                body: JSON.stringify(userData),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            return await res.json()
+        } catch (err) {
             console.log(err)
-        });
+        }
     },
-    signup:userData=>{
-        return fetch(`${BASE_URL}/api/users`,{
-            method:"POST",
-            body:JSON.stringify(userData),
-            headers:{
-                "Content-Type":"application/json"
-            }
-        }).then(res=>res.json())
-        .catch((err) => {
+    signup:async userData=>{
+        try {
+            const res = await fetch(`${BASE_URL}/api/users`, {
+                method: "POST",
+                body: JSON.stringify(userData),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            return await res.json()
+        } catch (err) {
             console.log(err)
-        });
+        }
     },
-    getAllCharacters:()=>{
-        return fetch(`${BASE_URL}/api/characters`).then(res=>res.json())
+    getAllCharacters:async ()=>{
+        const res = await fetch(`${BASE_URL}/api/characters`)
+        return await res.json()
     },
-    getOneCharacter:charId=>{
-        return fetch(`${BASE_URL}/api/characters/${charId}`, {
+    getOneCharacter:async charId=>{
+        const res = await fetch(`${BASE_URL}/api/characters/${charId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then(res=>res.json())
+        })
+        return await res.json()
     },
-    createCharacter:(gameData,token)=>{
-        return fetch(`${BASE_URL}/api/characters`,{
-            method:"POST",
-            body:JSON.stringify(gameData),
-            headers:{
-                "Content-Type":"application/json",
-                authorization:`Bearer ${token}`
+    createCharacter:async (gameData,token)=>{
+        const res = await fetch(`${BASE_URL}/api/characters`, {
+            method: "POST",
+            body: JSON.stringify(gameData),
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${token}`
             }
-        }).then(res=>res.json())
+        })
+        return await res.json()
     }
 }

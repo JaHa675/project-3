@@ -5,6 +5,7 @@ import warrior from "../assets/characters/Warrior.png"
 import Mage from "../assets/characters/Mage.png"
 import MainScene from "./main"
 import eventsCenter from '../scripts/EventEmitter'
+import { createCharacter, getOneCharacter } from "../utils/API";
 
 var mage;
 var platforms;
@@ -14,7 +15,8 @@ var mageSelect;
 var warriorSelect;
 var text6;
 let charClass;
-
+//  THIS IS A TEMP ASSIGNED HARD CODED VARIABLE FOR THE CHARACTERS NAME WE SHOULD ADD A WAY FOR THEM TO SET THEIR NAME
+let character_name ='tingle'
 
 class CharacterSelection extends Scene {
     constructor() {
@@ -58,15 +60,16 @@ class CharacterSelection extends Scene {
 
         mageSelect.on('pointerdown', function () {
             charClass = 'mage'
+            createCharacter({ character_name: character_name, class: charClass })
             goToMain();
             console.log(' mage button pushed');
         })
-
+        
         warriorSelect.on('pointerdown', function () {
             charClass = 'warrior'
+            createCharacter({ character_name: character_name, class: charClass })
             goToMain();
             console.log('warrior button pushed');
-
         })
 
 
@@ -74,7 +77,7 @@ class CharacterSelection extends Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
         const goToMain = () => {
-            this.scene.start('Mains', {charClass: charClass})
+            this.scene.start('Mains', { character_name: character_name, charClass: charClass, level: 1 })
         }
         // this.input.keyboard.on('keydown-U', () => {
         //     this.scene.add('main', MainScene, true, {x:800, y:600})
