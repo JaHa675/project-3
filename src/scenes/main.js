@@ -218,8 +218,8 @@ class Mains extends Phaser.Scene {
                 brookeDoorText.setText('')
             }
             if (firstPlayBrooke !== false) {
-                this.input.on(brookeDoorText)
                 firstPlayBrooke = false;
+                this.input.on(brookeDoorText)
                 console.log("input A test", firstPlayBrooke);
                 this.scene.start('Brookes')
             } else if (brookeBossDefeated === false && firstPlayBrooke === false) {
