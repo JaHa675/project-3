@@ -9,6 +9,7 @@ import DahliaScene from "./dahliaBoss"
 import JamesScene from "./jamesBoss"
 import LucasScene from "./lucasBoss"
 import CatScene from "./catbBoss"
+import CatDoors from "./finalBossDoors"
 import House from "./playerHouse"
 import eventsCenter from '../scripts/EventEmitter'
 import Dialogue from '../assets/extras/charDialogue1.png'
@@ -296,6 +297,10 @@ class Mains extends Phaser.Scene {
                 console.log(dahliaBossDefeated)
                 this.scene.switch('Cats')
             }
+        })
+        this.input.keyboard.on('keydown-F', () => {
+            //   console.log(firstPlay, dahliaBossDefeated)
+                this.scene.start('CatDoors')
         })
         // ======================================================================================
 
