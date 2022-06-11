@@ -8,6 +8,7 @@ import floorPlatform from "../assets/backgrounds/RoomPlatform.png"
 import catPath from "../assets/extras/catDoor.png"
 import CatDoors from "./finalBossDoors"
 import KingJoe from "../assets/characters/KingJoe.png"
+import MessageBubble from "../assets/extras/MessageBubble.png"
 
 
 var player;
@@ -15,6 +16,8 @@ var platforms;
 var cursors;
 var doors;
 var backDoor;
+var Joe;
+var image;
 
 class House extends Phaser.Scene {
     constructor () {
@@ -27,6 +30,7 @@ class House extends Phaser.Scene {
         this.load.image('floorPlatform',floorPlatform);
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
         this.load.spritesheet('KingJoe', KingJoe, {frameWidth: 48, frameHeight: 48});
+        this.load.image('MessageBubble',MessageBubble)
     }
     create () {
         platforms = this.physics.add.staticGroup();
@@ -41,7 +45,8 @@ class House extends Phaser.Scene {
 
         // layer.add(this.add.text(25, 50, 'Player House', { fontFamily: 'Press Start 2P', fontSize: 300, color: 'goldenrod' }))
 
-        this.add.sprite(600,300,'KingJoe').setScale(2);
+        Joe =this.add.sprite(600,300,'KingJoe').setScale(2);
+        Joe.setInteractive();
 
         player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         player.setBounce(0.2);
@@ -104,6 +109,37 @@ class House extends Phaser.Scene {
         let CatPath = () => {
             this.scene.start('CatDoors')
     }
+
+        let joeQuotes =[
+            "Prett-y prett-y cool",
+            "mmm MM mm",
+            "ABC. Always Be Coding.",
+            "You can do everything 100% right and still fail.",
+            "Have you seen my cat?",
+            "This is *other* Joe",
+            "Let's go with....Salmon",
+            "Joegrammers",
+            "101 Manatee Jokes",
+            "Please don't try to find out where I live. Please.",
+            "what specifically is the issue? Include screenshots and code snippets. What steps have you taken to solve said problem?",
+            "We're coming to the end of an era.",
+            "Snaps for them",
+            "Oop I wasn't recording"
+        
+        ]
+        var joeSays = this.add.text(635,280,"",{fontSize:'10px',fontFamily:'"Press Start 2P"', color:'black',wordWrap: { width: 100 }})
+        image =this.add.image(635,280,'MessageBubble').setScale(0.5).setDepth(-1)
+
+        Joe.on('pointerdown',function (){
+            console.log("pushed");
+            let randNum = Math.floor(Math.random() * 14) + 1;
+            
+            
+            joeSays.setText(joeQuotes[randNum])
+            console.log(joeSays)
+
+        });
+        
     }
     update () {
         if (cursors.left.isDown)
