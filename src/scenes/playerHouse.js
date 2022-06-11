@@ -5,18 +5,22 @@ import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import floor from "../assets/backgrounds/RoomFloor.png"
 import floorPlatform from "../assets/backgrounds/RoomPlatform.png"
+import catPath from "../assets/extras/catDoor.png"
+import CatDoors from "./finalBossDoors"
 
 
 var player;
 var platforms;
 var cursors;
+var doors;
+var backDoor;
 
 class House extends Phaser.Scene {
     constructor () {
         super('House')
     }
     preload () {
-
+        this.load.image('catPath', catPath)
         this.load.image('housebg',housebg);
         this.load.image('floor',floor);
         this.load.image('floorPlatform',floorPlatform);
@@ -37,8 +41,26 @@ class House extends Phaser.Scene {
 
         player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         player.setBounce(0.2);
-        player.setCollideWorldBounds(true);
 
+        player.setCollideWorldBounds(true);
+        doors = this.physics.add.staticGroup();
+        // for (let i=0; i<1; i++) {
+        backDoor =  doors.create(200, 500, 'catPath').refreshBody().setScale(.3).setInteractive();
+            backDoor.on('pointerdown', function (pointer) {
+                console.log("this");
+                console.log(this);
+                console.log("pointer");
+                console.log(pointer);
+                switch (this.x) {
+                    case 200: {
+                        CatPath()
+                        break;
+                    }
+                    default: 
+                        break;
+                }
+            })
+        // }
         // let groundX = this.sys.game.config.width / 3;
         // // getting a ground to render on the bottom
         // let ground = this.physics.add.image(groundX, groundY, "ground");
@@ -74,6 +96,10 @@ class House extends Phaser.Scene {
         this.physics.add.collider(player, platforms);
 
         player.setDataEnabled();
+
+        let CatPath = () => {
+            this.scene.start('CatDoors')
+    }
     }
     update () {
         if (cursors.left.isDown)
