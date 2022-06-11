@@ -11,6 +11,7 @@ import LucasScene from "./lucasBoss"
 import CatScene from "./catbBoss"
 import House from "./playerHouse"
 import eventsCenter from '../scripts/EventEmitter'
+import Dialogue from '../assets/extras/charDialogue1.png'
 // import React, {useEffect,useState} from 'react';
 
 var player;
@@ -18,6 +19,7 @@ var platforms;
 var cursors;
 var doors;
 var door1;
+var dialogueImage;
 
 var firstPlayDahlia = true;
 
@@ -50,10 +52,12 @@ class Mains extends Phaser.Scene {
         this.load.spritesheet('mage', mage, { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet('warrior', warrior, { frameWidth: 48, frameHeight: 48 });
         this.load.image("ground", ground)
+        this.load.image("charDialogue", Dialogue)
     }
     create() {
         this.character = ""
         // create a background 
+        dialogueImage = this.add.image(400, 100, 'charDialogue').setScale(.6).setDepth(.5)
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'dgBattle').refreshBody();
 
