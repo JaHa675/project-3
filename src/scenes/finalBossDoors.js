@@ -7,6 +7,7 @@ import finalGround from "../assets/backgrounds/MainFloor.png"
 import finalPlatform from "../assets/backgrounds/MainPlatform.png"
 import fancyDoor from "../assets/backgrounds/TransparentDoor.png"
 import Mains from "./main";
+import Dialogue from '../assets/extras/charDialogue1.png'
 
 // base variables for the door
 var player;
@@ -18,7 +19,8 @@ var firstPlayCat = true;
 let catBossDefeated = false;
 var firstPlayMain = true;
 let mainBossDefeated = false;
-
+var timedEvent;
+var dialogueImage;
 
 class CatDoor extends Phaser.Scene {
     constructor () {
@@ -31,10 +33,12 @@ class CatDoor extends Phaser.Scene {
         this.load.spritesheet('warrior',warrior,{frameWidth: 48, frameHeight: 48});
         this.load.image("finalGround", finalGround)
         this.load.image("finalPlatform", finalPlatform)
+        this.load.image("charDialogue", Dialogue)
     }
     create () {
         this.character ="";
         // create a background 
+        dialogueImage = this.add.image(400, 100, 'charDialogue').setScale(.6).setDepth(.5)
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 460, 'finalGround').refreshBody();
         platforms.create(400, 530, 'finalPlatform').setScale(1.1).refreshBody();
@@ -113,18 +117,30 @@ class CatDoor extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         
             let CatRoom = () => {
+                const catDoorText = this.add.text(280, 110, 'MYSTERY DOOR?!', { fontSize: '30px', fill: 'black'}).setDepth(4)
+                timedEvent = this.time.delayedCall(2000, CatOnEvent, [], this);
+                function CatOnEvent() {
+                    catDoorText.setText('')
+                    this.scene.start('Cats')
+                    this.scene.launch('BattleLog')
+                }
                 //   console.log(firstPlay, dahliaBossDefeated)
                  if (firstPlayCat !== false) {
-                    firstPlayCat = false;
+                    this.input.on('click',CatOnEvent)
                      console.log("input A test",firstPlayCat);
-                    this.scene.start ('Cats')
                  } else if (catBossDefeated === false && firstPlayCat === false ) {
                      console.log(catBossDefeated)
                      this.scene.start('Cats')
                  } 
             };
             let MainRoom = () => {
-                    this.scene.start('Mains')
+                this.input.on('click', MainOnEvent)
+                const lucasDoorText = this.add.text(260, 110, 'Back to Main Path', { fontSize: '30px', fill: 'black' }).setDepth(4)
+            timedEvent = this.time.delayedCall(1500, MainOnEvent, [], this);
+            function MainOnEvent() {
+                lucasDoorText.setText('')
+                this.scene.start('Mains')
+            }
             }
 
         this.physics.add.collider(player, platforms);

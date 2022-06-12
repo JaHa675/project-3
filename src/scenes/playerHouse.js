@@ -174,14 +174,14 @@ class House extends Phaser.Scene {
         });
         
 
+        graphics = this.add.graphics();
         }
-    // graphics = this.add.graphics();
 
     
     update () {
 
-        // graphics.lineStyle(2, 0xffffff, 2);
-        // graphics.strokeRectShape(saveYes.getBounds());
+        graphics.lineStyle(2, 0xffffff, 2);
+        graphics.strokeRectShape(saveYes.getBounds());
 
         if (cursors.left.isDown) 
         {
