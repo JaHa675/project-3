@@ -14,15 +14,19 @@ export default function About() {
                     <h1 className='aboutTitle'>Why We Did this?</h1>
                     <div className='aboutParaContainer'>
                         <h6 className='aboutUsPara'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            We wanted to create a fun exiting game that brought us to the early 2000s with pixelated games. As enginners, we liked the thought of a game that combined all of our love for games and challlenged us to create something new.
                         </h6>
-                        <h6 className='aboutUsPara'>
+                        {/* make sure that it is known that the sprite sheet can create white space at the bottom */}
+                        {/* <h6 className='aboutUsPara'>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </h6>
+                        </h6> */}
                     </div>
                 </div>
                 <div className='linksContainer'>
-                    <h4>Links to Our GitHub</h4>
+                    <div className="gitHubTitle">
+                        <h4>Links to Our GitHub</h4>
+                        <h5 className="subText">Click our Avatars</h5>
+                    </div>
                     </div>
                     <div className="characterArea">
                         <div className="characterBox">
