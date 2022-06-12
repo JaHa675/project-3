@@ -215,7 +215,7 @@ class Mains extends Phaser.Scene {
                 console.log("input A test", firstPlayDahlia);
             } else if (dahliaBossDefeated === false && firstPlayDahlia === false) {
                 console.log(dahliaBossDefeated)
-                this.scene.switch('Dahlias')
+                this.scene.start('Dahlias')
                 this.scene.launch('BattleLog')
             }
         };
@@ -227,7 +227,7 @@ class Mains extends Phaser.Scene {
                 this.scene.start('Cats')
             } else if (catBossDefeated === false && firstPlayCat === false) {
                 console.log(catBossDefeated)
-                this.scene.switch('Cats')
+                this.scene.start('Cats')
             }
         };
         let BrookeRoom = () => {
@@ -244,7 +244,7 @@ class Mains extends Phaser.Scene {
                 console.log("input A test", firstPlayBrooke);
             } else if (brookeBossDefeated === false && firstPlayBrooke === false) {
                 console.log(brookeBossDefeated)
-                this.scene.switch('Brookes')
+                this.scene.start('Brookes')
                 this.scene.launch('BattleLog')
             }
         };
@@ -262,7 +262,7 @@ class Mains extends Phaser.Scene {
                 console.log("input A test", firstPlayJames);
             } else if (jamesBossDefeated === false && firstPlayJames === false) {
                 console.log(jamesBossDefeated)
-                this.scene.switch('Jamess')
+                this.scene.start('Jamess')
                 this.scene.launch('BattleLog')
             }
         };
@@ -280,7 +280,7 @@ class Mains extends Phaser.Scene {
                 console.log("input A test", firstPlayLucas);
             } else if (lucasBossDefeated === false && firstPlayLucas === false) {
                 console.log(lucasBossDefeated)
-                this.scene.switch('Lucass')
+                this.scene.start('Lucass')
                 this.scene.launch('BattleLog')
             }
         };
@@ -296,7 +296,7 @@ class Mains extends Phaser.Scene {
             //     this.input.on('click', houseOnEvent)
             //     console.log("input A test", firstPlayHouse);
             // } else if (firstPlayHouse === false) {
-            //     this.scene.switch('House')
+            //     this.scene.start('House')
             // }
         };
         // eventsCenter.on('classSelect', function(playerChange){
@@ -319,7 +319,7 @@ class Mains extends Phaser.Scene {
                 this.scene.start('Cats')
             } else if (catBossDefeated === false && firstPlayCat === false) {
                 console.log(dahliaBossDefeated)
-                this.scene.switch('Cats')
+                this.scene.start('Cats')
             }
         })
         this.input.keyboard.on('keydown-F', () => {

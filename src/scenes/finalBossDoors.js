@@ -120,7 +120,7 @@ class CatDoor extends Phaser.Scene {
                     this.scene.start ('Cats')
                  } else if (catBossDefeated === false && firstPlayCat === false ) {
                      console.log(catBossDefeated)
-                     this.scene.switch('Cats')
+                     this.scene.start('Cats')
                  } 
             };
             let MainRoom = () => {

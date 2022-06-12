@@ -76,7 +76,7 @@ class Lucass extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         // this.input.keyboard.on('keydown-R', () => {
         //     // console.log('R button pressed');
-        //     this.scene.switch('Mains')
+        //     this.scene.start('Mains')
         // }, this);
 
         // collider only takes in two parameters
@@ -172,7 +172,7 @@ class Lucass extends Phaser.Scene {
                 if (player.data.get('hp') < 1) {
                     boss.data.set('hp', 100);
                     player.data.set('hp', 20);
-                    this.scene.switch('Mains')
+                    this.scene.start('Mains')
                 }
                 // TODO: make a display for damage dealt
                 console.log(player.data.get('hp'))
@@ -180,7 +180,7 @@ class Lucass extends Phaser.Scene {
             } else {
                 // TODO: maybe give them a nice animation for leveling up
                 eventsCenter.emit('lucas-defeated')
-                this.scene.switch('Mains')
+                this.scene.start('Mains')
             }
         }
 

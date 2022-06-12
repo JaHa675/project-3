@@ -154,13 +154,13 @@ class House extends Phaser.Scene {
             "Joegrammers",
             "101 Manatee Jokes",
             "Please don't try to find out where I live. Please.",
-            "what specifically is the issue? Include screenshots and code snippets. What steps have you taken to solve said problem?",
+            "What specifically is the issue? Include screenshots and code snippets. What steps have you taken to solve said problem?",
             "We're coming to the end of an era.",
             "Snaps for them",
             "Oop I wasn't recording"
         
         ]
-        var joeSays = this.add.text(635,280,"",{fontSize:'10px',fontFamily:'"Press Start 2P"', color:'black',wordWrap: { width: 100 }})
+        var joeSays = this.add.text(635,280,"",{fontSize:'10px',fontFamily:'"Press Start 2P"', color:'black',wordWrap: { width: 100 }, backgroundColor:'lightgrey'}).setPadding(3)
         image =this.add.image(635,280,'MessageBubble').setScale(0.5).setDepth(-1)
 
         Joe.on('pointerdown',function (){
@@ -175,15 +175,15 @@ class House extends Phaser.Scene {
         
 
         }
-    graphics = this.add.graphics();
+    // graphics = this.add.graphics();
 
-    }
+    
     update () {
 
-        graphics.lineStyle(2, 0xffffff, 2);
-        graphics.strokeRectShape(saveYes.getBounds());
+        // graphics.lineStyle(2, 0xffffff, 2);
+        // graphics.strokeRectShape(saveYes.getBounds());
 
-        if (cursors.left.isDown)
+        if (cursors.left.isDown) 
         {
             player.setVelocityX(-160);
 
