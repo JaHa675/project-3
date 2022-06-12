@@ -5,7 +5,7 @@ import warrior from "../assets/characters/Warrior.png"
 import Mage from "../assets/characters/Mage.png"
 import MainScene from "./main"
 import eventsCenter from '../scripts/EventEmitter'
-import { createCharacter, getOneCharacter } from "../utils/API";
+import api from "../utils/API";
 
 var mage;
 var platforms;
@@ -60,14 +60,14 @@ class CharacterSelection extends Scene {
 
         mageSelect.on('pointerdown', function () {
             charClass = 'mage'
-            createCharacter({ character_name: character_name, class: charClass })
+            api.createCharacter({ character_name: character_name, class: charClass })
             goToMain();
             console.log(' mage button pushed');
         })
         
         warriorSelect.on('pointerdown', function () {
             charClass = 'warrior'
-            createCharacter({ character_name: character_name, class: charClass })
+            api.createCharacter({ character_name: character_name, class: charClass })
             goToMain();
             console.log('warrior button pushed');
         })

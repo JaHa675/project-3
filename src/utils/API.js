@@ -6,7 +6,7 @@ const BASE_URL="http://localhost:3001"
 // const BASE_URL="https://battle-trail-backend.herokuapp.com"
 
 
-module.exports = {
+export default {
     getAllUsers:async ()=>{
         const res = await fetch(`${BASE_URL}/api/users`)
         return await res.json()
