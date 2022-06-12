@@ -6,7 +6,7 @@ import mainPlatform from "../assets/backgrounds/MainFloor.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 // import ground from "../assets/backgrounds/BattleOption4ground.png"
-import door from "../assets/backgrounds/My project (7).png"
+import door from "../assets/backgrounds/DoorsTrial1.png"
 import DahliaScene from "./dahliaBoss"
 import JamesScene from "./jamesBoss"
 import LucasScene from "./lucasBoss"
@@ -89,6 +89,7 @@ class Mains extends Phaser.Scene {
                 console.log(this);
                 console.log("pointer")
                 console.log(pointer);
+                console.log(this.x)
                 switch (this.x) {
                     case 70:
                         {

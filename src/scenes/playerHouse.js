@@ -14,7 +14,10 @@ var player;
 var platforms;
 var cursors;
 var doors;
+var graphics;
 var backDoor;
+var saveTitle;
+var saveYes;
 
 class House extends Phaser.Scene {
     constructor () {
@@ -48,6 +51,7 @@ class House extends Phaser.Scene {
 
         player.setCollideWorldBounds(true);
         doors = this.physics.add.staticGroup();
+        // creating one door to use for the final boss
         // for (let i=0; i<1; i++) {
         backDoor =  doors.create(200, 500, 'catPath').refreshBody().setScale(.3).setInteractive();
             backDoor.on('pointerdown', function (pointer) {
@@ -64,6 +68,8 @@ class House extends Phaser.Scene {
                         break;
                 }
             })
+            saveTitle = this.add.text(580, 480, 'WANT TO SAVE?', { fontFamily: '"Press Start 2P"' });
+            saveYes = this.add.text(700, 505, 'YES', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
         // }
         // let groundX = this.sys.game.config.width / 3;
         // // getting a ground to render on the bottom
@@ -104,8 +110,13 @@ class House extends Phaser.Scene {
         let CatPath = () => {
             this.scene.start('CatDoors')
     }
+    graphics = this.add.graphics();
     }
     update () {
+
+        graphics.lineStyle(2, 0xffffff, 2);
+        graphics.strokeRectShape(saveYes.getBounds());
+
         if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
@@ -130,6 +141,7 @@ class House extends Phaser.Scene {
             player.setVelocityY(-330);
         }
     }
+    
 }
 export default House
 
