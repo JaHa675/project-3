@@ -134,7 +134,7 @@ This project was completed as a collaborative group for Project 3 from the Unive
 - [Google Fonts](https://fonts.google.com/) - Pixelated Font
 - [Spriter's Resource](https://www.spriters-resource.com/) - Open Sprite Resource
 - [Battle Backgrounds](https://www.spriters-resource.com/psp/lunarsilverstarharmony/sheet/58073/) - Open Sprite Resource
-- - [Character Sprite Templates](https://www.spriters-resource.com/pc_computer/rpgmakermv/sheet/100167/) - Open Sprite Resource
+- [Character Sprite Templates](https://www.spriters-resource.com/pc_computer/rpgmakermv/sheet/100167/) - Open Sprite Resource
 
 ---
 # Contact
