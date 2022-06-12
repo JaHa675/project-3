@@ -26,8 +26,8 @@ var graphics;
 var selectText;
 var attackText;
 var defendText;
-// var titleText;
-// var fightText;
+var titleText;
+var fightText;
 
 
 class Dahlias extends Phaser.Scene {
@@ -100,7 +100,7 @@ class Dahlias extends Phaser.Scene {
 
         // console.log(currentChar)
 
-        player.data.set('name', 'dog');
+        player.data.set('name', 'Mage');
         player.data.set('class', 'mage');
         player.data.set('level', 4);
         player.data.set('attack', player.data.get('level') * 2);
@@ -146,12 +146,19 @@ class Dahlias extends Phaser.Scene {
 
         });
 
+        this.input.keyboard.on('keydown-R', () => {
+            // console.log('R button pressed');
+            this.scene.start('Mains')
+            this.scene.stop('BattleLog')
+        }, this);
+
 
         selectText = this.add.text(50, 480, 'SELECT:', { fontFamily: '"Press Start 2P"' });
         attackText = this.add.text(50, 505, 'ATTACK', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
         defendText = this.add.text(50, 545, 'DEFEND', { fontFamily: '"Press Start 2P"' }).setPadding(5);
-        // titleText = this.add.text(220, 80, 'DEFEAT THE DAHLIA', { fontFamily: '"Press Start 2P', fontSize: '32px' })
-        // fightText = this.add.text(400, 120, 'FIGHT!', { fontFamily: '"Press Start 2P', fontSize: '32px' })
+        titleText = this.add.text(250, 80, 'CAN YOU DEFEAT THE DAHLIA', { fontFamily: '"Press Start 2P', fontSize: '12px' })
+        fightText = this.add.text(360, 120, 'FIGHT!', { fontFamily: '"Press Start 2P', fontSize: '12px' })
+
 
 
         // Beginnings of code for click functions for attack and defend 

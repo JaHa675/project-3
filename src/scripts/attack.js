@@ -19,6 +19,10 @@ module.exports = {
         const damage = 1;
         return damage
     },
+    brookeAttack: () =>  {
+        const damage = 1;
+        return damage
+    },
     catAttack: () =>  {
         const damage = 1;
         return damage

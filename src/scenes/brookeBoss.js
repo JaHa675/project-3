@@ -58,6 +58,7 @@ class Brookes extends Phaser.Scene {
         this.input.keyboard.on('keydown-R', () => {
             // console.log('R button pressed');
             this.scene.start('Mains')
+            this.scene.stop('BattleLog')
         }, this);
 
         // collider only takes in two parameters
@@ -78,7 +79,7 @@ class Brookes extends Phaser.Scene {
 
         // console.log(currentChar)
 
-        player.data.set('name', 'dog');
+        player.data.set('name', 'Mage');
         player.data.set('class', 'mage');
         player.data.set('level', 2);
         player.data.set('attack', player.data.get('level') * 2);

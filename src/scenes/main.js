@@ -202,7 +202,7 @@ class Mains extends Phaser.Scene {
         //  Please leave console logs for testing purposes as the game grows
         cursors = this.input.keyboard.createCursorKeys();
         let DahliaRoom = () => {
-            const dahliaDoorText = this.add.text(280, 200, 'Fight Dahlia?!', { fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey' })
+            const dahliaDoorText = this.add.text(280, 110, 'Fight Dahlia?!', { fontSize: '30px', fill: 'black' }).setDepth(4)
             timedEvent = this.time.delayedCall(1500, dgOnEvent, [], this);
             function dgOnEvent() {
                 dahliaDoorText.setText('')
@@ -219,19 +219,8 @@ class Mains extends Phaser.Scene {
                 this.scene.launch('BattleLog')
             }
         };
-        let CatRoom = () => {
-            //   console.log(firstPlay, dahliaBossDefeated)
-            if (firstPlayCat !== false) {
-                firstPlayCat = false;
-                console.log("input A test", firstPlayCat);
-                this.scene.start('Cats')
-            } else if (catBossDefeated === false && firstPlayCat === false) {
-                console.log(catBossDefeated)
-                this.scene.start('Cats')
-            }
-        };
         let BrookeRoom = () => {
-            const brookeDoorText = this.add.text(280, 200, 'Fight Brooke?!', { fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey' })
+            const brookeDoorText = this.add.text(280,110, 'Fight Brooke?!', { fontSize: '30px', fill: 'black' }).setDepth(4)
             timedEvent = this.time.delayedCall(1500, blOnEvent, [], this);
             function blOnEvent() {
                 brookeDoorText.setText('')
@@ -249,7 +238,7 @@ class Mains extends Phaser.Scene {
             }
         };
         let JamesRoom = () => {
-            const jamesDoorText = this.add.text(280, 200, 'Fight James?!', { fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey' })
+            const jamesDoorText = this.add.text(280, 110, 'Fight James?!', { fontSize: '30px', fill: 'black' }).setDepth(4)
             timedEvent = this.time.delayedCall(1500, jhOnEvent, [], this);
             function jhOnEvent() {
                 jamesDoorText.setText('')
@@ -267,7 +256,7 @@ class Mains extends Phaser.Scene {
             }
         };
         let LucasRoom = () => {
-            const lucasDoorText = this.add.text(280, 200, 'Fight Lucas?!', { fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey' })
+            const lucasDoorText = this.add.text(280, 110, 'Fight Lucas?!', { fontSize: '30px', fill: 'black' }).setDepth(4)
             timedEvent = this.time.delayedCall(1500, lrOnEvent, [], this);
             function lrOnEvent() {
                 lucasDoorText.setText('')
@@ -285,7 +274,7 @@ class Mains extends Phaser.Scene {
             }
         };
         let HouseRoom = () => {
-            const houseDoorText = this.add.text(260, 200, 'Enter your house?', { fontSize: '30px', fill: 'black', backgroundColor: 'lightgrey' })
+            const houseDoorText = this.add.text(260, 110, 'Enter your house?', { fontSize: '30px', fill: 'black' }).setDepth(4)
             timedEvent = this.time.delayedCall(1500, houseOnEvent, [], this);
             function houseOnEvent() {
                 houseDoorText.setText('')
