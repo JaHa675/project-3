@@ -7,10 +7,10 @@ import bottom from "../assets/backgrounds/JamesGround.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import { mageAttack, warriorAttack, jamesAttack } from '../scripts/attack';
-import { getOneCharacter } from '../utils/API';
+import api from "../utils/API";
 
 
-const currentChar = getOneCharacter(1);
+const currentChar = api.getOneCharacter(1);
 
 
 var player;
