@@ -8,6 +8,7 @@ import floorPlatform from "../assets/backgrounds/RoomPlatform.png"
 import catPath from "../assets/extras/catDoor.png"
 import CatDoors from "./finalBossDoors"
 import KingJoe from "../assets/characters/KingJoe.png"
+import BackToMain from "../assets/backgrounds/exitToMain.png"
 
 
 var player;
@@ -18,6 +19,7 @@ var graphics;
 var backDoor;
 var saveTitle;
 var saveYes;
+var mainDoor;
 
 class House extends Phaser.Scene {
     constructor () {
@@ -30,6 +32,7 @@ class House extends Phaser.Scene {
         this.load.image('floorPlatform',floorPlatform);
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
         this.load.spritesheet('KingJoe', KingJoe, {frameWidth: 48, frameHeight: 48});
+        this.load.image('BackToMain', BackToMain)
     }
     create () {
         platforms = this.physics.add.staticGroup();
@@ -53,6 +56,19 @@ class House extends Phaser.Scene {
         doors = this.physics.add.staticGroup();
         // creating one door to use for the final boss
         // for (let i=0; i<1; i++) {
+        mainDoor = doors.create(90, 180, 'BackToMain').refreshBody().setInteractive().setScale(0.5);
+        mainDoor.on('pointerdown', function (pointer) {
+            console.log("this")
+            console.log(this)
+            switch (this.x) {
+                case 90: {
+                    MainPath();
+                    break;
+                }
+                default:
+                    break;
+            }
+        })
         backDoor =  doors.create(200, 500, 'catPath').refreshBody().setScale(.3).setInteractive();
             backDoor.on('pointerdown', function (pointer) {
                 console.log("this");
@@ -107,9 +123,13 @@ class House extends Phaser.Scene {
 
         player.setDataEnabled();
 
+        let MainPath = () => {
+            this.scene.start('Mains')
+        }
+
         let CatPath = () => {
             this.scene.start('CatDoors')
-    }
+        }
     graphics = this.add.graphics();
     }
     update () {

@@ -289,15 +289,15 @@ class Mains extends Phaser.Scene {
             timedEvent = this.time.delayedCall(1500, houseOnEvent, [], this);
             function houseOnEvent() {
                 houseDoorText.setText('')
-                firstPlayHouse = false;
+                // firstPlayHouse = false;
                 this.scene.start('House')
             }
-            if (firstPlayHouse !== false) {
-                this.input.on('click', houseOnEvent)
-                console.log("input A test", firstPlayHouse);
-            } else if (firstPlayHouse === false) {
-                this.scene.switch('House')
-            }
+            // if (firstPlayHouse !== false) {
+            //     this.input.on('click', houseOnEvent)
+            //     console.log("input A test", firstPlayHouse);
+            // } else if (firstPlayHouse === false) {
+            //     this.scene.switch('House')
+            // }
         };
         // eventsCenter.on('classSelect', function(playerChange){
         //     player.data.set('class',playerChange);
