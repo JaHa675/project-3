@@ -6,7 +6,8 @@ import warrior from "../assets/characters/Warrior.png"
 import catBattle from "../assets/backgrounds/CatBossBackground.jpg"
 import CatSprite from "../assets/characters/CatBoss2.png"
 import bottom from "../assets/backgrounds/CatGround.jpg"
-import { mageAttack, warriorAttack, dahliaAttack } from '../scripts/attack';
+import { mageAttack, warriorAttack, dahliaAttack, catAttack } from '../scripts/attack';
+import eventsCenter from '../scripts/EventEmitter';
 
 var player;
 var platforms;
@@ -157,13 +158,25 @@ class Cats extends Phaser.Scene {
 
         const bossAttack = () => {
             const hp = boss.data.get('hp')
-            // change to catAttack()
-            let damage = dahliaAttack();
-            player.data.set('hp', hp - damage);
-            console.log(player.data.get('hp'))
-            currentTurn = 'player';
+            if (hp > 0) {
+                let damage = catAttack();
+                eventsCenter.emit('bossAttack', damage)
+                player.data.set('hp', player.data.get('hp') - damage);
+                if (player.data.get('hp') < 1) {
+                    boss.data.set('hp', 100);
+                    player.data.set('hp', 20);
+                    this.scene.switch('Credits')
+                    this.scene.stop('BattleLog')
+                }
+                // TODO: make a display for damage dealt
+                console.log(player.data.get('hp'))
+                currentTurn = 'player';
+            } else {
+                // TODO: maybe give them a nice animation for leveling up
+                eventsCenter.emit('dahlia-defeated')
+                this.scene.switch('Mains')
+            }
         }
-
         graphics = this.add.graphics();
     }
     update() {

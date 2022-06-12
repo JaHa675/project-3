@@ -8,7 +8,7 @@ var scrollText;
 
 class Credit extends Phaser.Scene {
     constructor () {
-        super('Credit')
+        super('Credits')
     }
     preload () {
         this.load.image('creditBackground',creditBackground)
@@ -50,24 +50,26 @@ class Credit extends Phaser.Scene {
 }
 
 
-export default function Credits(props) {
-    var game = null;
+export default Credit
+
+// export default function Credits(props) {
+//     var game = null;
 
     
-    useEffect((props) => {
-        const config = {
-            type: Phaser.AUTO,
-            parent: "phaser",
-            width: 800,
-            height: 600,
-            scene: Credit
-        }
-         game = new Phaser.Game(config);
-    },[])
+//     useEffect((props) => {
+//         const config = {
+//             type: Phaser.AUTO,
+//             parent: "phaser",
+//             width: 800,
+//             height: 600,
+//             scene: Credit
+//         }
+//          game = new Phaser.Game(config);
+//     },[])
     
-    return (
-        <div id="battle">{game ? game :""}</div>
+//     return (
+//         <div id="battle">{game ? game :""}</div>
         
-    )
+//     )
     
-}
+// }
