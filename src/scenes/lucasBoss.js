@@ -3,7 +3,7 @@ import Phaser from "phaser";
 // import playGame from "../phaserGame"
 import lucasBattle from "../assets/backgrounds/LucasBackground.png"
 import lucasBoss from "../assets/characters/Lucas.png"
-import bottom from "../assets/backgrounds/LucasGround.png"
+import lucasGround from "../assets/backgrounds/LucasGround.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 
@@ -29,7 +29,7 @@ class Lucass extends Phaser.Scene {
     }
     preload () {
         this.load.image('lucasBattle',lucasBattle)
-        this.load.image('bottom', bottom)
+        this.load.image('lucasGround', lucasGround)
         this.load.spritesheet('mage', mage, {
             frameWidth: 48, frameHeight: 48
         });
@@ -41,7 +41,7 @@ class Lucass extends Phaser.Scene {
         platforms = this.physics.add.staticGroup();
 
         platforms.create(400, 300, 'lucasBattle').setScale(1.5).refreshBody();
-        platforms.create(400, 480, 'bottom').setScale(1.5).refreshBody();
+        platforms.create(400, 480, 'lucasGround').setScale(1.5).refreshBody();
         
         player = this.physics.add.sprite(350, 100, 'mage');
         

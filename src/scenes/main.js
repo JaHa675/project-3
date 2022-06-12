@@ -6,7 +6,7 @@ import mainPlatform from "../assets/backgrounds/MainFloor.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 // import ground from "../assets/backgrounds/BattleOption4ground.png"
-import door from "../assets/backgrounds/My project (7).png"
+import door from "../assets/backgrounds/TheDoorResize.png"
 import DahliaScene from "./dahliaBoss"
 import JamesScene from "./jamesBoss"
 import LucasScene from "./lucasBoss"
@@ -83,12 +83,13 @@ class Mains extends Phaser.Scene {
 
         let doorX = 70;
         for (let i = 0; i < 5; i++) {
-            var door = doors.create(doorX, 300, 'door').refreshBody().setScale(.3).setInteractive();
+            var door = doors.create(doorX, 300, 'door').refreshBody().setScale(1.5).setInteractive();
             door.on('pointerdown', function (pointer) {
                 console.log("this");
                 console.log(this);
                 console.log("pointer")
                 console.log(pointer);
+                console.log(this.x)
                 switch (this.x) {
                     case 70:
                         {

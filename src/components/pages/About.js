@@ -11,7 +11,7 @@ export default function About() {
         <div>
             <div className='infoContainer'>
                 <div className='aboutContainer'>
-                    <h1 className='aboutTitle'>Why We Did this?</h1>
+                    <h1 className='aboutTitle'>Why Make A Game?</h1>
                     <div className='aboutParaContainer'>
                         <h6 className='aboutUsPara'>
                             We wanted to create a fun exiting game that brought us to the early 2000s with pixelated games. As enginners, we liked the thought of a game that combined all of our love for games and challlenged us to create something new.
@@ -24,8 +24,8 @@ export default function About() {
                 </div>
                 <div className='linksContainer'>
                     <div className="gitHubTitle">
-                        <h4>Links to Our GitHub</h4>
-                        <h5 className="subText">Click our Avatars</h5>
+                        <h4>Click our Avatars</h4>
+                        <h5 className="subText">For Links to Our GitHub</h5>
                     </div>
                     </div>
                     <div className="characterArea">
