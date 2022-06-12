@@ -9,7 +9,11 @@ export default function Landing () {
                 <div style={{height: "250px"}}>
                 <img src={logo} alt ="wait until the page loads" className="battleLogo"/>
                 </div>
-                <a href='/login'><button className="playNow">Play Now</button></a>
+                <div className="landingBtnContainer">
+                    <a href='/about'><button className="playNow landingBTNL ">About Us</button></a>
+                    <hr></hr>
+                    <a href='/login'><button className="playNow landingBTNR">Play Now</button></a>
+                </div>
             </div>
         </div>
     );
