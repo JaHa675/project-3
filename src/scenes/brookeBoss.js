@@ -4,7 +4,7 @@ import Phaser from "phaser";
 import mage from "../assets/characters/Mage.png"
 import blBattle from "../assets/backgrounds/BrookeBackground.png"
 import BrookeBoss from '../assets/characters/Brooke.png'
-import bottom from "../assets/backgrounds/BrookeGround.png"
+import brookeBottom from "../assets/backgrounds/BrookeGround.png"
 import { mageAttack, warriorAttack, brookeAttack } from '../scripts/attack';
 
 var player;
@@ -26,14 +26,14 @@ class Brookes extends Phaser.Scene {
     preload () {
         this.load.image('blBattle',blBattle)
         this.load.spritesheet('BrookeBoss',BrookeBoss,{frameWidth: 48, frameHeight: 48});
-        this.load.image("bottom", bottom)
+        this.load.image("brookeBottom", brookeBottom)
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
     }
     create () {
 
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'blBattle').setScale(1.5).refreshBody();
-        platforms.create(400, 480, 'bottom').setScale(1.5).refreshBody();
+        platforms.create(400, 480, 'brookeBottom').setScale(1.5).refreshBody();
 
         boss = this.physics.add.sprite(500, 200, 'BrookeBoss').setBounce(0.2).setCollideWorldBounds(true).setScale(2);
         // player.setCollideWorldBounds(true);
@@ -42,11 +42,11 @@ class Brookes extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         // makes the boss touch the ground
         this.physics.add.collider(boss, platforms);
-        // this.physics.add.collider(boss, bottom);
+        // this.physics.add.collider(boss, brookeBottom);
 
         // makes the boss touch the ground
         this.physics.add.collider(player, platforms);
-        // this.physics.add.collider(player, bottom);
+        // this.physics.add.collider(player, brookeBottom);
         // console.log(currentChar)
 
             // Scene change handler currently on key, needs to be onClick or bound condtionally
@@ -60,8 +60,8 @@ class Brookes extends Phaser.Scene {
         }, this);
 
         // collider only takes in two parameters
-        this.physics.add.collider(player, bottom);
-        this.physics.add.collider(boss, bottom);
+        this.physics.add.collider(player, brookeBottom);
+        this.physics.add.collider(boss, brookeBottom);
         // this.physics.add.collider(player, platforms);
         // this.physics.add.collider(boss, platforms);
 

@@ -3,21 +3,29 @@ import Phaser from "phaser";
 import housebg from "../assets/backgrounds/Room.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
-import floor from "../assets/backgrounds/RoomFloor.png"
+import safeHouseBottom from "../assets/backgrounds/RoomFloor.png"
 import floorPlatform from "../assets/backgrounds/RoomPlatform.png"
 import catPath from "../assets/extras/catDoor.png"
 import CatDoors from "./finalBossDoors"
 import KingJoe from "../assets/characters/KingJoe.png"
 import MessageBubble from "../assets/extras/MessageBubble.png"
+import BackToMain from "../assets/backgrounds/exitToMain.png"
+
 
 
 var player;
 var platforms;
 var cursors;
 var doors;
+var graphics;
 var backDoor;
+
 var Joe;
 var image;
+
+var saveTitle;
+var saveYes;
+var mainDoor;
 
 class House extends Phaser.Scene {
     constructor () {
@@ -26,15 +34,19 @@ class House extends Phaser.Scene {
     preload () {
         this.load.image('catPath', catPath)
         this.load.image('housebg',housebg);
-        this.load.image('floor',floor);
+        this.load.image('safeHouseBottom',safeHouseBottom);
         this.load.image('floorPlatform',floorPlatform);
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
         this.load.spritesheet('KingJoe', KingJoe, {frameWidth: 48, frameHeight: 48});
+
         this.load.image('MessageBubble',MessageBubble)
+
+        this.load.image('BackToMain', BackToMain)
+
     }
     create () {
         platforms = this.physics.add.staticGroup();
-        platforms.create(400, 300, 'floor').setScale(2).refreshBody();
+        platforms.create(400, 300, 'safeHouseBottom').setScale(2).refreshBody();
         platforms.create(400, 560, 'floorPlatform').setScale(1.5).refreshBody();
 
         const layer =this.add.layer();
@@ -53,7 +65,21 @@ class House extends Phaser.Scene {
 
         player.setCollideWorldBounds(true);
         doors = this.physics.add.staticGroup();
+        // creating one door to use for the final boss
         // for (let i=0; i<1; i++) {
+        mainDoor = doors.create(90, 180, 'BackToMain').refreshBody().setInteractive().setScale(0.5);
+        mainDoor.on('pointerdown', function (pointer) {
+            console.log("this")
+            console.log(this)
+            switch (this.x) {
+                case 90: {
+                    MainPath();
+                    break;
+                }
+                default:
+                    break;
+            }
+        })
         backDoor =  doors.create(200, 500, 'catPath').refreshBody().setScale(.3).setInteractive();
             backDoor.on('pointerdown', function (pointer) {
                 console.log("this");
@@ -69,6 +95,8 @@ class House extends Phaser.Scene {
                         break;
                 }
             })
+            saveTitle = this.add.text(580, 480, 'WANT TO SAVE?', { fontFamily: '"Press Start 2P"' });
+            saveYes = this.add.text(700, 505, 'YES', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
         // }
         // let groundX = this.sys.game.config.width / 3;
         // // getting a ground to render on the bottom
@@ -106,8 +134,13 @@ class House extends Phaser.Scene {
 
         player.setDataEnabled();
 
+        let MainPath = () => {
+            this.scene.start('Mains')
+        }
+
         let CatPath = () => {
             this.scene.start('CatDoors')
+
     }
 
         let joeQuotes =[
@@ -140,8 +173,16 @@ class House extends Phaser.Scene {
 
         });
         
+
+        }
+    graphics = this.add.graphics();
+
     }
     update () {
+
+        graphics.lineStyle(2, 0xffffff, 2);
+        graphics.strokeRectShape(saveYes.getBounds());
+
         if (cursors.left.isDown)
         {
             player.setVelocityX(-160);
@@ -166,6 +207,7 @@ class House extends Phaser.Scene {
             player.setVelocityY(-330);
         }
     }
+    
 }
 export default House
 

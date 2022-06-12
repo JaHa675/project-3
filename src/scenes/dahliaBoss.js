@@ -12,7 +12,7 @@ import warrior from "../assets/characters/Warrior.png"
 
 import bridge from "../assets/extras/TomatoPlatform.png"
 import { mageAttack, warriorAttack, dahliaAttack } from '../scripts/attack';
-import { getOneCharacter } from '../utils/API';
+import api from "../utils/API";
 import eventsCenter from '../scripts/EventEmitter';
 
 // const currentChar = ;

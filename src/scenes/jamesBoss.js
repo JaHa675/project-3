@@ -3,14 +3,14 @@ import Phaser from "phaser";
 // import playGame from "../phaserGame"
 import BattleBackground from "../assets/backgrounds/JamesBackground.png"
 import jamesBoss from "../assets/characters/James.png"
-import bottom from "../assets/backgrounds/JamesGround.png"
+import jamesGround from "../assets/backgrounds/JamesGround.png"
 import mage from "../assets/characters/Mage.png"
 import warrior from "../assets/characters/Warrior.png"
 import { mageAttack, warriorAttack, jamesAttack } from '../scripts/attack';
-import { getOneCharacter } from '../utils/API';
+import api from "../utils/API";
 
 
-const currentChar = getOneCharacter(1);
+const currentChar = api.getOneCharacter(1);
 
 
 var player;
@@ -28,7 +28,7 @@ class Jamess extends Phaser.Scene {
     }
     preload() {
         this.load.image('BattleBackground', BattleBackground)
-        this.load.image('bottom', bottom)
+        this.load.image('jamesGround', jamesGround)
         this.load.spritesheet('mage', mage, {
             frameWidth: 48, frameHeight: 48
         });
@@ -41,7 +41,7 @@ class Jamess extends Phaser.Scene {
 
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 300, 'BattleBackground').setScale(1.5).refreshBody();
-        platforms.create(400, 465, 'bottom').setScale(1.5).refreshBody();
+        platforms.create(400, 465, 'jamesGround').setScale(1.5).refreshBody();
 
         player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
         player.setCollideWorldBounds(true).setBounce(0.2);

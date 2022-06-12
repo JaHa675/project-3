@@ -27,6 +27,7 @@ body {
   justify-content: center;
   color: goldenrod;
   border: dashed 3px;
+  background: rgba(93, 132, 156, 0.806) !important;
 }
 .aboutTitle {
   margin-top: 5%;
@@ -39,6 +40,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
 }
 .linksContainer {
   display: flex;
@@ -47,6 +49,7 @@ body {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
 }
 .githubLinks {
   display: flex;
@@ -66,6 +69,16 @@ body {
   left:0;
 }
 
+.gitHubTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.subText {
+  position: relative;
+  right: 6%;
+}
 
 /* #buttonBox {
 
@@ -86,6 +99,7 @@ body {
 }
 
 /* ----------------Sprite CSS---------------- */
+/* make sure that it is known that the sprite sheet can create white space at the bottom  */
 .characterArea {
  display: flex;
  margin-left: 25%;
