@@ -76,7 +76,7 @@ class Jamess extends Phaser.Scene {
         let JamesBossDefeated = false
         this.input.keyboard.on('keydown-R', () => {
             // console.log('R button pressed');
-            this.scene.switch('Mains')
+            this.scene.start('Mains')
         }, this);
 
         // collider only takes in two parameters
@@ -175,7 +175,7 @@ class Jamess extends Phaser.Scene {
                 if (player.data.get('hp') < 1) {
                     boss.data.set('hp', 100);
                     player.data.set('hp', 20);
-                    this.scene.switch('Mains')
+                    this.scene.start('Mains')
                     this.scene.stop('BattleLog')
                 }
                 // TODO: make a display for damage dealt
@@ -184,7 +184,7 @@ class Jamess extends Phaser.Scene {
             } else {
                 // TODO: maybe give them a nice animation for leveling up
                 eventsCenter.emit('dahlia-defeated')
-                this.scene.switch('Mains')
+                this.scene.start('Mains')
             }
         }
 

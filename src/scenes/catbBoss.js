@@ -76,7 +76,7 @@ class Cats extends Phaser.Scene {
         // let dahliaBossDefeated = false
         this.input.keyboard.on('keydown-R', () => {
             // console.log('R button pressed');
-            this.scene.switch('Mains')
+            this.scene.start('Mains')
         }, this);
         
         // collider only takes in two parameters
@@ -165,7 +165,7 @@ class Cats extends Phaser.Scene {
                 if (player.data.get('hp') < 1) {
                     boss.data.set('hp', 100);
                     player.data.set('hp', 20);
-                    this.scene.switch('Credits')
+                    this.scene.start('Credits')
                     this.scene.stop('BattleLog')
                 }
                 // TODO: make a display for damage dealt
@@ -174,7 +174,7 @@ class Cats extends Phaser.Scene {
             } else {
                 // TODO: maybe give them a nice animation for leveling up
                 eventsCenter.emit('dahlia-defeated')
-                this.scene.switch('Mains')
+                this.scene.start('Mains')
             }
         }
         graphics = this.add.graphics();
