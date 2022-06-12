@@ -25,6 +25,23 @@
     justify-content: center;
     align-items: center;
 }
+.landingBtnContainer {
+    display: flex;
+    justify-content: space-around;
+    
+}
+.landingBTNL {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    right: 8%;
+}
+.landingBTNR {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: 8%;
+}
 button:hover {
     color: #322b5b;
     transition: ease 0.5s ;
