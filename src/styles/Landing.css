@@ -50,3 +50,27 @@ button:hover {
 a {
     text-decoration: none;
 }
+
+canvas {
+    margin-left: 23%;
+    margin-top: 6%;
+  }
+
+
+  
+@media screen and (max-width: 768px) {
+    canvas {
+        margin-left: 3%;
+        margin-top: 1%;
+        width: 95%;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  canvas{  
+    margin-left: 1%;
+    height: 95%;
+   margin-bottom: 5%;
+  }
+}
+
