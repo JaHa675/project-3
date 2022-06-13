@@ -7,7 +7,7 @@ const publicPath = path.join(__dirname,'client', 'build', 'index.html');
 console.log(publicPath);
 
 const port = process.env.PORT || 3000;
-app.use(express.static(publicPath));
+app.use(express.static(path.join(__dirname,'client', 'build')));
 app.get('*', (req, res) => {
     res.sendFile(publicPath);
     console.log(publicPath, "do you see me");
