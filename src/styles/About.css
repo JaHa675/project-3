@@ -142,11 +142,6 @@ body {
   top: calc(-96px * var(--pixel-size));
 }
 
-canvas {
-  margin-left: 23%;
-  margin-top: 6%;
-}
-
 
 @keyframes moveSpritesheet {
   from {
