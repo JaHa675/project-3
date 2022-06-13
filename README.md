@@ -1,70 +1,173 @@
-# Getting Started with Create React App
+# [Project #3 - Battle Trail](https://github.com/JaHa675/project-3)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Badge](https://img.shields.io/badge/license-MIT-blue)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+# Description
 
-### `npm start`
+Welcome to the Battle Trail, a fun & exiting 2D RPG that is heavily inspired by 2000s pixelated games. As enginners, we liked the thought of a game that combined all of our love for games and challlenged us to create something new. We used technologies like React, JavaScript, and Phaser Game Engine to bring our idea of a quirky, sprite dominated game to life. Throughout the game you will see lots of pixel art from open soure sprite resources and characters that are based off the creators. We hope that you find joy in the little things will working your way through Battle Trail!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Check out our deployed project [here](https://github.com/JaHa675/project-3)! 
 
-### `npm test`
+&nbsp;
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
+# Table of Contents
 
-### `npm run build`
+  - [Description](#description)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Technologies Used](#technologies-used)
+  - [Demo](#demo)
+  - [Screenshots](#screenshots)
+  - [Contributing](#contributing)
+  - [Contact](#contact)
+  - [License](#license)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+&nbsp;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
+# Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Instructions: 
+1. Fork the application front end repository & the application back end repository from GitHub and clone this project to your machine.
+2. Open the projects with your preferred text-editor, such as VS code.
+3. Prerequisite installations: Node.js, MySQL, React.
+4. This project includes a `package.json` file that specifies dependencies for this project, which can be installed by running the command `"npm install"`.
 
-### `npm run eject`
+&nbsp;
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
+# Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Once the front end repository has been installed:
+1. Open the project file within your terminal
+2. Run command `"npm install"` to download all of the npm packages and their dependencies required to run the application.
+1. Run command `"npm run start"` and React will start a local server at localhost:3001 on your default browser.
+2. Open the back end repository and repeat steps 1 & 2. Running the server for both the front end and back end are necessary for use.
+3. Sign up as a new user and play through the game!
+4. When finished, run command `CONTROL-C` in the terminal to end the session.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+&nbsp;
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
+# Technologies Used
 
-## Learn More
+General Technologies: 
+- [HTML](https://html.com/)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [Javascript](https://www.javascript.com/)
+- [Node](https://www.npmjs.com/package/node)
+- [Heroku](https://www.heroku.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [Phaser](https://phaser.io/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+NPM Packages
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+- [nodemon](https://www.npmjs.com/package/nodemon) 
+- [Express](https://www.npmjs.com/package/express)
 
-### Code Splitting
+&nbsp;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+&nbsp;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
+# Demo
 
-### Making a Progressive Web App
+## Landing Page
+![Landing Page and About Us Demo](./src/assets/ReadMeImages/Landing_About.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Login/ SignUp
+![Login/ SignUp](./src/assets/ReadMeImages/Login_SignUp.gif)
 
-### Advanced Configuration
+## Character Selection Demo
+![Character Selection Demo](./src/assets/ReadMeImages/CharacterSelection_Main.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Battle Selection and Attack Demo
+![Updating Account](./src/assets/ReadMeImages/BattleSelection_Attack.gif)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+&nbsp;
 
-### `npm run build` fails to minify
+---
+# Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Landing Page
+![Landing](./src/assets/ReadMeImages/LandingPage.JPG)
+
+## Login/ Sign Up Page
+![Login/ Sign Up Page](./src/assets/ReadMeImages/Login.JPG)
+
+## Main Path
+![Main Path](./src/assets/ReadMeImages/Main.JPG)
+
+## About Us
+![About Us](./src/assets/ReadMeImages/AboutUs.JPG)
+
+## Character Selection
+![Character Selection](./src/assets/ReadMeImages/CharacterSelection.JPG)
+
+## Safe House
+![Safe House](./src/assets/ReadMeImages/SafeHouse.JPG)
+
+## Credits
+![Credits](./src/assets/ReadMeImages/Credits.JPG)
+
+&nbsp;
+
+---
+# Contributing
+
+This project was completed as a collaborative group for Project 3 from the University of Washington Full Stack Flex Coding Bootcamp. If you would like to contribute, please feel free to contact any of the team members with questions or comments. Our github links and emails can be found below.
+
+&nbsp;
+
+---
+# Credits
+- [Aseprite](https://www.aseprite.org/) - Spritesheet Creator
+- [Google Fonts](https://fonts.google.com/) - Pixelated Font
+- [Spriter's Resource](https://www.spriters-resource.com/) - Open Sprite Resource
+- [Battle Backgrounds](https://www.spriters-resource.com/psp/lunarsilverstarharmony/sheet/58073/) - Open Sprite Resource
+- [Character Sprite Templates](https://www.spriters-resource.com/pc_computer/rpgmakermv/sheet/100167/) - Open Sprite Resource
+
+---
+# Contact
+
+If you have any questions feel free to contact our team:
+- Dahlia Graves | [Github](https://github.com/DahliaGRV) | [email](Dahliag@uw.edu)
+- Lucas Roman | [Github](https://github.com/remotemana) | [email](lucas.e.roman@gmail.com)
+- James Harding | [Github](https://github.com/JaHa675) | [email](jamesharding675@gmail.com)
+- Brooke Love | [Github](https://github.com/brookelove) | [email](brookelovedevelops@gmail.com)
+
+&nbsp;
+
+---
+## License
+
+[MIT License](./LICENSE) 
+
+Copyright (c) 2022
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
