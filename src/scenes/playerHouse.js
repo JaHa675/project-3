@@ -10,6 +10,7 @@ import CatDoors from "./finalBossDoors"
 import KingJoe from "../assets/characters/KingJoe.png"
 import MessageBubble from "../assets/extras/MessageBubble.png"
 import BackToMain from "../assets/backgrounds/exitToMain.png"
+import arrow1 from '../assets/extras/arrow3.png'
 
 
 
@@ -23,9 +24,14 @@ var backDoor;
 var Joe;
 var image;
 
-var saveTitle;
+// var saveTitle;
 var saveYes;
 var mainDoor;
+
+var arrowLeft;
+var arrowLeftFlag;
+var arrowRight;
+var arrowRightFlag;
 
 class House extends Phaser.Scene {
     constructor () {
@@ -38,6 +44,7 @@ class House extends Phaser.Scene {
         this.load.image('floorPlatform',floorPlatform);
         this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
         this.load.spritesheet('KingJoe', KingJoe, {frameWidth: 48, frameHeight: 48});
+        this.load.image("arrow", arrow1)
 
         this.load.image('MessageBubble',MessageBubble)
 
@@ -56,6 +63,18 @@ class House extends Phaser.Scene {
         layer.add(this.make.image({x:400, y:400, key:'housebg'},false));
 
         // layer.add(this.add.text(25, 50, 'Player House', { fontFamily: 'Press Start 2P', fontSize: 300, color: 'goldenrod' }))
+
+        arrowLeft = this.add.image(100, 500, "arrow").setScale(.1).setDepth(6);
+        arrowLeft.setInteractive();
+        arrowLeft.on('pointerdown', () => {arrowLeftFlag = true; console.log(arrowLeftFlag)});
+        arrowLeft.on('pointerup', () => {arrowLeftFlag = false; console.log(arrowLeftFlag)});
+        arrowLeft.flipX=true;
+        
+        arrowRight = this.add.image(225, 500, "arrow").setScale(.1);
+        arrowRight.setInteractive();
+        arrowRight.on('pointerdown', () => {arrowRightFlag = true; console.log(arrowRightFlag)});
+        arrowRight.on('pointerup', () => {arrowRightFlag = false; console.log(arrowRightFlag)});
+
 
         Joe =this.add.sprite(600,300,'KingJoe').setScale(2);
         Joe.setInteractive();
@@ -80,14 +99,14 @@ class House extends Phaser.Scene {
                     break;
             }
         })
-        backDoor =  doors.create(200, 500, 'catPath').refreshBody().setScale(.3).setInteractive();
+        backDoor =  doors.create(450, 500, 'catPath').refreshBody().setScale(.3).setInteractive();
             backDoor.on('pointerdown', function (pointer) {
                 console.log("this");
                 console.log(this);
                 console.log("pointer");
                 console.log(pointer);
                 switch (this.x) {
-                    case 200: {
+                    case 450: {
                         CatPath()
                         break;
                     }
@@ -95,8 +114,8 @@ class House extends Phaser.Scene {
                         break;
                 }
             })
-            saveTitle = this.add.text(580, 480, 'WANT TO SAVE?', { fontFamily: '"Press Start 2P"' });
-            saveYes = this.add.text(700, 505, 'YES', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
+            // saveTitle = this.add.text(580, 480, 'WANT TO SAVE?', { fontFamily: '"Press Start 2P"' });
+            // saveYes = this.add.text(700, 505, 'YES', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
         // }
         // let groundX = this.sys.game.config.width / 3;
         // // getting a ground to render on the bottom
@@ -174,22 +193,22 @@ class House extends Phaser.Scene {
         });
         
 
-        graphics = this.add.graphics();
+        // graphics = this.add.graphics();
         }
 
     
     update () {
 
-        graphics.lineStyle(2, 0xffffff, 2);
-        graphics.strokeRectShape(saveYes.getBounds());
+        // graphics.lineStyle(2, 0xffffff, 2);
+        // graphics.strokeRectShape(saveYes.getBounds());
 
-        if (cursors.left.isDown) 
+        if (cursors.left.isDown || arrowLeftFlag === true) 
         {
             player.setVelocityX(-160);
 
             player.anims.play('left', true);
         }
-        else if (cursors.right.isDown)
+        else if (cursors.right.isDown || arrowRightFlag === true)
         {
             player.setVelocityX(160);
 

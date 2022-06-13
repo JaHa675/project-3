@@ -15,6 +15,8 @@ import CatDoors from "./finalBossDoors"
 import House from "./playerHouse"
 import eventsCenter from '../scripts/EventEmitter'
 import Dialogue from '../assets/extras/charDialogue1.png'
+import arrow from '../assets/extras/arrow3.png'
+// import { Grid } from "matter";
 // import React, {useEffect,useState} from 'react';
 
 var player;
@@ -24,8 +26,12 @@ var doors;
 var door1;
 var dialogueImage;
 
-var firstPlayDahlia = true;
+var arrowLeft;
+var arrowLeftFlag;
+var arrowRight;
+var arrowRightFlag;
 
+var firstPlayDahlia = true;
 let dahliaBossDefeated = false;
 var firstPlayCat = true;
 let catBossDefeated = false;
@@ -41,6 +47,7 @@ let houseBossDefeated = false;
 var timedEvent;
 // MAIN acts as the directory for the other scenes
 
+var color = 0xffffff;
 class Mains extends Phaser.Scene {
     constructor() {
         super('Mains')
@@ -50,7 +57,7 @@ class Mains extends Phaser.Scene {
         this.character_name = data.character_name;
         this.level = data.level;
     }
-
+    
     preload() {
         this.load.image('mainBackground', mainBackground)
         this.load.image('door', door)
@@ -59,6 +66,7 @@ class Mains extends Phaser.Scene {
         this.load.image("mainFloor", mainFloor)
         this.load.image("mainPlatform", mainPlatform)
         this.load.image("charDialogue", Dialogue)
+        this.load.image("arrow", arrow)
     }
     create() {
         this.character = ""
@@ -68,8 +76,18 @@ class Mains extends Phaser.Scene {
         platforms.create(400, 800, 'mainPlatform').refreshBody();
         platforms.create(400, 540, 'mainFloor').refreshBody();
         
-      
+        arrowLeft = this.add.image(100, 500, "arrow").setScale(.1);
+        arrowLeft.setInteractive();
+        arrowLeft.on('pointerdown', () => {arrowLeftFlag = true; console.log(arrowLeftFlag)});
+        arrowLeft.on('pointerup', () => {arrowLeftFlag = false; console.log(arrowLeftFlag)});
+        arrowLeft.flipX=true;
+        
+        arrowRight = this.add.image(225, 500, "arrow").setScale(.1);
+        arrowRight.setInteractive();
+        arrowRight.on('pointerdown', () => {arrowRightFlag = true; console.log(arrowRightFlag)});
+        arrowRight.on('pointerup', () => {arrowRightFlag = false; console.log(arrowRightFlag)});
 
+        
         const layer =this.add.layer();
         console.log(layer);
         // adding the background image as a layer above the floor
@@ -117,7 +135,7 @@ class Mains extends Phaser.Scene {
                             break;
                         }
 
-                    default:
+                        default:
                         break;
                 }
             });
@@ -136,24 +154,24 @@ class Mains extends Phaser.Scene {
 
         // getting the player to render 
         const mage = () => {
-            console.log('before')
+            
             player.setTexture('mage');
-            console.log('after')
+          
         }
         const warrior = () => {
             console.log(this.charClass)
-            console.log('before function warrior')
+           
             player.setTexture('warrior');
-            console.log('after function warrior')
+           
         }
         if (player.data.get('class') === 'mage') {
-            console.log('before')
+            
             mage();
-            console.log('after')
+           
         } else {
-            console.log('before if statement warrior')
+           
             warrior();
-            console.log('after if statement warrior')
+         
         }
 
         // getting a ground to render on the bottom
@@ -335,12 +353,13 @@ class Mains extends Phaser.Scene {
 
     update() {
 
-        if (cursors.left.isDown) {
+
+        if (cursors.left.isDown || arrowLeftFlag === true) {
             player.setVelocityX(-160);
 
             player.anims.play('left', true);
         }
-        else if (cursors.right.isDown) {
+        else if (cursors.right.isDown || arrowRightFlag === true) {
             player.setVelocityX(160);
 
             player.anims.play('right', true);
