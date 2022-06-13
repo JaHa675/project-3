@@ -8,6 +8,7 @@ import finalPlatform from "../assets/backgrounds/MainPlatform.png"
 import fancyDoor from "../assets/backgrounds/TransparentDoor.png"
 import Mains from "./main";
 import Dialogue from '../assets/extras/charDialogue1.png'
+import arrow2 from '../assets/extras/arrow3.png'
 
 // base variables for the door
 var player;
@@ -22,6 +23,13 @@ let mainBossDefeated = false;
 var timedEvent;
 var dialogueImage;
 
+var arrowLeft;
+var arrowLeftFlag;
+var arrowRight;
+var arrowRightFlag;
+
+
+
 class CatDoor extends Phaser.Scene {
     constructor () {
         super('CatDoors')
@@ -34,6 +42,8 @@ class CatDoor extends Phaser.Scene {
         this.load.image("finalGround", finalGround)
         this.load.image("finalPlatform", finalPlatform)
         this.load.image("charDialogue", Dialogue)
+        this.load.image("arrow", arrow2)
+
     }
     create () {
         this.character ="";
@@ -48,6 +58,17 @@ class CatDoor extends Phaser.Scene {
         // adding the background image as a layer above the floor
 
         layer.add(this.make.image({x:400, y:500, key:'finalBackground'},false).setScale(1.5));
+
+    arrowLeft = this.add.image(100, 500, "arrow").setScale(.1).setDepth(6);
+    arrowLeft.setInteractive();
+    arrowLeft.on('pointerdown', () => {arrowLeftFlag = true; console.log(arrowLeftFlag)});
+    arrowLeft.on('pointerup', () => {arrowLeftFlag = false; console.log(arrowLeftFlag)});
+    arrowLeft.flipX=true;
+
+    arrowRight = this.add.image(225, 500, "arrow").setScale(.1);
+    arrowRight.setInteractive();
+    arrowRight.on('pointerdown', () => {arrowRightFlag = true; console.log(arrowRightFlag)});
+    arrowRight.on('pointerup', () => {arrowRightFlag = false; console.log(arrowRightFlag)});
 
         //creating the 2 doors 
         finalDoors = this.physics.add.staticGroup();
@@ -146,13 +167,13 @@ class CatDoor extends Phaser.Scene {
         this.physics.add.collider(player, platforms);
     }
     update () {
-        if (cursors.left.isDown)
+        if (cursors.left.isDown || arrowLeftFlag === true)
         {
             player.setVelocityX(-160);
 
             player.anims.play('left', true);
         }
-        else if (cursors.right.isDown)
+        else if (cursors.right.isDown || arrowRightFlag === true)
         {
             player.setVelocityX(160);
 
