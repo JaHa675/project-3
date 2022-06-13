@@ -1,4 +1,4 @@
-# [Project #3 - Battle Trail](https://github.com/JaHa675/project-3)
+# [Project #3 - Battle Trail]([https://github.com/JaHa675/project-3](https://battle-trail.herokuapp.com))
 
 ![Badge](https://img.shields.io/badge/license-MIT-blue)
 
@@ -9,7 +9,7 @@
 Welcome to the Battle Trail, a fun & exiting 2D RPG that is heavily inspired by 2000s pixelated games. As enginners, we liked the thought of a game that combined all of our love for games and challlenged us to create something new. We used technologies like React, JavaScript, and Phaser Game Engine to bring our idea of a quirky, sprite dominated game to life. Throughout the game you will see lots of pixel art from open soure sprite resources and characters that are based off the creators. We hope that you find joy in the little things will working your way through Battle Trail!
 
 
-Check out our deployed project [here](https://github.com/JaHa675/project-3)! 
+Check out our deployed project [here]([https://github.com/JaHa675/project-3](https://battle-trail.herokuapp.com))! 
 
 &nbsp;
 
