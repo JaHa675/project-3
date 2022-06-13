@@ -6,6 +6,8 @@ import Mage from "../assets/characters/Mage.png"
 import MainScene from "./main"
 import eventsCenter from '../scripts/EventEmitter'
 import api from "../utils/API";
+import tokenParse from "../utils/tokenParse"
+
 
 var mage;
 var platforms;
@@ -15,8 +17,9 @@ var mageSelect;
 var warriorSelect;
 var text6;
 let charClass;
-//  THIS IS A TEMP ASSIGNED HARD CODED VARIABLE FOR THE CHARACTERS NAME WE SHOULD ADD A WAY FOR THEM TO SET THEIR NAME
-let character_name ='tingle'
+// let character_name = 'sadsad'
+let character_name = localStorage.getItem('user_name');
+console.log(character_name)
 
 class CharacterSelection extends Scene {
     constructor() {

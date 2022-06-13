@@ -44,7 +44,6 @@ export default function Login (props) {
             user_name:"",
             password:""
         })
-        window.location= "/main"
     }
 
     const handleModalChangeName  = e => {
@@ -90,7 +89,7 @@ export default function Login (props) {
                     </Modal.Body>
                     <Modal.Footer>
                     <div className="signUpBTN">
-                     <a href='/main'> <Button variant="dark" className="playNow" style={{padding: "10px"}} onClick={signupSubmit}>Submit</Button></a>
+                    <Button variant="dark" className="playNow" style={{padding: "10px"}} onClick={signupSubmit}>Submit</Button>
 
                     </div>
                     </Modal.Footer>

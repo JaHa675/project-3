@@ -11,11 +11,12 @@ import warrior from "../assets/characters/Warrior.png"
 // import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 
 import bridge from "../assets/extras/TomatoPlatform.png"
-import { mageAttack, warriorAttack, dahliaAttack } from '../scripts/attack';
+import { mageAttack, warriorAttack, dahliaAttack, defend } from '../scripts/attack';
 import api from "../utils/API";
 import eventsCenter from '../scripts/EventEmitter';
 
 // const currentChar = ;
+
 
 
 var player;
@@ -30,9 +31,15 @@ var titleText;
 var fightText;
 
 
+
 class Dahlias extends Phaser.Scene {
     constructor() {
         super('Dahlias')
+    }
+    init(data) {
+        this.charClass = data.charClass;
+        this.character_name = data.character_name;
+        this.level = data.level;
     }
     preload() {
         this.load.image('BattleBackground', BattleBackground)
@@ -100,7 +107,7 @@ class Dahlias extends Phaser.Scene {
 
         // console.log(currentChar)
 
-        player.data.set('name', 'Mage');
+        player.data.set('name', this.character_name);
         player.data.set('class', 'mage');
         player.data.set('level', 4);
         player.data.set('attack', player.data.get('level') * 2);
@@ -143,11 +150,9 @@ class Dahlias extends Phaser.Scene {
                 'Attack: ' + player.data.get('attack'),
                 'Hp: ' + player.data.get('hp')
             ]);
-
         });
 
         this.input.keyboard.on('keydown-R', () => {
-            // console.log('R button pressed');
             this.scene.start('Mains')
             this.scene.stop('BattleLog')
         }, this);
@@ -155,7 +160,7 @@ class Dahlias extends Phaser.Scene {
 
         selectText = this.add.text(50, 480, 'SELECT:', { fontFamily: '"Press Start 2P"' });
         attackText = this.add.text(50, 505, 'ATTACK', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
-        defendText = this.add.text(50, 545, 'DEFEND', { fontFamily: '"Press Start 2P"' }).setPadding(5);
+        defendText = this.add.text(50, 545, 'DEFEND', { fontFamily: '"Press Start 2P"' }).setPadding(5).setInteractive();
         titleText = this.add.text(250, 80, 'CAN YOU DEFEAT THE DAHLIA', { fontFamily: '"Press Start 2P', fontSize: '12px' })
         fightText = this.add.text(360, 120, 'FIGHT!', { fontFamily: '"Press Start 2P', fontSize: '12px' })
 
@@ -177,6 +182,16 @@ class Dahlias extends Phaser.Scene {
             //  else {
             //     console.log(warriorAttack(player.data.get('level'), boss.data.get('defense')))
             // }
+        });
+
+        defendText.on('pointerdown', function () {
+            const hp = player.data.get('hp')
+                let block = defend(player.data.get('level'))
+                player.data.set('hp', hp + block);
+                // TODO: display damage dealt
+                currentTurn = 'boss';
+                bossAttack();
+
         })
 
         const bossAttack = () => {

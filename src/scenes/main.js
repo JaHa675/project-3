@@ -224,7 +224,7 @@ class Mains extends Phaser.Scene {
             timedEvent = this.time.delayedCall(1500, dgOnEvent, [], this);
             function dgOnEvent() {
                 dahliaDoorText.setText('')
-                this.scene.start('Dahlias')
+                this.scene.start('Dahlias', { character_name: this.character_name, charClass: this.charClass, level: this.level })
                 this.scene.launch('BattleLog')
                 firstPlayDahlia = false;
             }
@@ -242,7 +242,7 @@ class Mains extends Phaser.Scene {
             timedEvent = this.time.delayedCall(1500, blOnEvent, [], this);
             function blOnEvent() {
                 brookeDoorText.setText('')
-                this.scene.start('Brookes')
+                this.scene.start('Brookes', { character_name: this.character_name, charClass: this.charClass, level: this.level })
                 this.scene.launch('BattleLog')
                 firstPlayBrooke = false;
             }
@@ -260,7 +260,7 @@ class Mains extends Phaser.Scene {
             timedEvent = this.time.delayedCall(1500, jhOnEvent, [], this);
             function jhOnEvent() {
                 jamesDoorText.setText('')
-                this.scene.start('Jamess')
+                this.scene.start('Jamess', { character_name: this.character_name, charClass: this.charClass, level: this.level })
                 this.scene.launch('BattleLog')
                 firstPlayJames = false;
             }
@@ -278,7 +278,7 @@ class Mains extends Phaser.Scene {
             timedEvent = this.time.delayedCall(1500, lrOnEvent, [], this);
             function lrOnEvent() {
                 lucasDoorText.setText('')
-                this.scene.start('Lucass')
+                this.scene.start('Lucass', { character_name: this.character_name, charClass: this.charClass, level: this.level })
                 this.scene.launch('BattleLog')
                 firstPlayLucas = false;
             }
@@ -344,6 +344,7 @@ class Mains extends Phaser.Scene {
 
     dahliaDefeated() {
         dahliaBossDefeated = true;
+        this.level ++;
     }
 
 
