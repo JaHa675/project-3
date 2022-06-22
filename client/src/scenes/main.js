@@ -77,20 +77,25 @@ class Mains extends Phaser.Scene {
         platforms.create(400, 800, 'mainPlatform').refreshBody();
         platforms.create(400, 540, 'mainFloor').refreshBody();
         
+        cursors = this.input.keyboard.createCursorKeys();
+        
+        this.input.keyboard.on('keydown-A', () => {arrowLeftFlag = true})
+        this.input.keyboard.on('keyup-A', () => {arrowLeftFlag = false})
+        this.input.keyboard.on('keydown-D', () => {arrowRightFlag = true})
+        this.input.keyboard.on('keyup-D', () => {arrowRightFlag = false})
         arrowLeft = this.add.image(100, 500, "arrow").setScale(.1);
         arrowLeft.setInteractive();
-        arrowLeft.on('pointerdown', () => {arrowLeftFlag = true; console.log(arrowLeftFlag)});
-        arrowLeft.on('pointerup', () => {arrowLeftFlag = false; console.log(arrowLeftFlag)});
+        arrowLeft.on('pointerdown', () => {arrowLeftFlag = true;});
+        arrowLeft.on('pointerup', () => {arrowLeftFlag = false;});
         arrowLeft.flipX=true;
         
         arrowRight = this.add.image(225, 500, "arrow").setScale(.1);
         arrowRight.setInteractive();
-        arrowRight.on('pointerdown', () => {arrowRightFlag = true; console.log(arrowRightFlag)});
-        arrowRight.on('pointerup', () => {arrowRightFlag = false; console.log(arrowRightFlag)});
+        arrowRight.on('pointerdown', () => {arrowRightFlag = true;});
+        arrowRight.on('pointerup', () => {arrowRightFlag = false;});
 
-        
         const layer =this.add.layer();
-        console.log(layer);
+        // console.log(layer);
         // adding the background image as a layer above the floor
 
         layer.add(this.make.image({x:400, y:500, key:'mainBackground'},false).setScale(1.5));
@@ -219,7 +224,6 @@ class Mains extends Phaser.Scene {
 
         // Scene change handler currently on key, needs to be on press or bound conditionally (i.e. character position on a door)
         //  Please leave console logs for testing purposes as the game grows
-        cursors = this.input.keyboard.createCursorKeys();
         let DahliaRoom = () => {
             const dahliaDoorText = this.add.text(280, 110, 'Fight Dahlia?!', { fontSize: '30px', fill: 'black' }).setDepth(4)
             timedEvent = this.time.delayedCall(1500, dgOnEvent, [], this);
@@ -323,7 +327,7 @@ class Mains extends Phaser.Scene {
 
             if (firstPlayCat !== false) {
                 firstPlayCat = false;
-                console.log("input A test", firstPlayCat);
+                console.log("input C test", firstPlayCat);
                 this.scene.start('Cats')
             } else if (catBossDefeated === false && firstPlayCat === false) {
                 console.log(dahliaBossDefeated)
@@ -335,7 +339,6 @@ class Mains extends Phaser.Scene {
                 this.scene.start('CatDoors')
         })
         // ======================================================================================
-
 
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
@@ -353,8 +356,6 @@ class Mains extends Phaser.Scene {
     }
 
     update() {
-
-
         if (cursors.left.isDown || arrowLeftFlag === true) {
             player.setVelocityX(-160);
 

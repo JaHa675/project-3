@@ -10,8 +10,9 @@ const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname,'client', 'build')));
 app.get('*', (req, res) => {
     res.sendFile(publicPath);
-    console.log(publicPath, "do you see me");
+    console.log(publicPath, "Running locally on port 3000");
 });
+
 app.listen(port, () => {
     console.log('Server is up!');
 });
