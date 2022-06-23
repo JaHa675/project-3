@@ -4,11 +4,13 @@ import Brooke from "../../assets/characters/Brooke.png"
 import Dahlia from "../../assets/characters/Dahlia.png"
 import James from "../../assets/characters/James.png"
 import Lucas from "../../assets/characters/Lucas.png"
+import NavBar from "../NavBar"
 
 
 export default function About() {
     return (
         <div>
+            <NavBar></NavBar>
             <div className='infoContainer'>
                 <div className='aboutContainer'>
                     <h1 className='aboutTitle'>Why Make A Game?</h1>
