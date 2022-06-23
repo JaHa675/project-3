@@ -71,8 +71,8 @@ export default function Login (props) {
                     <input value={loginData.password} name="loginPassword"  type="password" placeholder="Your Password Here" onChange={(e)=>setLoginData({...loginData,password:e.target.value})} id="passwordInput" className="loginInput" required></input>
                     <br></br>
                     {/* <input type="submit" value="Play Now" id="form_button" className="playNow centerBTN moveUp"/> */}
-                    <Button variant="dark" onClick={loginSubmit}  className="playNow centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
-                    <Button variant="dark" onClick={handleShow} className="playNow centerBTN moveUp openModal" style={{margin: "10px"}}>Sign Up</Button>
+                    <Button variant="dark" onClick={loginSubmit}  className="playNow MQBUTTONL centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
+                    <Button variant="dark" onClick={handleShow} className="playNow MQBUTTONR centerBTN moveUp openModal" style={{margin: "10px"}}>Sign Up</Button>
                     </form>
                     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} aria-labelledby="contained-modal-title-vcenter">
                     <Modal.Header closeButton>
