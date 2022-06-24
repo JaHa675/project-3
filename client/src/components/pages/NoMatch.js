@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../styles/NoMatch.css'
-import logo from "../../assets/images/Battle_Trail_Gaming_Logo__AdobeCreativeCloudExpress.gif"
 import gate from "../../assets/extras/stone-gate.png"
 
 
