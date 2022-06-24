@@ -1,5 +1,6 @@
 
 import Phaser from "phaser";
+import NavBar from '../components/NavBar'
 import mainBackground from "../assets/backgrounds/MainBackground.png"
 import mainFloor from "../assets/backgrounds/MainFloor.png"
 import mainPlatform from "../assets/backgrounds/MainFloor.png"
