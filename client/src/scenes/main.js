@@ -31,6 +31,8 @@ var arrowLeftFlag;
 var arrowRight;
 var arrowRightFlag;
 
+var tutorialFlag = true;
+
 var firstPlayDahlia = true; 
 let dahliaBossDefeated = false; 
 var firstPlayCat = true;
@@ -41,8 +43,6 @@ var firstPlayJames = true;
 let jamesBossDefeated = false;
 var firstPlayLucas = true;
 let lucasBossDefeated = false;
-var firstPlayHouse = true;
-let houseBossDefeated = false;
 // var safeHouse;
 var timedEvent;
 // MAIN acts as the directory for the other scenes
@@ -112,11 +112,11 @@ class Mains extends Phaser.Scene {
         for (let i = 0; i < 5; i++) {
             var door = doors.create(doorX, 300, 'door').refreshBody().setScale(1.5).setInteractive();
             door.on('pointerdown', function (pointer) {
-                console.log("this");
-                console.log(this);
-                console.log("pointer")
-                console.log(pointer);
-                console.log(this.x)
+                // console.log("this");
+                // console.log(this);
+                // console.log("pointer")
+                // console.log(pointer);
+                // console.log(this.x)
                 switch (this.x) {
                     case 70:
                         {
@@ -238,9 +238,9 @@ class Mains extends Phaser.Scene {
             }
             if (firstPlayDahlia !== false) {
                 this.input.on('click',dgOnEvent)
-                console.log("input A test", firstPlayDahlia);
+                console.log("dahlia door clicked1", firstPlayDahlia);
             } else if (dahliaBossDefeated === false && firstPlayDahlia === false) {
-                console.log(dahliaBossDefeated)
+                console.log("dahlia door clicked2",dahliaBossDefeated)
                 this.scene.start('Dahlias')
                 this.scene.launch('BattleLog')
             }
@@ -350,29 +350,39 @@ class Mains extends Phaser.Scene {
         // player tutorial
         
         function tutorialStart() {
-            dahliaBossDefeated = true;
+            console.log(dahliaBossDefeated)
+             dahliaBossDefeated = true;
+            console.log("dg door flag is " + dahliaBossDefeated)
             var tutorialLogs = [
+                'Battle Trail Tutorial',
                 'Navigate to a door',
                 'Click to Battle!',
                 ''
             ]
-            const tutorialText = this.add.text(235, 105, 'Battle Trail Tutorial', { fontSize: '30px', fill: 'black' }).setDepth(4)
+            const tutorialText = this.add.text(235, 105, '', { fontSize: '30px', fill: 'black' }).setDepth(4)
+            // timedEvent leave 'Battle Trail Tutorial' up for 1 second before changing into tutotrial text
             timedEvent = this.time.delayedCall(1000,tutorialChangeHandler, [], this);
-            console.log(tutorialText)
+            console.log("tutorial started")
             function tutorialChangeHandler() {
-                for (let i = 0; i < tutorialLogs.length; i++) {
-                    const element = tutorialLogs[i];
-                    (function (i) {
-                        setTimeout(() => {
-                            tutorialText.setText(element)
-                        }, 2000 * i);
-                    })(i);
-                    if (i >= tutorialLogs.length) {
-                        dahliaBossDefeated = false;
+                if (tutorialFlag !== false) {
+                    for (let i = 0; i < tutorialLogs.length; i++) {
+                        const element = tutorialLogs[i];
+                        (function (i) {
+                            setTimeout(() => {
+                                tutorialText.setText(element)
+                                console.log(i, tutorialLogs[i])
+                                if (tutorialLogs[i] === ''){
+                                    dahliaBossDefeated = false;
+                                    tutorialFlag = false;
+                                    console.log('tutorial finished', dahliaBossDefeated)
+                                }
+                            }, 2000 * i);
+                        })(i);
                     }
                 }
             }
         }
+        // timeout call to initialize the tutorial
         this.time.delayedCall(1000,tutorialStart, [], this);
     }
     
