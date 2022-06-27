@@ -1,22 +1,19 @@
 import React, {useState, useEffect} from 'react'
-import {BrowserRouter,Routes,Route} from "react-router-dom"
+import {BrowserRouter,Routes,Route, Navigate} from "react-router-dom"
 import Login from './components/pages/Login'
 import Landing from './components/pages/Landing'
 import About from './components/pages/About'
+import NoMatch from './components/pages/NoMatch'
 import Stats from './components/pages/Stats'
-import Brooke from './scenes/brookeBoss'
-import CatBoss from './scenes/catbBoss'
-import Dahlia from './scenes/dahliaBoss'
-import James from './scenes/jamesBoss'
-import Lucas from './scenes/lucasBoss'
 import Main from './scenes/main'
-import House from './scenes/playerHouse'
 import Credits from './scenes/credits'
 import Config from './scenes/config'
 import API from './utils/API'
 
 
 function App() {
+  const shouldRedirect = true;
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [token,setToken] = useState(null)
@@ -63,22 +60,19 @@ function App() {
     })
   }
   return (
+    <div>
     <BrowserRouter>
 <Routes>
-  <Route path ='/' element ={<Landing />}></Route>
-  <Route path ='/login' element ={<Login login={handleLoginSubmit} signup={handleSignupSubmit} />}></Route>
-  <Route path ='/about' element ={<About />}></Route>
-  <Route path ='/stats' element ={<Stats />}></Route>
-  <Route path ='/brooke' element ={<Brooke />}></Route>
-  <Route path ='/catboss' element ={<CatBoss />}></Route>
-  <Route path ='/dahlia' element ={<Dahlia />}></Route>
-  <Route path ='/james' element ={<James />}></Route>
-  <Route path ='/lucas' element ={<Lucas/>}></Route>
-  <Route path ='/main' element ={<Config />}></Route>
-  <Route path ='/house' element ={<House />}></Route>
-  <Route path ='/credits' element ={<Credits />}></Route>
+  <Route exact path ='/' element ={<Landing />}></Route>
+  <Route exact path ='/login' element ={<Login login={handleLoginSubmit} signup={handleSignupSubmit} />}></Route>
+  <Route exact path ='/about' element ={<About />}></Route>
+  <Route exact path ='/stats' element ={<Stats />}></Route>
+  <Route exact path ='/main' element ={<Config />}></Route>
+  <Route exact path ='/credits' element ={<Credits />}></Route>
+  <Route path="*" element={<NoMatch />}></Route>
 </Routes>
 </BrowserRouter>
+</div>
   )
 }
 

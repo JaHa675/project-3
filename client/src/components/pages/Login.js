@@ -6,6 +6,7 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import UserInfo from '../../scripts/signup';
 // import UserLoginInfo from '../../scripts/login'
+import NavBar from "../NavBar"
 
 
 export default function Login (props) {
@@ -35,6 +36,10 @@ export default function Login (props) {
             user_name:"",
             password:""
         })
+        const loginToken = localStorage.getItem("token");
+        if(loginToken){
+          window.location= "/main"
+        }
     }
 
     const signupSubmit = e=>{
@@ -44,7 +49,10 @@ export default function Login (props) {
             user_name:"",
             password:""
         })
-        window.location= "/main"
+        const singupToken = localStorage.getItem("token");
+        if(singupToken){
+          window.location= "/main"
+        }
     }
 
     const handleModalChangeName  = e => {
@@ -56,6 +64,8 @@ export default function Login (props) {
 
   
         return (
+            <div>
+                <NavBar />
             <div className="loginContainer">
                 <div className="contentContainer">
                 <div className='scrollImage'></div>
@@ -71,8 +81,9 @@ export default function Login (props) {
                     <input value={loginData.password} name="loginPassword"  type="password" placeholder="Your Password Here" onChange={(e)=>setLoginData({...loginData,password:e.target.value})} id="passwordInput" className="loginInput" required></input>
                     <br></br>
                     {/* <input type="submit" value="Play Now" id="form_button" className="playNow centerBTN moveUp"/> */}
-                    <Button variant="dark" onClick={loginSubmit}  className="playNow centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
-                    <Button variant="dark" onClick={handleShow} className="playNow centerBTN moveUp openModal" style={{margin: "10px"}}>Sign Up</Button>
+                    <Button variant="dark" onClick={loginSubmit}  className="playNow MQBUTTONL centerBTN" style={{padding: "20px"}}><a href='/main'>Play Now</a></Button>
+                    <Button variant="dark" onClick={handleShow} className="playNow MQBUTTONR centerBTN moveUp openModal" style={{margin: "10px"}}>Sign Up</Button>
+
                     </form>
                     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} aria-labelledby="contained-modal-title-vcenter">
                     <Modal.Header closeButton>
@@ -82,20 +93,18 @@ export default function Login (props) {
                     <Form.Label >Battle Name</Form.Label>
                         <Form.Control name="signupUsername" value={signupData.user_name} as='textarea' id="characterName"  onChange={handleModalChangeName} rows={1} style = {{resize: "none"}}/>
                         <br></br>
-                    {/* <Form.Label>Email</Form.Label>
-                        <Form.Control as='textarea' id="newEmail" rows={1} style = {{resize: "none"}}/>
-                        <br></br> */}
                     <Form.Label>Password</Form.Label>
                         <Form.Control name="signupPassword" value={signupData.password} as='textarea' id="newPassword" type="password" onChange={handleModalChangePassword} rows={1} style = {{resize: "none"}}/>
                     </Modal.Body>
                     <Modal.Footer>
                     <div className="signUpBTN">
-                     <a href='/main'> <Button variant="dark" className="playNow" style={{padding: "10px"}} onClick={signupSubmit}>Submit</Button></a>
+                      <Button variant="dark" className="playNow" style={{padding: "10px"}} onClick={signupSubmit}>Submit</Button>
 
                     </div>
                     </Modal.Footer>
                 </Modal>
                 </div>
+            </div>
             </div>
             
         );
