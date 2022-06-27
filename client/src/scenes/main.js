@@ -32,8 +32,10 @@ var arrowLeftFlag;
 var arrowRight;
 var arrowRightFlag;
 
-var firstPlayDahlia = true;
-let dahliaBossDefeated = false;
+var tutorialFlag = true;
+
+var firstPlayDahlia = true; 
+let dahliaBossDefeated = false; 
 var firstPlayCat = true;
 let catBossDefeated = false;
 var firstPlayBrooke = true;
@@ -42,8 +44,6 @@ var firstPlayJames = true;
 let jamesBossDefeated = false;
 var firstPlayLucas = true;
 let lucasBossDefeated = false;
-var firstPlayHouse = true;
-let houseBossDefeated = false;
 // var safeHouse;
 var timedEvent;
 // MAIN acts as the directory for the other scenes
@@ -76,108 +76,112 @@ class Mains extends Phaser.Scene {
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 800, 'mainPlatform').refreshBody();
         platforms.create(400, 540, 'mainFloor').refreshBody();
+
         
         cursors = this.input.keyboard.createCursorKeys();
-        
+        // A, D movment keys. If we want to include jump need to add a W option
         this.input.keyboard.on('keydown-A', () => {arrowLeftFlag = true})
         this.input.keyboard.on('keyup-A', () => {arrowLeftFlag = false})
         this.input.keyboard.on('keydown-D', () => {arrowRightFlag = true})
         this.input.keyboard.on('keyup-D', () => {arrowRightFlag = false})
+        
+        // left arrow movement
         arrowLeft = this.add.image(100, 500, "arrow").setScale(.1);
         arrowLeft.setInteractive();
         arrowLeft.on('pointerdown', () => {arrowLeftFlag = true;});
         arrowLeft.on('pointerup', () => {arrowLeftFlag = false;});
         arrowLeft.flipX=true;
         
+        // Right arrow movement
         arrowRight = this.add.image(225, 500, "arrow").setScale(.1);
         arrowRight.setInteractive();
         arrowRight.on('pointerdown', () => {arrowRightFlag = true;});
         arrowRight.on('pointerup', () => {arrowRightFlag = false;});
-
+        
         const layer =this.add.layer();
         // console.log(layer);
         // adding the background image as a layer above the floor
-
+        
         layer.add(this.make.image({x:400, y:500, key:'mainBackground'},false).setScale(1.5));
-
-
-        // adding the door to the game 
+        
+        
+        // adding the door to the game and function to navigate to scenes
         doors = this.physics.add.staticGroup();
         door1 = this.physics.add.staticGroup();
-
+        
         let doorX = 70;
         for (let i = 0; i < 5; i++) {
             var door = doors.create(doorX, 300, 'door').refreshBody().setScale(1.5).setInteractive();
             door.on('pointerdown', function (pointer) {
-                console.log("this");
-                console.log(this);
-                console.log("pointer")
-                console.log(pointer);
-                console.log(this.x)
+                // console.log("this");
+                // console.log(this);
+                // console.log("pointer")
+                // console.log(pointer);
+                // console.log(this.x)
                 switch (this.x) {
                     case 70:
                         {
                             DahliaRoom();
                             break;
                         }
-                    case 235:
-                        {
-                            BrookeRoom();
+                        case 235:
+                            {
+                                BrookeRoom();
+                                break;
+                            }
+                            case 400:
+                                {
+                                    JamesRoom();
                             break;
                         }
-                    case 400:
-                        {
-                            JamesRoom();
-                            break;
-                        }
-                    case 565:
-                        {
+                        case 565:
+                            {
                             LucasRoom()
                             break;
                         }
-                    case 730:
-                        {
-                            HouseRoom()
-                            break;
-                        }
-
-                        default:
-                        break;
-                }
-            });
-            doorX += 165;
-        }
-
-        // add inputEnabled = true
-        
-        player = this.physics.add.sprite(350, 200, `${this.charClass}`).setScale(2);
-        player.setBounce(0.2);
-        player.setCollideWorldBounds(true);
-        player.setDataEnabled();
-        player.data.set('class', this.charClass);
-        player.data.set('level', this.level);
-        player.data.set('character_name', this.character_name);
-
-        // getting the player to render 
-        const mage = () => {
-            
-            player.setTexture('mage');
-          
-        }
-        const warrior = () => {
-            console.log(this.charClass)
-           
-            player.setTexture('warrior');
-           
-        }
-        if (player.data.get('class') === 'mage') {
-            
-            mage();
-           
-        } else {
-           
+                        case 730:
+                            {
+                                HouseRoom()
+                                break;
+                            }
+                            
+                            default:
+                                break;
+                            }
+                        });
+                        doorX += 165;
+                    }
+                    
+                    // add inputEnabled = true
+                    
+                    player = this.physics.add.sprite(350, 200, `${this.charClass}`).setScale(2);
+                    player.setBounce(0.2);
+                    player.setCollideWorldBounds(true);
+                    player.setDataEnabled();
+                    player.data.set('class', this.charClass);
+                    player.data.set('level', this.level);
+                    player.data.set('character_name', this.character_name);
+                    
+                    // getting the player to render 
+                    const mage = () => {
+                        
+                        player.setTexture('mage');
+                        
+                    }
+                    const warrior = () => {
+                        console.log(this.charClass)
+                        
+                        player.setTexture('warrior');
+                        
+                    }
+                    if (player.data.get('class') === 'mage') {
+                        
+                        mage();
+                        
+                    } else {
+                        
             warrior();
-         
+            
         }
 
         // getting a ground to render on the bottom
@@ -188,8 +192,8 @@ class Mains extends Phaser.Scene {
         // ground.setBounce(0);
         // ground.setImmovable();
         // ground.setCollideWorldBounds(true);
-
-
+        
+        
         // player changing to right left and center positions
         this.anims.create({
             key: 'left',
@@ -197,7 +201,7 @@ class Mains extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
-
+        
         this.anims.create({
             key: 'turn',
             frames: [{ key: `${this.charClass}`, frame: 4 }],
@@ -211,17 +215,17 @@ class Mains extends Phaser.Scene {
             repeat: -1
         });
         door1.on('pointerdown', function (pointer) {
-
+            
             console.log("clicked door 1")
-
+            
         });
-
-
-
+        
+        
+        
         // EVENT EMITTER LISTENERS
         eventsCenter.on('dahlia-defeated', this.dahliaDefeated, this)
-
-
+        
+        
         // Scene change handler currently on key, needs to be on press or bound conditionally (i.e. character position on a door)
         //  Please leave console logs for testing purposes as the game grows
         let DahliaRoom = () => {
@@ -235,9 +239,9 @@ class Mains extends Phaser.Scene {
             }
             if (firstPlayDahlia !== false) {
                 this.input.on('click',dgOnEvent)
-                console.log("input A test", firstPlayDahlia);
+                console.log("dahlia door clicked1", firstPlayDahlia);
             } else if (dahliaBossDefeated === false && firstPlayDahlia === false) {
-                console.log(dahliaBossDefeated)
+                console.log("dahlia door clicked2",dahliaBossDefeated)
                 this.scene.start('Dahlias')
                 this.scene.launch('BattleLog')
             }
@@ -308,23 +312,23 @@ class Mains extends Phaser.Scene {
             //     this.input.on('click', houseOnEvent)
             //     console.log("input A test", firstPlayHouse);
             // } else if (firstPlayHouse === false) {
-            //     this.scene.start('House')
-            // }
-        };
-        // eventsCenter.on('classSelect', function(playerChange){
-        //     player.data.set('class',playerChange);
+                //     this.scene.start('House')
+                // }
+            };
+            // eventsCenter.on('classSelect', function(playerChange){
+                //     player.data.set('class',playerChange);
         //     console.log(player.data);
         // })
 
-
-
-
-
+        
+        
+        
+        
         // console.log(dahliaBossDefeated);
         // this is how originally worked ====================================================
         this.input.keyboard.on('keydown-C', () => {
             //   console.log(firstPlay, dahliaBossDefeated)
-
+            
             if (firstPlayCat !== false) {
                 firstPlayCat = false;
                 console.log("input C test", firstPlayCat);
@@ -336,34 +340,71 @@ class Mains extends Phaser.Scene {
         })
         this.input.keyboard.on('keydown-F', () => {
             //   console.log(firstPlay, dahliaBossDefeated)
-                this.scene.start('CatDoors')
+            this.scene.start('CatDoors')
         })
         // ======================================================================================
-
+        
         // collider only takes in two parameters
         this.physics.add.collider(player, platforms);
         // this.physics.add.collider(player, doors);
         // this.physics.add.collider(boss, platforms);
+        // player tutorial
+        
+        function tutorialStart() {
+            console.log(dahliaBossDefeated)
+             dahliaBossDefeated = true;
+            console.log("dg door flag is " + dahliaBossDefeated)
+            var tutorialLogs = [
+                'Battle Trail Tutorial',
+                'Navigate to a door',
+                'Click to Battle!',
+                ''
+            ]
+            const tutorialText = this.add.text(235, 105, '', { fontSize: '30px', fill: 'black' }).setDepth(4)
+            // timedEvent leave 'Battle Trail Tutorial' up for 1 second before changing into tutotrial text
+            timedEvent = this.time.delayedCall(1000,tutorialChangeHandler, [], this);
+            console.log("tutorial started")
+            function tutorialChangeHandler() {
+                if (tutorialFlag !== false) {
+                    for (let i = 0; i < tutorialLogs.length; i++) {
+                        const element = tutorialLogs[i];
+                        (function (i) {
+                            setTimeout(() => {
+                                tutorialText.setText(element)
+                                console.log(i, tutorialLogs[i])
+                                if (tutorialLogs[i] === ''){
+                                    dahliaBossDefeated = false;
+                                    tutorialFlag = false;
+                                    console.log('tutorial finished', dahliaBossDefeated)
+                                }
+                            }, 2000 * i);
+                        })(i);
+                    }
+                }
+            }
+        }
+        // timeout call to initialize the tutorial
+        this.time.delayedCall(1000,tutorialStart, [], this);
     }
-
+    
     dahliaDefeated() {
         dahliaBossDefeated = true;
     }
-
-
+    
+    
     updateClass(characterClass) {
         this.player.data.set = ('class', characterClass)
     }
-
+    
     update() {
         if (cursors.left.isDown || arrowLeftFlag === true) {
             player.setVelocityX(-160);
-
+            
             player.anims.play('left', true);
         }
         else if (cursors.right.isDown || arrowRightFlag === true) {
             player.setVelocityX(160);
-
+            
             player.anims.play('right', true);
         }
         else {
