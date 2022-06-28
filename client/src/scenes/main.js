@@ -229,7 +229,7 @@ class Mains extends Phaser.Scene {
             timedEvent = this.time.delayedCall(1500, dgOnEvent, [], this);
             function dgOnEvent() {
                 dahliaDoorText.setText('')
-                this.scene.start('Dahlias')
+                this.scene.start('Dahlias', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                 this.scene.launch('BattleLog')
                 firstPlayDahlia = false;
             }
@@ -238,7 +238,7 @@ class Mains extends Phaser.Scene {
                 console.log("input A test", firstPlayDahlia);
             } else if (dahliaBossDefeated === false && firstPlayDahlia === false) {
                 console.log(dahliaBossDefeated)
-                this.scene.start('Dahlias')
+                this.scene.start('Dahlias', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                 this.scene.launch('BattleLog')
             }
         };
@@ -247,7 +247,7 @@ class Mains extends Phaser.Scene {
             timedEvent = this.time.delayedCall(1500, blOnEvent, [], this);
             function blOnEvent() {
                 brookeDoorText.setText('')
-                this.scene.start('Brookes')
+                this.scene.start('Brookes', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                 this.scene.launch('BattleLog')
                 firstPlayBrooke = false;
             }
@@ -256,7 +256,7 @@ class Mains extends Phaser.Scene {
                 console.log("input A test", firstPlayBrooke);
             } else if (brookeBossDefeated === false && firstPlayBrooke === false) {
                 console.log(brookeBossDefeated)
-                this.scene.start('Brookes')
+                this.scene.start('Brookes', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                 this.scene.launch('BattleLog')
             }
         };
