@@ -88,13 +88,14 @@ class Brookes extends Phaser.Scene {
         player.data.set('level', this.level);
         player.data.set('character_name', this.character_name);
         player.data.set('attack', player.data.get('level') * 2);
-        player.data.set('hp', 20);
+        player.data.set('hp', 20 * player.data.get('level'));
 
-        boss.data.set('name', 'Brooke');
-        boss.data.set('level', 5);
-        boss.data.set('attack', 1);
-        boss.data.set('hp', 100);
-        boss.data.set('defense', 2);
+
+        boss.data.set('name', 'Dahlia');
+        boss.data.set('level', 5 * player.data.get('level'));
+        boss.data.set('attack', 2 * player.data.get('level'));
+        boss.data.set('hp', 25 * player.data.get('level'));
+        boss.data.set('defense', 2 * player.data.get('level'));
 
         //  Display it
         playerText.setText([
@@ -183,8 +184,9 @@ class Brookes extends Phaser.Scene {
                 if (player.data.get('hp') < 1) {
                     boss.data.set('hp', 100);
                     player.data.set('hp', 20);
-                    this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
+                    this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: player.data.get('level') })
                     this.scene.stop('BattleLog')
+                    this.scene.stop('Brookes')
                 }
                 // TODO: make a display for damage dealt
                 console.log(player.data.get('hp'))

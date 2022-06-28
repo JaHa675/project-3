@@ -1,10 +1,10 @@
 module.exports = {
     mageAttack: (level, bossDefense) => {
-        const damage = 2 * level / bossDefense;
+        const damage = 4 * level / bossDefense;
         return damage
     },
     warriorAttack: (level, bossDefense) => {
-        const damage = 1.5 * level / bossDefense * .75;
+        const damage = 3 * level / bossDefense * .5;
         return damage
     },
     dahliaAttack: () =>  {
