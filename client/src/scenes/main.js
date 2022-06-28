@@ -295,7 +295,7 @@ class Mains extends Phaser.Scene {
             timedEvent = this.time.delayedCall(1500, lrOnEvent, [], this);
             function lrOnEvent() {
                 lucasDoorText.setText('')
-                this.scene.start('Lucass')
+                this.scene.start('Lucass', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                 this.scene.launch('BattleLog')
                 firstPlayLucas = false;
             }
@@ -304,7 +304,7 @@ class Mains extends Phaser.Scene {
                 console.log("input A test", firstPlayLucas);
             } else if (lucasBossDefeated === false && firstPlayLucas === false) {
                 console.log(lucasBossDefeated)
-                this.scene.start('Lucass')
+                this.scene.start('Lucass', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                 this.scene.launch('BattleLog')
             }
         };
@@ -314,7 +314,7 @@ class Mains extends Phaser.Scene {
             function houseOnEvent() {
                 houseDoorText.setText('')
                 // firstPlayHouse = false;
-                this.scene.start('House')
+                this.scene.start('House', { character_name: this.character_name, charClass: this.charClass, level: 1 })
             }
             // if (firstPlayHouse !== false) {
             //     this.input.on('click', houseOnEvent)
@@ -340,15 +340,15 @@ class Mains extends Phaser.Scene {
             if (firstPlayCat !== false) {
                 firstPlayCat = false;
                 console.log("input C test", firstPlayCat);
-                this.scene.start('Cats')
+                this.scene.start('Cats', { character_name: this.character_name, charClass: this.charClass, level: 1 })
             } else if (catBossDefeated === false && firstPlayCat === false) {
                 console.log(dahliaBossDefeated)
-                this.scene.start('Cats')
+                this.scene.start('Cats', { character_name: this.character_name, charClass: this.charClass, level: 1 })
             }
         })
         this.input.keyboard.on('keydown-F', () => {
             //   console.log(firstPlay, dahliaBossDefeated)
-            this.scene.start('CatDoors')
+            this.scene.start('CatDoors', { character_name: this.character_name, charClass: this.charClass, level: 1 })
         })
         // ======================================================================================
 

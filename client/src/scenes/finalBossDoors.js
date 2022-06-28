@@ -30,15 +30,22 @@ var arrowRightFlag;
 
 
 
-class CatDoor extends Phaser.Scene {
+class CatDoors extends Phaser.Scene {
     constructor () {
         super('CatDoors')
+    }
+    init(data) {
+        this.charClass = data.charClass;
+        this.character_name = data.character_name;
+        this.level = data.level;
     }
     preload () {
         this.load.image('finalBackground',finalBackground)
         this.load.image('fancyDoor', fancyDoor)
-        this.load.spritesheet('mage',mage,{frameWidth: 48, frameHeight: 48});
-        this.load.spritesheet('warrior',warrior,{frameWidth: 48, frameHeight: 48});
+        this.load.spritesheet('mage',mage,
+        {frameWidth: 48, frameHeight: 48});
+        this.load.spritesheet('warrior',warrior,
+        {frameWidth: 48, frameHeight: 48});
         this.load.image("finalGround", finalGround)
         this.load.image("finalPlatform", finalPlatform)
         this.load.image("charDialogue", Dialogue)
@@ -96,15 +103,9 @@ class CatDoor extends Phaser.Scene {
             })
             doorX += 235;
         }
-            player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
-            // if(state.charClass === 'mage'){
-            //     player = this.physics.add.sprite(350, 100, 'mage');
-            // } else {
-            //     player = this.physics.add.sprite(350, 100, 'warrior');
-            // }
-            
-            player.setBounce(0.2);
-            player.setCollideWorldBounds(true);
+            // player = this.physics.add.sprite(350, 100, 'mage').setScale(2).setBounce(0.2).setCollideWorldBounds(true);
+            player = this.physics.add.sprite(350, 100, `${this.charClass}`).setScale(2);
+            player.setBounce(0.2).setCollideWorldBounds(true);
             
             // getting a ground to render on the bottom
             // let finalGroundX = this.sys.game.config.width / 3;
@@ -118,20 +119,20 @@ class CatDoor extends Phaser.Scene {
         // player changing to right left and center positions
         this.anims.create({
             key: 'left',
-            frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
+            frames: this.anims.generateFrameNumbers(`${this.charClass}`, { start: 4, end: 5 }),
             frameRate: 10,
             repeat: -1
         });
         
         this.anims.create({
             key: 'turn',
-            frames: [ { key: 'mage', frame: 4} ],
+            frames: [ { key: `${this.charClass}`, frame: 4} ],
             frameRate: 20
         });
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('mage', { start: 6, end: 7}),
+            frames: this.anims.generateFrameNumbers(`${this.charClass}`, { start: 6, end: 7}),
             frameRate: 10,
             repeat: -1
         });
@@ -142,7 +143,7 @@ class CatDoor extends Phaser.Scene {
                 timedEvent = this.time.delayedCall(2000, CatOnEvent, [], this);
                 function CatOnEvent() {
                     catDoorText.setText('')
-                    this.scene.start('Cats')
+                    this.scene.start('Cats', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                     this.scene.launch('BattleLog')
                 }
                 //   console.log(firstPlay, dahliaBossDefeated)
@@ -151,7 +152,7 @@ class CatDoor extends Phaser.Scene {
                      console.log("input A test",firstPlayCat);
                  } else if (catBossDefeated === false && firstPlayCat === false ) {
                      console.log(catBossDefeated)
-                     this.scene.start('Cats')
+                     this.scene.start('Cats', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                  } 
             };
             let MainRoom = () => {
@@ -160,7 +161,7 @@ class CatDoor extends Phaser.Scene {
             timedEvent = this.time.delayedCall(1500, MainOnEvent, [], this);
             function MainOnEvent() {
                 lucasDoorText.setText('')
-                this.scene.start('Mains')
+                this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
             }
             }
 
@@ -193,4 +194,4 @@ class CatDoor extends Phaser.Scene {
     }
 }
 
-export default CatDoor
+export default CatDoors
