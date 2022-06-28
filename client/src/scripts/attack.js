@@ -24,7 +24,7 @@ module.exports = {
         return damage
     },
     catAttack: () =>  {
-        const damage = 1;
+        const damage = 2;
         return damage
     }
 }

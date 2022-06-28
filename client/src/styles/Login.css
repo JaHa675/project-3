@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap';
+@import "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap";
 * {
   margin: 0;
 }
@@ -7,7 +7,7 @@ body {
   height: 100vh;
   width: auto;
   background-repeat: no-repeat;
-  font-family: 'Press Start 2P', cursive !important;
+  font-family: "Press Start 2P", cursive !important;
   background-image: url("../assets/images/contextPage.jpeg");
 }
 .loginPage {
@@ -54,7 +54,7 @@ a {
   display: flex;
   justify-content: center;
   padding: 10px;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   position: relative;
   bottom: 450px;
   margin-right: 40%;
@@ -75,11 +75,11 @@ a {
 .centerBTN {
   position: relative;
   bottom: 350px;
-  left: 15%
+  left: 15%;
 }
 #loginOut {
-  height:10px;
-  position: relative; 
+  height: 10px;
+  position: relative;
   bottom: 10px;
 }
 .openModal {
@@ -90,4 +90,28 @@ a {
 .modal-content {
   padding: 20px;
   background-color: antiquewhite !important;
+}
+
+@media screen and (max-width: 550px) {
+  .scrollImage {
+    transform: scale(0.7) rotate(90deg);
+    left: 18%;
+  }
+  .subHeaders {
+    transform: scale(0.7);
+    left: 28%;
+  }
+  .loginInput {
+    transform: scale(0.7);
+    position: relative;
+    left: 40%;
+  }
+  .MQBUTTONL {
+    left: 36%;
+    width: 20%;
+    top: -3772%;
+  }
+  .MQBUTTONR {
+    right: 18%;
+  }
 }

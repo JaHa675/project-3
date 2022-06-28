@@ -42,7 +42,10 @@ class House extends Phaser.Scene {
         this.load.image('housebg',housebg);
         this.load.image('safeHouseBottom',safeHouseBottom);
         this.load.image('floorPlatform',floorPlatform);
-        this.load.spritesheet('mage', mage, {frameWidth: 48, frameHeight: 48});
+        this.load.spritesheet('mage', mage, 
+        {frameWidth: 48, frameHeight: 48});
+        this.load.spritesheet('warrior', warrior,
+        { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet('KingJoe', KingJoe, {frameWidth: 48, frameHeight: 48});
         this.load.image("arrow", arrow1)
 
@@ -79,10 +82,13 @@ class House extends Phaser.Scene {
         Joe =this.add.sprite(600,300,'KingJoe').setScale(2);
         Joe.setInteractive();
 
-        player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
-        player.setBounce(0.2);
+        // player = this.physics.add.sprite(350, 100, 'mage').setScale(2);
+        // player.setBounce(0.2).setCollideWorldBounds(true);
 
-        player.setCollideWorldBounds(true);
+        player = this.physics.add.sprite(350, 100, `${this.charClass}`).setScale(2);
+        player.setBounce(0.2).setCollideWorldBounds(true);
+
+
         doors = this.physics.add.staticGroup();
         // creating one door to use for the final boss
         // for (let i=0; i<1; i++) {
@@ -129,20 +135,20 @@ class House extends Phaser.Scene {
 
         this.anims.create({
             key: 'left',
-            frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
+            frames: this.anims.generateFrameNumbers(`${this.charClass}`, { start: 4, end: 5 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'turn',
-            frames: [{ key: 'mage', frame: 4 }],
+            frames: [{ key: `${this.charClass}`, frame: 4 }],
             frameRate: 20
         });
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('mage', { start: 6, end: 7 }),
+            frames: this.anims.generateFrameNumbers(`${this.charClass}`, { start: 6, end: 7 }),
             frameRate: 10,
             repeat: -1
         });

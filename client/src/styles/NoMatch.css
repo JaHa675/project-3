@@ -1,0 +1,41 @@
+
+  .stonearchway {
+    width:800px;
+    max-height: 1000px;
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin: auto;
+    display: block;
+    background-color: #1a1a1a;
+  }
+  body {
+    background: #1a1a1a;
+    position: relative;
+    margin: 0;
+  }
+  
+  @keyframes text-appear {
+    0% {opacity: 0;}
+    50% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+  
+  .forbiddenmessage {
+    color: white;
+    font-family: 'Press Start 2P';
+  
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  
+    animation-name: text-appear;
+    animation-duration: 2.5s;
+  }
+  
+  h1, h3 {
+    margin: 0;
+  }

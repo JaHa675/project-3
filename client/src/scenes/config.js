@@ -12,6 +12,7 @@ import CatScene from "./catbBoss"
 import CatDoors from "./finalBossDoors"
 import TextBox from "./textbox"
 import CreditsScene from "./credits"
+import NavBar from '../components/NavBar'
 export default function Main(props) {
     var game = null;
     
@@ -43,7 +44,10 @@ export default function Main(props) {
     },[])
     
     return (
+        <div>
+        <NavBar></NavBar>
         <div id="battle">{game ? game :""}</div>
+        </div>
         
     )
 }

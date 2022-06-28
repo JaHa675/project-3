@@ -34,6 +34,11 @@ class Dahlias extends Phaser.Scene {
     constructor() {
         super('Dahlias')
     }
+    init(data) {
+        this.charClass = data.charClass;
+        this.character_name = data.character_name;
+        this.level = data.level;
+    }
     preload() {
         this.load.image('BattleBackground', BattleBackground)
         this.load.image('bridge', bridge)
@@ -41,6 +46,8 @@ class Dahlias extends Phaser.Scene {
         this.load.spritesheet('mage', mage, {
             frameWidth: 48, frameHeight: 48
         });
+        this.load.spritesheet('warrior', warrior,
+            { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet('dahliaBoss', dahliaBoss, {
             frameWidth: 48, frameHeight: 48
         });
@@ -49,34 +56,63 @@ class Dahlias extends Phaser.Scene {
         platforms = this.physics.add.staticGroup();
 
         platforms.create(400, 300, 'BattleBackground').setScale(1.5).refreshBody();
-        platforms.create(400, 470, 'floor').setScale(1.5);
-        
-        player = this.physics.add.sprite(350, 100, 'mage');
-        player.setCollideWorldBounds(true).setBounce(0.2).setScale(2);
-        
-        boss = this.physics.add.sprite(450, 100, 'dahliaBoss');
+        platforms.create(400, 470, 'floor').setScale(1.5).refreshBody();
+
+
+
+        // player = this.physics.add.sprite(350, 100, 'mage');
+        // player.setCollideWorldBounds(true).setBounce(0.2).setScale(2);
+        player = this.physics.add.sprite(350, 100, `${this.charClass}`).setScale(2);
+        player.setBounce(0.2).setCollideWorldBounds(true);
+
+        // getting the player to render 
+        // const mage = () => {
+
+        //     player.setTexture('mage');
+
+        // }
+        // const warrior = () => {
+        //     console.log(this.charClass)
+
+        //     player.setTexture('warrior');
+
+        // }
+        // if (player.data.get('class') === 'mage') {
+
+        //     mage();
+
+        // } else {
+
+        //     warrior();
+
+        // }
+        boss = this.physics.add.sprite(475, 100, 'dahliaBoss');
         boss.setCollideWorldBounds(true).setScale(2).setBounce(0.2);
-        
-        
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('mage', { start: 4, end: 5 }),
-            frameRate: 10,
-            repeat: -1
-        });
 
-        this.anims.create({
-            key: 'turn',
-            frames: [{ key: 'mage', frame: 4 }],
-            frameRate: 20
-        });
+        // collider only takes in two parameters
+        this.physics.add.collider(player, platforms);
+        this.physics.add.collider(boss, platforms);
 
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('mage', { start: 6, end: 7 }),
-            frameRate: 10,
-            repeat: -1
-        });
+
+        // this.anims.create({
+        //     key: 'left',
+        //     frames: this.anims.generateFrameNumbers(`${this.charClass}`, { start: 4, end: 5 }),
+        //     frameRate: 10,
+        //     repeat: -1
+        // });
+
+        // this.anims.create({
+        //     key: 'turn',
+        //     frames: [{ key: `${this.charClass}`, frame: 4 }],
+        //     frameRate: 20
+        // });
+
+        // this.anims.create({
+        //     key: 'right',
+        //     frames: this.anims.generateFrameNumbers(`${this.charClass}`, { start: 6, end: 7 }),
+        //     frameRate: 10,
+        //     repeat: -1
+        // });
 
         // Scene change handler currently on key, needs to be onClick or bound condtionally
         //  Please leave console logs for testing purposes as the game grows
@@ -86,25 +122,30 @@ class Dahlias extends Phaser.Scene {
         //     this.scene.start('Mains')
         // }, this);
 
-        // collider only takes in two parameters
-        this.physics.add.collider(player, platforms);
-        this.physics.add.collider(boss, platforms);
+        player.setDataEnabled();
+        boss.setDataEnabled();
+
 
         const playerText = this.add.text(50, 50, '');
         const bossText = this.add.text(630, 50, '');
 
         let currentTurn = 'player';
 
-        player.setDataEnabled();
-        boss.setDataEnabled();
+
 
         // console.log(currentChar)
 
-        player.data.set('name', 'Mage');
-        player.data.set('class', 'mage');
-        player.data.set('level', 4);
+        // player.data.set('name', 'Mage');
+        // player.data.set('class', 'mage');
+        // player.data.set('level', 4);
+        // player.data.set('attack', player.data.get('level') * 2);
+        // player.data.set('hp', 20);
+        player.data.set('class', this.charClass);
+        player.data.set('level', this.level);
+        player.data.set('character_name', this.character_name);
         player.data.set('attack', player.data.get('level') * 2);
         player.data.set('hp', 20);
+
 
         boss.data.set('name', 'Dahlia');
         boss.data.set('level', 5);
@@ -114,7 +155,7 @@ class Dahlias extends Phaser.Scene {
 
         //  Display it
         playerText.setText([
-            'Name: ' + player.data.get('name'),
+            'Name: ' + player.data.get('character_name'),
             'Level: ' + player.data.get('level'),
             'Attack: ' + player.data.get('attack'),
             'Hp: ' + player.data.get('hp')
@@ -138,7 +179,7 @@ class Dahlias extends Phaser.Scene {
 
         player.on('changedata', function (gameObject, key, value) {
             playerText.setText([
-                'Name: ' + player.data.get('name'),
+                'Name: ' + player.data.get('character_name'),
                 'Level: ' + player.data.get('level'),
                 'Attack: ' + player.data.get('attack'),
                 'Hp: ' + player.data.get('hp')
@@ -148,7 +189,7 @@ class Dahlias extends Phaser.Scene {
 
         this.input.keyboard.on('keydown-R', () => {
             // console.log('R button pressed');
-            this.scene.start('Mains')
+            this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
             this.scene.stop('BattleLog')
         }, this);
 
@@ -174,9 +215,17 @@ class Dahlias extends Phaser.Scene {
                 currentTurn = 'boss';
                 bossAttack();
             }
-            //  else {
-            //     console.log(warriorAttack(player.data.get('level'), boss.data.get('defense')))
-            // }
+             else {
+                let damage = warriorAttack(player.data.get('level'), boss.data.get('defense'))
+                boss.data.set('hp', hp - damage);
+                eventsCenter.emit('playerAttack', damage)
+                console.log(boss.data.get('hp'))
+
+                // TODO: display damage dealt
+                currentTurn = 'boss';
+                bossAttack();
+
+            }
         })
 
         const bossAttack = () => {
@@ -188,7 +237,7 @@ class Dahlias extends Phaser.Scene {
                 if (player.data.get('hp') < 1) {
                     boss.data.set('hp', 100);
                     player.data.set('hp', 20);
-                    this.scene.start('Mains')
+                    this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                     this.scene.stop('BattleLog')
                 }
                 // TODO: make a display for damage dealt
@@ -197,7 +246,7 @@ class Dahlias extends Phaser.Scene {
             } else {
                 // TODO: maybe give them a nice animation for leveling up
                 eventsCenter.emit('dahlia-defeated')
-                this.scene.start('Mains')
+                this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
             }
         }
 
