@@ -49,6 +49,7 @@ class Jamess extends Phaser.Scene {
     create() {
 
         platforms = this.physics.add.staticGroup();
+
         platforms.create(400, 300, 'BattleBackground1').setScale(1.5).refreshBody();
         platforms.create(400, 465, 'jamesGround').setScale(1.5).refreshBody();
 
@@ -57,7 +58,7 @@ class Jamess extends Phaser.Scene {
         player = this.physics.add.sprite(350, 100, `${this.charClass}`).setScale(2);
         player.setBounce(0.2).setCollideWorldBounds(true);
 
-        boss = this.physics.add.sprite(450, 100, 'jamesBoss').setScale(2);
+        boss = this.physics.add.sprite(475, 100, 'jamesBoss').setScale(2);
         boss.setCollideWorldBounds(true).setBounce(0.2);
 
         // collider only takes in two parameters
@@ -92,21 +93,11 @@ class Jamess extends Phaser.Scene {
         boss.setDataEnabled();
 
         // let JamesBossDefeated = false
-        
-        this.input.keyboard.on('keydown-R', () => {
-            // console.log('R button pressed');
-            this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
-            this.scene.stop('BattleLog')
-        }, this);
 
         const playerText = this.add.text(50, 50, '');
         const bossText = this.add.text(630, 50, '');
 
         let currentTurn = 'player';
-
-
-
-
 
         // console.log(currentChar)
 
@@ -160,6 +151,12 @@ class Jamess extends Phaser.Scene {
             ]);
 
         });
+
+        this.input.keyboard.on('keydown-R', () => {
+            // console.log('R button pressed');
+            this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
+            this.scene.stop('BattleLog')
+        }, this);
 
 
         selectText = this.add.text(50, 480, 'SELECT:', { fontFamily: '"Press Start 2P"' });

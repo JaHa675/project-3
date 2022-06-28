@@ -58,7 +58,7 @@ class Mains extends Phaser.Scene {
         this.character_name = data.character_name;
         this.level = data.level;
     }
-    
+
     preload() {
         this.load.image('mainBackground', mainBackground)
         this.load.image('door', door)
@@ -76,29 +76,29 @@ class Mains extends Phaser.Scene {
         platforms = this.physics.add.staticGroup();
         platforms.create(400, 800, 'mainPlatform').refreshBody();
         platforms.create(400, 540, 'mainFloor').refreshBody();
-        
+
         cursors = this.input.keyboard.createCursorKeys();
-        
-        this.input.keyboard.on('keydown-A', () => {arrowLeftFlag = true})
-        this.input.keyboard.on('keyup-A', () => {arrowLeftFlag = false})
-        this.input.keyboard.on('keydown-D', () => {arrowRightFlag = true})
-        this.input.keyboard.on('keyup-D', () => {arrowRightFlag = false})
+
+        this.input.keyboard.on('keydown-A', () => { arrowLeftFlag = true })
+        this.input.keyboard.on('keyup-A', () => { arrowLeftFlag = false })
+        this.input.keyboard.on('keydown-D', () => { arrowRightFlag = true })
+        this.input.keyboard.on('keyup-D', () => { arrowRightFlag = false })
         arrowLeft = this.add.image(100, 500, "arrow").setScale(.1);
         arrowLeft.setInteractive();
-        arrowLeft.on('pointerdown', () => {arrowLeftFlag = true;});
-        arrowLeft.on('pointerup', () => {arrowLeftFlag = false;});
-        arrowLeft.flipX=true;
-        
+        arrowLeft.on('pointerdown', () => { arrowLeftFlag = true; });
+        arrowLeft.on('pointerup', () => { arrowLeftFlag = false; });
+        arrowLeft.flipX = true;
+
         arrowRight = this.add.image(225, 500, "arrow").setScale(.1);
         arrowRight.setInteractive();
-        arrowRight.on('pointerdown', () => {arrowRightFlag = true;});
-        arrowRight.on('pointerup', () => {arrowRightFlag = false;});
+        arrowRight.on('pointerdown', () => { arrowRightFlag = true; });
+        arrowRight.on('pointerup', () => { arrowRightFlag = false; });
 
-        const layer =this.add.layer();
+        const layer = this.add.layer();
         // console.log(layer);
         // adding the background image as a layer above the floor
 
-        layer.add(this.make.image({x:400, y:500, key:'mainBackground'},false).setScale(1.5));
+        layer.add(this.make.image({ x: 400, y: 500, key: 'mainBackground' }, false).setScale(1.5));
 
 
         // adding the door to the game 
@@ -141,7 +141,7 @@ class Mains extends Phaser.Scene {
                             break;
                         }
 
-                        default:
+                    default:
                         break;
                 }
             });
@@ -149,7 +149,7 @@ class Mains extends Phaser.Scene {
         }
 
         // add inputEnabled = true
-        
+
         player = this.physics.add.sprite(350, 200, `${this.charClass}`).setScale(2);
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
@@ -160,24 +160,24 @@ class Mains extends Phaser.Scene {
 
         // getting the player to render 
         const mage = () => {
-            
+
             player.setTexture('mage');
-          
+
         }
         const warrior = () => {
             console.log(this.charClass)
-           
+
             player.setTexture('warrior');
-           
+
         }
         if (player.data.get('class') === 'mage') {
-            
+
             mage();
-           
+
         } else {
-           
+
             warrior();
-         
+
         }
 
         // getting a ground to render on the bottom
@@ -234,7 +234,7 @@ class Mains extends Phaser.Scene {
                 firstPlayDahlia = false;
             }
             if (firstPlayDahlia !== false) {
-                this.input.on('click',dgOnEvent)
+                this.input.on('click', dgOnEvent)
                 console.log("input A test", firstPlayDahlia);
             } else if (dahliaBossDefeated === false && firstPlayDahlia === false) {
                 console.log(dahliaBossDefeated)
@@ -242,8 +242,12 @@ class Mains extends Phaser.Scene {
                 this.scene.launch('BattleLog')
             }
         };
+
+        // EVENT EMITTER LISTENERS
+        // eventsCenter.on('brooke-defeated', this.brookeDefeated, this)
+
         let BrookeRoom = () => {
-            const brookeDoorText = this.add.text(280,110, 'Fight Brooke?!', { fontSize: '30px', fill: 'black' }).setDepth(4)
+            const brookeDoorText = this.add.text(280, 110, 'Fight Brooke?!', { fontSize: '30px', fill: 'black' }).setDepth(4)
             timedEvent = this.time.delayedCall(1500, blOnEvent, [], this);
             function blOnEvent() {
                 brookeDoorText.setText('')
@@ -252,7 +256,7 @@ class Mains extends Phaser.Scene {
                 firstPlayBrooke = false;
             }
             if (firstPlayBrooke !== false) {
-                this.input.on('click',blOnEvent)
+                this.input.on('click', blOnEvent)
                 console.log("input A test", firstPlayBrooke);
             } else if (brookeBossDefeated === false && firstPlayBrooke === false) {
                 console.log(brookeBossDefeated)
@@ -260,24 +264,32 @@ class Mains extends Phaser.Scene {
                 this.scene.launch('BattleLog')
             }
         };
+
+        // EVENT EMITTER LISTENERS
+        // eventsCenter.on('jeames-defeated', this.jamesDefeated, this)
+
         let JamesRoom = () => {
             const jamesDoorText = this.add.text(280, 110, 'Fight James?!', { fontSize: '30px', fill: 'black' }).setDepth(4)
             timedEvent = this.time.delayedCall(1500, jhOnEvent, [], this);
             function jhOnEvent() {
                 jamesDoorText.setText('')
-                this.scene.start('Jamess')
+                this.scene.start('Jamess', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                 this.scene.launch('BattleLog')
                 firstPlayJames = false;
             }
             if (firstPlayJames !== false) {
-                this.input.on('click',jhOnEvent)
+                this.input.on('click', jhOnEvent)
                 console.log("input A test", firstPlayJames);
             } else if (jamesBossDefeated === false && firstPlayJames === false) {
                 console.log(jamesBossDefeated)
-                this.scene.start('Jamess')
+                this.scene.start('Jamess', { character_name: this.character_name, charClass: this.charClass, level: 1 })
                 this.scene.launch('BattleLog')
             }
         };
+
+        // EVENT EMITTER LISTENERS
+        // eventsCenter.on('lucas-defeated', this.lucasDefeated, this)
+
         let LucasRoom = () => {
             const lucasDoorText = this.add.text(280, 110, 'Fight Lucas?!', { fontSize: '30px', fill: 'black' }).setDepth(4)
             timedEvent = this.time.delayedCall(1500, lrOnEvent, [], this);
@@ -336,7 +348,7 @@ class Mains extends Phaser.Scene {
         })
         this.input.keyboard.on('keydown-F', () => {
             //   console.log(firstPlay, dahliaBossDefeated)
-                this.scene.start('CatDoors')
+            this.scene.start('CatDoors')
         })
         // ======================================================================================
 
