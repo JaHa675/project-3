@@ -61,17 +61,17 @@ function App() {
   }
   return (
     <div>
-    <BrowserRouter>
-<Routes>
-  <Route exact path ='/' element ={<Landing />}></Route>
-  <Route exact path ='/login' element ={<Login login={handleLoginSubmit} signup={handleSignupSubmit} />}></Route>
-  <Route exact path ='/about' element ={<About />}></Route>
-  <Route exact path ='/stats' element ={<Stats />}></Route>
-  <Route exact path ='/main' element ={<Config />}></Route>
-  <Route exact path ='/credits' element ={<Credits />}></Route>
-  <Route path="*" element={<NoMatch />}></Route>
-</Routes>
-</BrowserRouter>
+  <BrowserRouter forceRefresh={true}>
+    <Routes>
+      <Route exact path ='/' element ={<Landing />}></Route>
+      <Route exact path ='/login' element ={<Login login={handleLoginSubmit} signup={handleSignupSubmit} />}></Route>
+      <Route exact path ='/about' element ={<About />}></Route>
+      <Route exact path ='/stats' element ={<Stats />}></Route>
+      <Route exact path ='/main' element ={<Config />}></Route>
+      <Route exact path ='/credits' element ={<Credits />}></Route>
+      <Route path="*" element={<NoMatch />}></Route>
+    </Routes>
+  </BrowserRouter>
 </div>
   )
 }
