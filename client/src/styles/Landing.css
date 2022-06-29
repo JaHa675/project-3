@@ -53,6 +53,19 @@ canvas {
   margin-left: 23%;
   margin-top: 6%;
 }
+
+@media screen and (max-width: 2000px){
+  canvas {
+    margin-left: 30%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  canvas {
+    margin-left: 25%;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   canvas {
     position: relative;
@@ -76,8 +89,9 @@ canvas {
     transform: rotate(90deg);
     position: relative;
     top: 15%;
-    margin-left: 1%;
-    height: 95%;
+    margin-left: 20%;
+    height: 55%;
     margin-bottom: 5%;
+    width: 55%
   }
 }
