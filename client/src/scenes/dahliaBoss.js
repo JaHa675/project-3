@@ -11,7 +11,7 @@ import warrior from "../assets/characters/Warrior.png"
 // import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 
 import bridge from "../assets/extras/TomatoPlatform.png"
-import { mageAttack, warriorAttack, dahliaAttack } from '../scripts/attack';
+import { mageAttack, warriorAttack, dahliaAttack, defend } from '../scripts/attack';
 import api from "../utils/API";
 import eventsCenter from '../scripts/EventEmitter';
 
@@ -221,6 +221,14 @@ class Dahlias extends Phaser.Scene {
                 bossAttack();
 
             }
+        })
+
+        defendText.on('pointerdown', function () {
+            let block = defend(player.data.get('level'))
+            player.data.set('hp', player.data.get('hp') + block);
+            // eventsCenter.emit('playerAttack', block)
+            currentTurn = 'boss';
+            bossAttack();
         })
 
         const bossAttack = () => {
