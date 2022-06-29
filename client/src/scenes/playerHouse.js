@@ -37,6 +37,11 @@ class House extends Phaser.Scene {
     constructor () {
         super('House')
     }
+    init(data) {
+        this.charClass = data.charClass;
+        this.character_name = data.character_name;
+        this.level = data.level;
+    }
     preload () {
         this.load.image('catPath', catPath)
         this.load.image('housebg',housebg);
@@ -160,11 +165,11 @@ class House extends Phaser.Scene {
         player.setDataEnabled();
 
         let MainPath = () => {
-            this.scene.start('Mains')
+            this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
         }
 
         let CatPath = () => {
-            this.scene.start('CatDoors')
+            this.scene.start('CatDoors', { character_name: this.character_name, charClass: this.charClass, level: 1 })
 
     }
 
