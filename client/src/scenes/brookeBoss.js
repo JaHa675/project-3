@@ -55,7 +55,7 @@ class Brookes extends Phaser.Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
 
-            // Scene change handler currently on key, needs to be onClick or bound condtionally
+        // Scene change handler currently on key, needs to be onClick or bound condtionally
         //  Please leave console logs for testing purposes as the game grows
         cursors = this.input.keyboard.createCursorKeys();
 
@@ -66,24 +66,10 @@ class Brookes extends Phaser.Scene {
         // collider only takes in two parameters
         this.physics.add.collider(player, brookeBottom);
         this.physics.add.collider(boss, brookeBottom);
-        // this.physics.add.collider(player, platforms);
-        // this.physics.add.collider(boss, platforms);
 
         const playerText = this.add.text(50, 50, '');
         const bossText = this.add.text(630, 50, '');
 
-        let currentTurn = 'player';
-
-
-        
-
-        // console.log(currentChar)
-
-        // player.data.set('name', 'Mage');
-        // player.data.set('class', 'mage');
-        // player.data.set('level', 2);
-        // player.data.set('attack', player.data.get('level') * 2);
-        // player.data.set('hp', 20);
         player.data.set('class', this.charClass);
         player.data.set('level', this.level);
         player.data.set('character_name', this.character_name);
@@ -155,10 +141,7 @@ class Brookes extends Phaser.Scene {
                 let damage = mageAttack(player.data.get('level'), boss.data.get('defense'))
                 boss.data.set('hp', hp - damage);
                 eventsCenter.emit('playerAttack', damage)
-                console.log(boss.data.get('hp'))
-
-                // TODO: display damage dealt
-                currentTurn = 'boss';
+                console.log(player.data.get('hp') , boss.data.get('hp'))
                 bossAttack();
             }
             else {
@@ -166,9 +149,6 @@ class Brookes extends Phaser.Scene {
                 boss.data.set('hp', hp - damage);
                 eventsCenter.emit('playerAttack', damage)
                 console.log(boss.data.get('hp'))
-
-                // TODO: display damage dealt
-                currentTurn = 'boss';
                 bossAttack();
 
             }
@@ -182,19 +162,19 @@ class Brookes extends Phaser.Scene {
                 eventsCenter.emit('bossAttack', damage)
                 player.data.set('hp', player.data.get('hp') - damage);
                 if (player.data.get('hp') < 1) {
-                    boss.data.set('hp', 100);
-                    player.data.set('hp', 20);
+                    boss.data.set('hp', 25 * player.data.get('level'));
+                    player.data.set('hp', 20 * player.data.get('level'));
                     this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: player.data.get('level') })
                     this.scene.stop('BattleLog')
                     this.scene.stop('Brookes')
                 }
-                // TODO: make a display for damage dealt
-                console.log(player.data.get('hp'))
-                currentTurn = 'player';
             } else {
                 // TODO: maybe give them a nice animation for leveling up
                 eventsCenter.emit('brooke-defeated')
                 this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
+                this.scene.stop('BattleLog')
+                
+                this.scene.stop('Brookes')
             }
         }
 
