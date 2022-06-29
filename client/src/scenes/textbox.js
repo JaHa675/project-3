@@ -29,6 +29,15 @@ class TextBox extends Phaser.Scene {
         eventsCenter.on('logChange', logChangeHandler,this);
         eventsCenter.on('playerAttack', this.playerAttackHandler,this);
         eventsCenter.on('bossAttack', this.bossAttackHandler,this);
+        let megaThis = this
+        let shutdownHandler = function () {
+            console.log('shutdown scene function')
+            eventsCenter.off('logChange', logChangeHandler);
+            eventsCenter.off('playerAttack', megaThis.playerAttackHandler);
+            eventsCenter.off('bossAttack',megaThis.bossAttackHandler);
+        }
+
+        this.events.on('shutdown', shutdownHandler())
         
     }
     playerAttackHandler(damage) {
@@ -47,5 +56,7 @@ class TextBox extends Phaser.Scene {
         }
         eventsCenter.emit('logChange')
         }
+
+
     }
 export default TextBox;

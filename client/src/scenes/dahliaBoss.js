@@ -11,7 +11,7 @@ import warrior from "../assets/characters/Warrior.png"
 // import warriorBattlePos from "../assets/characters/WarriorBattlePositions.png"
 
 import bridge from "../assets/extras/TomatoPlatform.png"
-import { mageAttack, warriorAttack, dahliaAttack } from '../scripts/attack';
+import { mageAttack, warriorAttack, dahliaAttack, defend } from '../scripts/attack';
 import api from "../utils/API";
 import eventsCenter from '../scripts/EventEmitter';
 
@@ -184,11 +184,11 @@ class Dahlias extends Phaser.Scene {
 
         });
 
-        this.input.keyboard.on('keydown-R', () => {
-            // console.log('R button pressed');
-            this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
-            this.scene.stop('BattleLog')
-        }, this);
+        // this.input.keyboard.on('keydown-R', () => {
+        //     // console.log('R button pressed');
+        //     this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
+        //     this.scene.stop('BattleLog')
+        // }, this);
 
 
         selectText = this.add.text(50, 480, 'SELECT:', { fontFamily: '"Press Start 2P"' });
@@ -211,7 +211,7 @@ class Dahlias extends Phaser.Scene {
                 currentTurn = 'boss';
                 bossAttack();
             }
-             else {
+            else {
                 let damage = warriorAttack(player.data.get('level'), boss.data.get('defense'))
                 boss.data.set('hp', hp - damage);
                 eventsCenter.emit('playerAttack', damage)
@@ -221,6 +221,14 @@ class Dahlias extends Phaser.Scene {
                 bossAttack();
 
             }
+        })
+
+        defendText.on('pointerdown', function () {
+            let block = defend(player.data.get('level'))
+            player.data.set('hp', player.data.get('hp') + block);
+            // eventsCenter.emit('playerAttack', block)
+            currentTurn = 'boss';
+            bossAttack();
         })
 
         const bossAttack = () => {
@@ -242,12 +250,16 @@ class Dahlias extends Phaser.Scene {
                 // TODO: maybe give them a nice animation for leveling up
                 eventsCenter.emit('dahlia-defeated')
                 this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: player.data.get('level') })
+                this.scene.stop('BattleLog')
+                this.scene.stop('Dahlias')
+                this.scene.remove('Dahlias')
             }
         }
 
+
         graphics = this.add.graphics();
     }
-    update(data) {
+    update() {
         graphics.lineStyle(2, 0xffffff, 2);
 
         graphics.strokeRectShape(attackText.getBounds());

@@ -7,6 +7,10 @@ module.exports = {
         const damage = 3 * level / bossDefense * .5;
         return damage
     },
+    defend: (level) => {
+        const block = 2 * level + 1;
+        return block
+    },
     dahliaAttack: () =>  {
         const damage = 1;
         return damage
