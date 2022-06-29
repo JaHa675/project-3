@@ -1,32 +1,37 @@
 import React, {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Alert} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert'
 import { Link } from "react-router-dom";
 
-function LoginAlert() {
-    const [show, setShow] = useState(true);
-    return(
-    <div>
-    <Alert show={show} variant="success">
-    <Alert.Heading>Exit the Game?!</Alert.Heading>
-    <p>
-     Saved data will be lost if you navigate out of game
-    </p>
-    <hr />
-    <div className="d-flex justify-content-end">
-      <Button onClick={() => setShow(false)} variant="outline-success">
-        Nevermind
-      </Button>
-      <Link to="/login" >To Login</Link>
-    </div>
-  </Alert>
-  {/* {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>} */}
-  </div>
-  )
 
-  }
 
 export default function NavBar() {
+    const [show, setShow] = useState(true);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    // function LoginAlert() {
+    //     const [show, setShow] = useState(true);
+    //     return(
+    //     <div>
+    //     <Alert show={show} variant="success">
+    //     <Alert.Heading>Exit the Game?!</Alert.Heading>
+    //     <p>
+    //      Saved data will be lost if you navigate out of game
+    //     </p>
+    //     <hr />
+    //     <div className="d-flex justify-content-end">
+    //       <Button onClick={() => setShow(false)} variant="outline-success">
+    //         Nevermind
+    //       </Button>
+    //       <Link to="/login" >To Login</Link>
+    //     </div>
+    //   </Alert>
+    //   {/* {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>} */}
+    //   </div>
+    //   )
+    
+    //   }
 
     return (
         <div>
@@ -38,7 +43,7 @@ export default function NavBar() {
                 </p>
                 }
                 { document.location.pathname !== "/login" && 
-                <p className="nav-item " ><Button  onClick={LoginAlert}>Login</Button> 
+                <p className="nav-item " ><Button  onClick={handleShow}>Login</Button> 
                 </p>
                 }
                 {   document.location.pathname !== "/main" &&
@@ -52,6 +57,19 @@ export default function NavBar() {
                 </p>
                 }
             </nav>
+            <Alert show={show} variant="success">
+        <Alert.Heading>Exit the Game?!</Alert.Heading>
+        <p>
+         Saved data will be lost if you navigate out of game
+        </p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={handleClose} variant="outline-success">
+            Nevermind
+          </Button>
+          <Link to="/login" >To Login</Link>
+        </div>
+      </Alert>
         </div>
     );
 }
