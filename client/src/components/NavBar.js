@@ -39,7 +39,7 @@ export default function NavBar() {
                 <h1 className="text-light"> Battle Trail</h1>
                 { document.location.pathname !== "/" && 
                 <p className="nav-item " >
-                    <Button variant="dark" style={{color:"#c89876"}}  onClick={()=> {window.location.href="/"}}> HomepPage</Button>
+                    <Button variant="dark" style={{color:"#c89876"}}  onClick={()=> {window.location.href="/"}}> HomePage</Button>
                 </p>
                 }
                 { document.location.pathname !== "/login" && 
