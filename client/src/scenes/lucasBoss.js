@@ -205,7 +205,7 @@ class Lucass extends Phaser.Scene {
                     boss.data.set('hp', 100);
                     player.data.set('hp', 20);
                     this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: player.data.get('level') })
-                    this.scene.stop('BattleLog')
+                    this.scene.sleep('BattleLog')
                     this.scene.stop('Lucass')
                 }
                 // TODO: make a display for damage dealt
