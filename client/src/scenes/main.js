@@ -340,8 +340,6 @@ class Mains extends Phaser.Scene {
         // player tutorial
 
         function tutorialStart() {
-
-            console.log("dg door flag is " + dahliaBossDefeated)
             var tutorialLogs = [
                 'Battle Trail Tutorial',
                 'Navigate to a door',
@@ -350,8 +348,8 @@ class Mains extends Phaser.Scene {
             ]
             const tutorialText = this.add.text(235, 105, '', { fontSize: '30px', fill: 'black' }).setDepth(4)
             // timedEvent leave 'Battle Trail Tutorial' up for 1 second before changing into tutotrial text
-            timedEvent = this.time.delayedCall(1000, tutorialChangeHandler, [], this);
-            console.log("tutorial started")
+            timedEvent = this.time.delayedCall(1000,tutorialChangeHandler, [], this);
+            // console.log("tutorial started")
             function tutorialChangeHandler() {
                 if (tutorialFlag !== false) {
                     for (let i = 0; i < tutorialLogs.length; i++) {
@@ -359,14 +357,15 @@ class Mains extends Phaser.Scene {
                         (function (i) {
                             setTimeout(() => {
                                 tutorialText.setText(element)
-                                console.log(i, tutorialLogs[i])
-                                if (tutorialLogs[i] === '') {
+                                // console.log(i, tutorialLogs[i])
+                                if (tutorialLogs[i] === ''){
                                     dahliaBossDefeated = false;
-                                    brookeBossDefeated = false;
                                     jamesBossDefeated = false;
+                                    brookeBossDefeated = false;
                                     lucasBossDefeated = false;
+                                    catBossDefeated = false;                       
                                     tutorialFlag = false;
-                                    console.log('tutorial finished', dahliaBossDefeated)
+                                    // console.log('tutorial finished', dahliaBossDefeated)
                                 }
                             }, 2000 * i);
                         })(i);

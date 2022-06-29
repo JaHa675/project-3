@@ -13,22 +13,22 @@ export default function NavBar() {
                 <h1 className="text-light"> Battle Trail</h1>
                 { document.location.pathname !== "/" && 
                 <p className="nav-item " >
-                    <Link to="/" >HomePage</Link>
+                    <div onClick={()=> {window.location.href="/"}}> HomepPage</div>
                 </p>
                 }
                 { document.location.pathname !== "/login" && 
                 <p className="nav-item " >
-                    <Link to="/login" >Login</Link>
+                    <div onClick={()=> {window.location.href="/login"}}> Login</div>
                 </p>
                 }
                 {
                     <p className="nav-item " >
-                    <Link to="/main" >Game</Link>
+                    <div onClick={()=> {window.location.href="/main"}}> Game</div>
                 </p>
                 }
                 { document.location.pathname !== "/about" && 
                 <p className="nav-item " >
-                    <Link to="/about" >About The Creators</Link>
+                    <div onClick={()=> {window.location.href="/about"}}> About The Creators</div>
                 </p>
                 }
             </nav>
