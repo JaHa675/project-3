@@ -165,7 +165,7 @@ class Brookes extends Phaser.Scene {
                     boss.data.set('hp', 25 * player.data.get('level'));
                     player.data.set('hp', 20 * player.data.get('level'));
                     this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: player.data.get('level') })
-                    this.scene.stop('BattleLog')
+                    this.scene.sleep('BattleLog')
                     this.scene.stop('Brookes')
                 }
             } else {

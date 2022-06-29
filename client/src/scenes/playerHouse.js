@@ -37,6 +37,11 @@ class House extends Phaser.Scene {
     constructor () {
         super('House')
     }
+    init(data) {
+        this.charClass = data.charClass;
+        this.character_name = data.character_name;
+        this.level = data.level;
+    }
     preload () {
         this.load.image('catPath', catPath)
         this.load.image('housebg',housebg);
@@ -67,16 +72,25 @@ class House extends Phaser.Scene {
 
         // layer.add(this.add.text(25, 50, 'Player House', { fontFamily: 'Press Start 2P', fontSize: 300, color: 'goldenrod' }))
 
+        // A, D movment keys. If we want to include jump need to add a W option
+        this.input.keyboard.on('keydown-A', () => { arrowLeftFlag = true })
+        this.input.keyboard.on('keyup-A', () => { arrowLeftFlag = false })
+        this.input.keyboard.on('keydown-D', () => { arrowRightFlag = true })
+        this.input.keyboard.on('keyup-D', () => { arrowRightFlag = false })
+
+
+         // left arrow movement
         arrowLeft = this.add.image(100, 500, "arrow").setScale(.1).setDepth(6);
         arrowLeft.setInteractive();
-        arrowLeft.on('pointerdown', () => {arrowLeftFlag = true; console.log(arrowLeftFlag)});
-        arrowLeft.on('pointerup', () => {arrowLeftFlag = false; console.log(arrowLeftFlag)});
-        arrowLeft.flipX=true;
-        
+        arrowLeft.on('pointerdown', () => { arrowLeftFlag = true; console.log(arrowLeftFlag) });
+        arrowLeft.on('pointerup', () => { arrowLeftFlag = false; console.log(arrowLeftFlag) });
+        arrowLeft.flipX = true;
+
+         // Right arrow movement
         arrowRight = this.add.image(225, 500, "arrow").setScale(.1);
         arrowRight.setInteractive();
-        arrowRight.on('pointerdown', () => {arrowRightFlag = true; console.log(arrowRightFlag)});
-        arrowRight.on('pointerup', () => {arrowRightFlag = false; console.log(arrowRightFlag)});
+        arrowRight.on('pointerdown', () => { arrowRightFlag = true; console.log(arrowRightFlag) });
+        arrowRight.on('pointerup', () => { arrowRightFlag = false; console.log(arrowRightFlag) });
 
 
         Joe =this.add.sprite(600,300,'KingJoe').setScale(2);
@@ -160,11 +174,11 @@ class House extends Phaser.Scene {
         player.setDataEnabled();
 
         let MainPath = () => {
-            this.scene.start('Mains')
+            this.scene.start('Mains', { character_name: this.character_name, charClass: this.charClass, level: 1 })
         }
 
         let CatPath = () => {
-            this.scene.start('CatDoors')
+            this.scene.start('CatDoors', { character_name: this.character_name, charClass: this.charClass, level: 1 })
 
     }
 
